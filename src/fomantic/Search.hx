@@ -2,6 +2,8 @@ package fomantic;
 import tink.pure.List;
 import fomantic.Icon;
 import js.jquery.Helper.*;
+import fomantic.Types.Boul;
+
 @:pure
 typedef SearchContent={
    public var title(default,never):String;

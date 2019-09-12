@@ -2,7 +2,7 @@ package fomantic;
 
 import tink.domspec.ClassName;
 
-
+import fomantic.Types.Boul;
 class Icon extends coconut.ui.View{
 
     @:attr @:optional public var disabled:Bool=false;

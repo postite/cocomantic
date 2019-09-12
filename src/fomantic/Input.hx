@@ -1,6 +1,6 @@
 package fomantic;
 
-
+import fomantic.Types.Boul;
 class Input extends coconut.ui.View{
    @:attr public var value:String="";
    @:attr public var placeholder:String="...";

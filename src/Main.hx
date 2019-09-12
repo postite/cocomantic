@@ -1,5 +1,6 @@
 import coconut.Ui.hxx;
-
+import fomantic.*;
+import js.Browser.document as doc;
 class Main {
 	static function main() {
 		trace("Hello, world!");
