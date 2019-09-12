@@ -1,0 +1,10 @@
+-cp src
+-D analyzer-optimize
+-lib coconut.ui
+-lib coconut.vdom
+-lib jQueryExtern
+-main Main
+--macro js.jquery.Config.addPlugin('fomantic.JSearchPlugin')
+-D no-deprecation-warnings
+--js www/coco.js
+
