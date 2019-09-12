@@ -1,0 +1,15 @@
+{
+   "name": "cocomantic",
+   "url" : "",
+   "license": "MIT",
+   "tags": ["semantic", "ui", "jquery", "coconut"],
+   "description": "fomantic components to be used with coconut.ui",
+   "version": "0.0.1",
+   "classPath": "src/",
+   "releasenote": "wip.",
+   "contributors": ["postite"],
+   "dependencies": {
+     "jQueryExtern": "",
+     "coconut.ui": ""
+   }
+ }
