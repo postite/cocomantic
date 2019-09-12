@@ -24,7 +24,7 @@ class Search extends coconut.ui.View{
 
 
    function setup(e) {
-		J(e).search({
+		cast (J(e)).search({
          source:content.toArray(),
          searchFields:["title"],
          fullTextSearch:false,
