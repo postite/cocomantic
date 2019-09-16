@@ -64,25 +64,18 @@ class App extends coconut.ui.View {
 	@:attr var router:coconut.router.BrowserRouter<Route>;
 
 	function render() 
-		<div ref=${router.intercept}>
+		<div >
 			<div class="menu">bim</div>
-			 <Pages />
+			 <Pages  router={router}/>
 			<a href="/two">totwo</a>
 			<a href="/other">toother</a>
 		</div>
 	;
-/*
-	<switch ${router.route}>
-				<case ${HomePage}><View0 />
-				<case ${OtherPage}><View1 />
-				<case ${TwoPage}><View2 />
-				<case ${UnknownPage(v)}><Unknown path=${v}/>
-			</switch>
-			*/
+
 }
 
 class Pages extends View{
-
+	@:attr var router:coconut.router.BrowserRouter<Route>;
 	var routes:ObservableMap<Route,Bool>=new ObservableMap(
 		[
 	HomePage=>false,
@@ -101,21 +94,57 @@ class Pages extends View{
 					routes.set(key,false);
 			}
 	}
+	function viewDidMount(){
+		goto(router.route);
+	}
 
-	function render()
-
-	<div class="pages">
+	function render(){
 	
-	<Hideable hidden={routes.get(HomePage)}>
+	return <div ref=${router.intercept} class="pages">
+	
+		<p>{Std.string(router.route)}</p>
+			
+		<switch ${router.route}>
+				
+				<case ${HomePage}>
+				<Hideable hidden={routes.get(HomePage)}>
+					<Login act={e->{e.preventDefault();goto(OnePage);}}/>
+				</Hideable>
+				<case ${OnePage}><p>one</p>
+				<case ${TwoPage}><View2 hidden={routes.get(TwoPage)} done={e->router.push(OnePage)}/>
+				<case ${UnknownPage(v)}><Unknown path=${v}/>
+		</switch>
+		
+	</div>
+	;
+	}
+
+}
+/*
+
+<switch ${router.route}>
+				<case ${HomePage}><p>home</p>
+				<case ${OnePage}><p>home</p>
+				<case ${TwoPage}><p>home</p>
+				<case ${UnknownPage(v)}><Unknown path=${v}/>
+			</switch>
+<switch ${router.route}>
+				<case ${HomePage}><Hideable hidden={routes.get(HomePage)}>
+	<Login act={e->{e.preventDefault();goto(OnePage);}}/>
+	</Hideable>
+				<case ${OnePage}><View1 hidden={routes.get(OnePage)} done={e->goto(TwoPage)}/>
+				<case ${TwoPage}><View2 hidden={routes.get(TwoPage)} done={e->goto(HomePage)}/>
+				<case ${UnknownPage(v)}><Unknown path=${v}/>
+			</switch>
+			
+	
+	<!--<Hideable hidden={routes.get(HomePage)}>
 	<Login act={e->{e.preventDefault();goto(OnePage);}}/>
 	</Hideable>
 	<View1 hidden={routes.get(OnePage)} done={e->goto(TwoPage)}/>
 	<View2 hidden={routes.get(TwoPage)} done={e->goto(HomePage)}/>
-	</div>
-	;
-
-}
-
+	-->
+*/
 
 
 class View0 extends View{
