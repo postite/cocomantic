@@ -4,6 +4,7 @@
 -lib coconut.vdom
 -lib jQueryExtern
 -lib coconut.router
+--times
 -main Main
 #--macro js.jquery.Config.addPlugin('fomantic.JSearchPlugin')
 -D no-deprecation-warnings

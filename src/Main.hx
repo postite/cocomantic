@@ -51,6 +51,7 @@ class Main {
 	 coconut.ui.Renderer.mount(
 		cast doc.body.appendChild(doc.createDivElement()),
         hxx('<App router=${router} />')
+		//   hxx('<Bouton text="op" />')
 		);
 	
 	}

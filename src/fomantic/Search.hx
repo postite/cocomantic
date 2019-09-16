@@ -14,15 +14,33 @@ class Search extends coconut.ui.View{
    @:state public var value:SearchContent={title:"bim"};
    @:attr @:optional public var placeholder:String="...";
    
-   @:attr @:optional public var fluid:Boul;
-   @:attr @:optional public var disabled:Boul =false;
+   @:attr @:optional public var fluid:Bool;
+   @:attr @:optional public var disabled:Bool =false;
    @:tracked
    @:attr public var content:List<SearchContent>;
    @:attr @:optional public var url:String;
-   @:attr @:optional public var aligned:Boul;
-   @:attr @:optional public var loading:Boul;
-   @:attr @:optional public var searchOnFocus:Boul=false;
+   @:attr @:optional public var aligned:Bool;
+   @:attr @:optional public var loading:Bool;
+   @:attr @:optional public var searchOnFocus:Bool=false;
 
+    @:attribute var className:tink.domspec.ClassName = null;
+    @:computed  var classes:tink.domspec.ClassName={
+      var b=className;
+      if(disabled)
+      b=b.add("disabled");
+      if(loading)
+      b=b.add("loading");
+      if(searchOnFocus)
+      b=b.add("searchonfocus");
+      if(fluid)
+      b=b.add("fluid");
+      if(aligned)
+      b=b.add("aligned");
+      
+    
+
+      return b;
+   };
 
    function setup(e) {
       
@@ -67,11 +85,7 @@ function viewDidMount(){
 //    }
    function render(){
    trace("rendering saerch" );
-     return  <div ref=${setup} class='ui search 
-      ${disabled.as("disabled")}  
-      ${loading.as("loading")}  
-      ${searchOnFocus.as("searchonfocus")}  
-      '>
+     return  <div ref=${setup} class='ui search ${classes} '>
          <input class="prompt" type="text" placeholder="Common passwords..."/>
          <Icon img={IconName.search} />
          <div class="results"></div>

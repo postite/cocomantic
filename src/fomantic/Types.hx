@@ -19,7 +19,8 @@ enum abstract Dir(String){
    var right;
    var none="";
 }
-
+/*
+@:forward
 abstract Boul(Bool) from Bool to Bool {
   	
   public function new(n)
@@ -35,3 +36,4 @@ abstract Boul(Bool) from Bool to Bool {
  
   
 }
+*/

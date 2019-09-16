@@ -10,17 +10,28 @@ class Button  extends View{
    @:attr @:optional public var img:IconName=null;
    @:attr public var onClick:js.html.MouseEvent->Void;
 
-   @:attr @:optional public var disabled:Boul=false;
-   @:attr @:optional public var loading:Boul=false;
-   @:attr @:optional public var active:Boul=true;
+   @:attr @:optional public var disabled:Bool=false;
+   @:attr @:optional public var loading:Bool=false;
+   @:attr @:optional public var active:Bool=true;
 
    @:attr @:optional public var type:ButtonType=basic;
    @:attr @:optional public var size:Size=null;
 
+   @:attribute var className:tink.domspec.ClassName = null;
+   @:computed  var classes:tink.domspec.ClassName={
+      var b=className;
+      if(disabled)
+      b=b.add("disabled");
+      if(loading)
+      b=b.add("loading");
+      if(active)
+      b=b.add("active");
 
+      return b;
+   };
 
    function render()
-      <button onclick={onClick} class='ui $type button $size ${active.as("active")} ${loading.as("loading")} ${disabled.as("disabled")}'>
+      <button onclick={onClick} class='ui button $type $size ${classes}'>
       <if {img!=null} >
       <Icon img={img} />
       </if>

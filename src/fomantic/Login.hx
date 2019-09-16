@@ -8,7 +8,7 @@ import js.jquery.Helper.*;
 class Login extends coconut.ui.View{
 
    @:attr public var act:js.html.MouseEvent->Void;
-
+    @:attribute var className:tink.domspec.ClassName = null;
    function valid(form){
       
     untyped (J(form))
@@ -46,7 +46,7 @@ class Login extends coconut.ui.View{
     
    }
    function render(){
-      <div ref=${valid}>
+      <div ref=${valid} class='${className}'>
       <Form>
          <Input name="password" img={IconName.lock} placeholder="paswword" type={password}/>        
          <Input name="email" img={IconName.user} placeholder="name" type={email}/>

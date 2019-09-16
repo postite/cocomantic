@@ -8,35 +8,31 @@ class Icon extends coconut.ui.View{
     @:attr @:optional public var disabled:Bool=false;
     @:attr @:optional public var size:Size=null;
     @:attr @:optional public var loading:Bool=false;
-    @:attr @:optional public var outline:Boul=false;
+    @:attr @:optional public var outline:Bool=false;
     @:attr public var img:IconName=null;
     @:attr @:optional public var act:(js.html.Event)->Void;
+
    // @:attr @:optional public var direction:Dir;
+    @:attribute var className:tink.domspec.ClassName = null;
+    @:computed  var classes:tink.domspec.ClassName={
+      var b=className;
+      if(disabled)
+      b=b.add("disabled");
+      if(loading)
+      b=b.add("loading");
+      if(act!=null)
+      b=b.add("link");
+      
+    if( outline)
+        b=b.add('outline');
 
+      return b;
+   };
 
-inline function classNames():String{
-
-    var buf= new StringBuf();
-    buf.add('$img icon ');
-
-
-    if(disabled) 
-        buf.add('disabled ');
-    if(loading) 
-        buf.add('loading ');
-    if(act!=null)
-        buf.add('link ');
-    if(size!=null)
-        buf.add('$size ');
-
-    buf.add(outline.as('outline ')); //attention à l'espace 
-
-    return buf.toString();
-}
   function render()
    // <i class={{link:link,icon:true,}} ></i>
    // <i class=${"icon "+img+ {{(act!=null)?" link":" ";}+ {(disabled)?" disabled":" ";}}} onclick={act}></i>
-    <i class={classNames()} onclick={act}></i>
+    <i class='$img icon $size ${classes}' onclick={act}></i>
     ;
 
 }
