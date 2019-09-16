@@ -1,6 +1,6 @@
 {
    "name": "cocomantic",
-   "url" : "",
+   "url" : "http://github.com/postite/cocomantic",
    "license": "MIT",
    "tags": ["semantic", "ui", "jquery", "coconut"],
    "description": "fomantic components to be used with coconut.ui",

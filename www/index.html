@@ -9,6 +9,45 @@
    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.8/dist/semantic.min.js"></script>
        
    <title>Document</title>
+   <style>
+   .animated{
+      
+  background: #2db34a;    
+  transition-property:opacity;
+  transition-duration: 3s;
+  transition-timing-function: linear;
+   }
+   .animated.fadeOut{
+    opacity: 0;
+    background: #a8aa25;
+    position:absolute; /* tip */
+
+  }
+   .animated.fadeIn{
+    opacity: 1;
+    background: #753b67;
+    
+  }
+
+  
+ 
+   body{margin:0}
+  .list-item{display:block;margin-bottom:10px;padding:10px;color:#fff}
+  .list-item:last-child{margin-bottom:0}
+  .transition-wrapper{position:relative;z-index:1}
+  .transition-wrapper 
+  .transition-item{position:fixed;top:0;right:0;left:0}
+  .detail-page{overflow:auto;box-sizing:border-box;padding:20px;height:100vh;background-color:#03a9f4;transition:transform .5s,opacity .5s}
+  .detail-page.transition-appear{opacity:0;transform:translate3d(100%,0,0)}
+  .detail-page.transition-appear.transition-appear-active,.detail-page.transition-leave{opacity:1;transform:translateZ(0)}
+  .detail-page.transition-leave.transition-leave-active{opacity:0;transform:translate3d(100%,0,0)}
+  .list-page{overflow:auto;box-sizing:border-box;padding:20px;height:100vh;background-color:#fff;transition:transform .5s,opacity .5s;transform:translateZ(0)}
+  .list-page.transition-appear{opacity:0;transform:translate3d(-100%,0,0)}
+  .list-page.transition-appear.transition-appear-active,.list-page.transition-leave{opacity:1;transform:translateZ(0)}
+  .list-page.transition-leave.transition-leave-active{opacity:0;transform:translate3d(-100%,0,0)}
+   </style>
+
+
 </head>
 <body>
    <script src="coco.js"></script>

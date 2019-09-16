@@ -3,8 +3,9 @@
 -lib coconut.ui
 -lib coconut.vdom
 -lib jQueryExtern
+-lib coconut.router
 -main Main
---macro js.jquery.Config.addPlugin('fomantic.JSearchPlugin')
+#--macro js.jquery.Config.addPlugin('fomantic.JSearchPlugin')
 -D no-deprecation-warnings
 --js www/coco.js
 
