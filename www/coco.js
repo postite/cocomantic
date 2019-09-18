@@ -331,24 +331,6 @@ tink_url__$Host_Host_$Impl_$.get_port = function(this1) {
 tink_url__$Host_Host_$Impl_$.toString = function(this1) {
 	return this1;
 };
-var js__$Boot_HaxeError = function(val) {
-	Error.call(this);
-	this.val = val;
-	if(Error.captureStackTrace) {
-		Error.captureStackTrace(this,js__$Boot_HaxeError);
-	}
-};
-js__$Boot_HaxeError.__name__ = true;
-js__$Boot_HaxeError.wrap = function(val) {
-	if(((val) instanceof Error)) {
-		return val;
-	} else {
-		return new js__$Boot_HaxeError(val);
-	}
-};
-js__$Boot_HaxeError.__super__ = Error;
-js__$Boot_HaxeError.prototype = $extend(Error.prototype,{
-});
 var tink_url__$Path_Path_$Impl_$ = {};
 tink_url__$Path_Path_$Impl_$.__name__ = true;
 tink_url__$Path_Path_$Impl_$.parts = function(this1) {
@@ -1290,63 +1272,99 @@ var tink_core_MPair = function(a,b) {
 	this.b = b;
 };
 tink_core_MPair.__name__ = true;
-var haxe_ds_ObjectMap = function() {
-	this.h = { __keys__ : { }};
-};
-haxe_ds_ObjectMap.__name__ = true;
-haxe_ds_ObjectMap.prototype = {
-	set: function(key,value) {
-		var id = key.__id__ || (key.__id__ = $global.$haxeUID++);
-		this.h[id] = value;
-		this.h.__keys__[id] = key;
+var js_Boot = function() { };
+js_Boot.__name__ = true;
+js_Boot.__string_rec = function(o,s) {
+	if(o == null) {
+		return "null";
 	}
-	,get: function(key) {
-		return this.h[key.__id__];
+	if(s.length >= 5) {
+		return "<...>";
 	}
-	,exists: function(key) {
-		return this.h.__keys__[key.__id__] != null;
+	var t = typeof(o);
+	if(t == "function" && (o.__name__ || o.__ename__)) {
+		t = "object";
 	}
-	,remove: function(key) {
-		var id = key.__id__;
-		if(this.h.__keys__[id] == null) {
-			return false;
-		}
-		delete(this.h[id]);
-		delete(this.h.__keys__[id]);
-		return true;
-	}
-	,keys: function() {
-		var a = [];
-		for( var key in this.h.__keys__ ) {
-		if(this.h.hasOwnProperty(key)) {
-			a.push(this.h.__keys__[key]);
-		}
-		}
-		return HxOverrides.iter(a);
-	}
-	,iterator: function() {
-		return { ref : this.h, it : this.keys(), hasNext : function() {
-			return this.it.hasNext();
-		}, next : function() {
-			var i = this.it.next();
-			return this.ref[i.__id__];
-		}};
-	}
-	,toString: function() {
-		var s_b = "";
-		s_b = "{";
-		var it = this.keys();
-		while(it.hasNext()) {
-			var i = it.next();
-			s_b += Std.string(Std.string(i));
-			s_b += " => ";
-			s_b += Std.string(Std.string(this.h[i.__id__]));
-			if(it.hasNext()) {
-				s_b += ", ";
+	switch(t) {
+	case "function":
+		return "<function>";
+	case "object":
+		if(o.__enum__) {
+			var e = $hxEnums[o.__enum__];
+			var n = e.__constructs__[o._hx_index];
+			var con = e[n];
+			if(con.__params__) {
+				s = s + "\t";
+				return n + "(" + ((function($this) {
+					var $r;
+					var _g = [];
+					{
+						var _g1 = 0;
+						var _g2 = con.__params__;
+						while(true) {
+							if(!(_g1 < _g2.length)) {
+								break;
+							}
+							var p = _g2[_g1];
+							_g1 = _g1 + 1;
+							_g.push(js_Boot.__string_rec(o[p],s));
+						}
+					}
+					$r = _g;
+					return $r;
+				}(this))).join(",") + ")";
+			} else {
+				return n;
 			}
 		}
-		s_b += "}";
-		return s_b;
+		if(((o) instanceof Array)) {
+			var str = "[";
+			s += "\t";
+			var _g3 = 0;
+			var _g11 = o.length;
+			while(_g3 < _g11) {
+				var i = _g3++;
+				str += (i > 0 ? "," : "") + js_Boot.__string_rec(o[i],s);
+			}
+			str += "]";
+			return str;
+		}
+		var tostr;
+		try {
+			tostr = o.toString;
+		} catch( e1 ) {
+			var e2 = ((e1) instanceof js__$Boot_HaxeError) ? e1.val : e1;
+			return "???";
+		}
+		if(tostr != null && tostr != Object.toString && typeof(tostr) == "function") {
+			var s2 = o.toString();
+			if(s2 != "[object Object]") {
+				return s2;
+			}
+		}
+		var str1 = "{\n";
+		s += "\t";
+		var hasp = o.hasOwnProperty != null;
+		var k = null;
+		for( k in o ) {
+		if(hasp && !o.hasOwnProperty(k)) {
+			continue;
+		}
+		if(k == "prototype" || k == "__class__" || k == "__super__" || k == "__interfaces__" || k == "__properties__") {
+			continue;
+		}
+		if(str1.length != 2) {
+			str1 += ", \n";
+		}
+		str1 += s + k + " : " + js_Boot.__string_rec(o[k],s);
+		}
+		s = s.substring(1);
+		str1 += "\n" + s + "}";
+		return str1;
+	case "string":
+		return o;
+	default:
+		return String(o);
 	}
 };
 var tink_state__$State_SimpleState = function(value,isEqual,guard) {
@@ -2259,15 +2277,19 @@ App.fromHxx = function(hxxMeta,attributes) {
 App.__super__ = coconut_ui_View;
 App.prototype = $extend(coconut_ui_View.prototype,{
 	render: function() {
+		var _gthis = this;
 		var __r = [];
-		var hxxMeta = { ref : ($_=tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.router),$bind($_,$_.intercept))};
+		var hxxMeta = { };
 		var __r1 = [];
 		var hxxMeta1 = { };
 		var __ret = { className : tink_domspec__$ClassName_ClassName_$Impl_$.ofString("menu")};
 		var __r2 = [];
 		__r2.push(coconut_diffing_VNodeData.VNative(coconut_vdom__$Html_Text.inst,null,null,"bim",null));
 		__r1.push(coconut_diffing_VNodeData.VNative(coconut_vdom_Html.DIV,hxxMeta1.ref,hxxMeta1.key,__ret,__r2));
-		__r1.push(Pages.fromHxx({ },{ }));
+		var __ret1 = { router : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
+			return tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.router);
+		}})};
+		__r1.push(Pages.fromHxx({ },__ret1));
 		var hxxMeta2 = { };
 		var __r3 = [];
 		__r3.push(coconut_diffing_VNodeData.VNative(coconut_vdom__$Html_Text.inst,null,null,"totwo",null));
@@ -2284,209 +2306,6 @@ App.prototype = $extend(coconut_ui_View.prototype,{
 	}
 	,__initAttributes: function(attributes) {
 		this.__slots.router.setData(attributes.router);
-	}
-});
-var haxe_ds_BalancedTree = function() {
-};
-haxe_ds_BalancedTree.__name__ = true;
-haxe_ds_BalancedTree.prototype = {
-	set: function(key,value) {
-		this.root = this.setLoop(key,value,this.root);
-	}
-	,get: function(key) {
-		var node = this.root;
-		while(node != null) {
-			var c = this.compare(key,node.key);
-			if(c == 0) {
-				return node.value;
-			}
-			if(c < 0) {
-				node = node.left;
-			} else {
-				node = node.right;
-			}
-		}
-		return null;
-	}
-	,remove: function(key) {
-		try {
-			this.root = this.removeLoop(key,this.root);
-			return true;
-		} catch( e ) {
-			if(typeof(((e) instanceof js__$Boot_HaxeError) ? e.val : e) == "string") {
-				return false;
-			} else {
-				throw e;
-			}
-		}
-	}
-	,exists: function(key) {
-		var node = this.root;
-		while(node != null) {
-			var c = this.compare(key,node.key);
-			if(c == 0) {
-				return true;
-			} else if(c < 0) {
-				node = node.left;
-			} else {
-				node = node.right;
-			}
-		}
-		return false;
-	}
-	,iterator: function() {
-		var ret = [];
-		this.iteratorLoop(this.root,ret);
-		return HxOverrides.iter(ret);
-	}
-	,keys: function() {
-		var ret = [];
-		this.keysLoop(this.root,ret);
-		return HxOverrides.iter(ret);
-	}
-	,setLoop: function(k,v,node) {
-		if(node == null) {
-			return new haxe_ds_TreeNode(null,k,v,null);
-		}
-		var c = this.compare(k,node.key);
-		if(c == 0) {
-			return new haxe_ds_TreeNode(node.left,k,v,node.right,node == null ? 0 : node._height);
-		} else if(c < 0) {
-			return this.balance(this.setLoop(k,v,node.left),node.key,node.value,node.right);
-		} else {
-			var nr = this.setLoop(k,v,node.right);
-			return this.balance(node.left,node.key,node.value,nr);
-		}
-	}
-	,removeLoop: function(k,node) {
-		if(node == null) {
-			throw new js__$Boot_HaxeError("Not_found");
-		}
-		var c = this.compare(k,node.key);
-		if(c == 0) {
-			return this.merge(node.left,node.right);
-		} else if(c < 0) {
-			return this.balance(this.removeLoop(k,node.left),node.key,node.value,node.right);
-		} else {
-			return this.balance(node.left,node.key,node.value,this.removeLoop(k,node.right));
-		}
-	}
-	,iteratorLoop: function(node,acc) {
-		if(node != null) {
-			this.iteratorLoop(node.left,acc);
-			acc.push(node.value);
-			this.iteratorLoop(node.right,acc);
-		}
-	}
-	,keysLoop: function(node,acc) {
-		if(node != null) {
-			this.keysLoop(node.left,acc);
-			acc.push(node.key);
-			this.keysLoop(node.right,acc);
-		}
-	}
-	,merge: function(t1,t2) {
-		if(t1 == null) {
-			return t2;
-		}
-		if(t2 == null) {
-			return t1;
-		}
-		var t = this.minBinding(t2);
-		return this.balance(t1,t.key,t.value,this.removeMinBinding(t2));
-	}
-	,minBinding: function(t) {
-		if(t == null) {
-			throw new js__$Boot_HaxeError("Not_found");
-		} else if(t.left == null) {
-			return t;
-		} else {
-			return this.minBinding(t.left);
-		}
-	}
-	,removeMinBinding: function(t) {
-		if(t.left == null) {
-			return t.right;
-		} else {
-			return this.balance(this.removeMinBinding(t.left),t.key,t.value,t.right);
-		}
-	}
-	,balance: function(l,k,v,r) {
-		var hl = l == null ? 0 : l._height;
-		var hr = r == null ? 0 : r._height;
-		if(hl > hr + 2) {
-			var _this = l.left;
-			var _this1 = l.right;
-			if((_this == null ? 0 : _this._height) >= (_this1 == null ? 0 : _this1._height)) {
-				return new haxe_ds_TreeNode(l.left,l.key,l.value,new haxe_ds_TreeNode(l.right,k,v,r));
-			} else {
-				return new haxe_ds_TreeNode(new haxe_ds_TreeNode(l.left,l.key,l.value,l.right.left),l.right.key,l.right.value,new haxe_ds_TreeNode(l.right.right,k,v,r));
-			}
-		} else if(hr > hl + 2) {
-			var _this2 = r.right;
-			var _this3 = r.left;
-			if((_this2 == null ? 0 : _this2._height) > (_this3 == null ? 0 : _this3._height)) {
-				return new haxe_ds_TreeNode(new haxe_ds_TreeNode(l,k,v,r.left),r.key,r.value,r.right);
-			} else {
-				return new haxe_ds_TreeNode(new haxe_ds_TreeNode(l,k,v,r.left.left),r.left.key,r.left.value,new haxe_ds_TreeNode(r.left.right,r.key,r.value,r.right));
-			}
-		} else {
-			return new haxe_ds_TreeNode(l,k,v,r,(hl > hr ? hl : hr) + 1);
-		}
-	}
-	,compare: function(k1,k2) {
-		return Reflect.compare(k1,k2);
-	}
-	,toString: function() {
-		if(this.root == null) {
-			return "{}";
-		} else {
-			return "{" + this.root.toString() + "}";
-		}
-	}
-};
-var haxe_ds_EnumValueMap = function() {
-	haxe_ds_BalancedTree.call(this);
-};
-haxe_ds_EnumValueMap.__name__ = true;
-haxe_ds_EnumValueMap.__super__ = haxe_ds_BalancedTree;
-haxe_ds_EnumValueMap.prototype = $extend(haxe_ds_BalancedTree.prototype,{
-	compare: function(k1,k2) {
-		var d = k1._hx_index - k2._hx_index;
-		if(d != 0) {
-			return d;
-		}
-		var p1 = Type.enumParameters(k1);
-		var p2 = Type.enumParameters(k2);
-		if(p1.length == 0 && p2.length == 0) {
-			return 0;
-		}
-		return this.compareArgs(p1,p2);
-	}
-	,compareArgs: function(a1,a2) {
-		var ld = a1.length - a2.length;
-		if(ld != 0) {
-			return ld;
-		}
-		var _g = 0;
-		var _g1 = a1.length;
-		while(_g < _g1) {
-			var i = _g++;
-			var d = this.compareArg(a1[i],a2[i]);
-			if(d != 0) {
-				return d;
-			}
-		}
-		return 0;
-	}
-	,compareArg: function(v1,v2) {
-		if(Reflect.isEnumValue(v1) && Reflect.isEnumValue(v2)) {
-			return this.compare(v1,v2);
-		} else if(((v1) instanceof Array) && v1.__enum__ == null && (((v2) instanceof Array) && v2.__enum__ == null)) {
-			return this.compareArgs(v1,v2);
-		} else {
-			return Reflect.compare(v1,v2);
-		}
 	}
 });
 var tink_state_ObservableBase = function() {
@@ -2590,8 +2409,6 @@ tink_state_ObservableMap.prototype = $extend(tink_state_ObservableBase.prototype
 			return exists == (c.to == haxe_ds_Option.None);
 		}));
 	}
-	,clear: function() {
-	}
 	,iterator: function() {
 		return tink_state__$Observable_Observable_$Impl_$.get_value(this.observableValues);
 	}
@@ -2608,6 +2425,13 @@ tink_state_ObservableMap.prototype = $extend(tink_state_ObservableBase.prototype
 	}
 	,toString: function() {
 		return tink_state__$Observable_Observable_$Impl_$.get_value(this.asString);
+	}
+	,clear: function() {
+		var key = this.map.keys();
+		while(key.hasNext()) {
+			var key1 = key.next();
+			this.map.remove(key1);
+		}
 	}
 	,copy: function() {
 		return new tink_state_ObservableMap(this.map);
@@ -2692,14 +2516,19 @@ tink_core__$Callback_CallbackList_$Impl_$.invokeAndClear = function(this1,data) 
 	}
 };
 var Pages = function(__coco_data_) {
+	var _gthis = this;
 	var _g = new haxe_ds_EnumValueMap();
 	_g.set(Route.HomePage,false);
 	_g.set(Route.OnePage,true);
 	_g.set(Route.TwoPage,true);
 	this.routes = new tink_state_ObservableMap(_g);
 	this.__tink_defaults5 = { };
-	this.__slots = { };
-	coconut_ui_View.call(this,$bind(this,this.render),null,null,null,null,null);
+	this.__slots = { router : new coconut_ui_tools_Slot(this,null)};
+	this.__initAttributes(__coco_data_);
+	coconut_ui_View.call(this,$bind(this,this.render),null,null,null,function() {
+		var viewDidMount = tink_state__$Observable_Observable_$Impl_$.get_value(tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.router).__coco_route);
+		_gthis.goto(viewDidMount);
+	},null);
 };
 Pages.__name__ = true;
 Pages.fromHxx = function(hxxMeta,attributes) {
@@ -2708,7 +2537,7 @@ Pages.fromHxx = function(hxxMeta,attributes) {
 Pages.__super__ = coconut_ui_View;
 Pages.prototype = $extend(coconut_ui_View.prototype,{
 	goto: function(where) {
-		Debug.Log("goto " + Std.string(where),null,{ fileName : "src/Main.hx", lineNumber : 95, className : "Pages", methodName : "goto"});
+		Debug.Log("goto " + Std.string(where),null,{ fileName : "src/Main.hx", lineNumber : 88, className : "Pages", methodName : "goto"});
 		var key = tink_state__$Observable_Observable_$Impl_$.get_value(this.routes.observableKeys);
 		while(key.hasNext()) {
 			var key1 = key.next();
@@ -2723,46 +2552,71 @@ Pages.prototype = $extend(coconut_ui_View.prototype,{
 	,render: function() {
 		var _gthis = this;
 		var __r = [];
-		var hxxMeta = { };
+		var hxxMeta = { ref : ($_=tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.router),$bind($_,$_.intercept))};
 		var __ret = { className : tink_domspec__$ClassName_ClassName_$Impl_$.ofString("pages")};
 		var __r1 = [];
-		var __ret1 = { hidden : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
-			return tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.routes.observe(Route.HomePage));
-		}}), children : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
-			var __r2 = [];
-			var __ret2 = { act : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
-				return function(e) {
-					e.preventDefault();
-					_gthis.goto(Route.OnePage);
+		var hxxMeta1 = { };
+		var __r2 = [];
+		var s = Std.string(tink_state__$Observable_Observable_$Impl_$.get_value(tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.router).__coco_route));
+		__r2.push(coconut_diffing_VNodeData.VNative(coconut_vdom__$Html_Text.inst,null,null,s,null));
+		__r1.push(coconut_diffing_VNodeData.VNative(coconut_vdom_Html.P,hxxMeta1.ref,hxxMeta1.key,{ },__r2));
+		var _g = tink_state__$Observable_Observable_$Impl_$.get_value(tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.router).__coco_route);
+		switch(_g._hx_index) {
+		case 0:
+			var __ret1 = { hidden : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
+				return tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.routes.observe(Route.HomePage));
+			}}), children : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
+				var __r3 = [];
+				var __ret2 = { act : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
+					return function(e) {
+						_gthis.goto(Route.OnePage);
+						return;
+					};
+				}})};
+				__r3.push(fomantic_Login.fromHxx({ },__ret2));
+				var __ret3 = { act : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
+					return function(e1) {
+						return e1;
+					};
+				}})};
+				__r3.push(fomantic_Inscript.fromHxx({ },__ret3));
+				return __r3;
+			}})};
+			__r1.push(animation_Hideable.fromHxx({ },__ret1));
+			break;
+		case 1:
+			var hxxMeta2 = { };
+			var __r4 = [];
+			__r4.push(coconut_diffing_VNodeData.VNative(coconut_vdom__$Html_Text.inst,null,null,"one",null));
+			__r1.push(coconut_diffing_VNodeData.VNative(coconut_vdom_Html.P,hxxMeta2.ref,hxxMeta2.key,{ },__r4));
+			break;
+		case 2:
+			var __ret4 = { hidden : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
+				return tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.routes.observe(Route.TwoPage));
+			}}), done : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
+				return function(e2) {
+					tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.router).push(Route.OnePage);
 					return;
 				};
 			}})};
-			__r2.push(fomantic_Login.fromHxx({ },__ret2));
-			return __r2;
-		}})};
-		__r1.push(animation_Hideable.fromHxx({ },__ret1));
-		var __ret3 = { hidden : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
-			return tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.routes.observe(Route.OnePage));
-		}}), done : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
-			return function(e1) {
-				_gthis.goto(Route.TwoPage);
-				return;
-			};
-		}})};
-		__r1.push(View1.fromHxx({ },__ret3));
-		var __ret4 = { hidden : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
-			return tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.routes.observe(Route.TwoPage));
-		}}), done : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
-			return function(e2) {
-				_gthis.goto(Route.HomePage);
-				return;
-			};
-		}})};
-		__r1.push(View2.fromHxx({ },__ret4));
+			__r1.push(View2.fromHxx({ },__ret4));
+			break;
+		case 3:
+			var v = _g.path;
+			var __ret5 = { path : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
+				return v;
+			}})};
+			__r1.push(Unknown.fromHxx({ },__ret5));
+			break;
+		}
 		__r.push(coconut_diffing_VNodeData.VNative(coconut_vdom_Html.DIV,hxxMeta.ref,hxxMeta.key,__ret,__r1));
 		return __r[0];
 	}
+	,get_router: function() {
+		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.router);
+	}
 	,__initAttributes: function(attributes) {
+		this.__slots.router.setData(attributes.router);
 	}
 });
 var View0 = function(__coco_data_) {
@@ -2806,7 +2660,7 @@ View0.prototype = $extend(coconut_ui_View.prototype,{
 			return "check";
 		}}), onClick : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
 			return function(e) {
-				return Debug.Log(e,null,{ fileName : "src/Main.hx", lineNumber : 165, className : "View0", methodName : "render"});
+				return Debug.Log(e,null,{ fileName : "src/Main.hx", lineNumber : 195, className : "View0", methodName : "render"});
 			};
 		}})};
 		__r1.push(fomantic_Button.fromHxx({ },__ret2));
@@ -2816,7 +2670,7 @@ View0.prototype = $extend(coconut_ui_View.prototype,{
 			return "left";
 		}}), act : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
 			return function(e1) {
-				return Debug.Log(e1,null,{ fileName : "src/Main.hx", lineNumber : 166, className : "View0", methodName : "render"});
+				return Debug.Log(e1,null,{ fileName : "src/Main.hx", lineNumber : 196, className : "View0", methodName : "render"});
 			};
 		}})};
 		__r1.push(fomantic_IconicInput.fromHxx({ },__ret3));
@@ -3803,107 +3657,6 @@ coconut_ui__$Renderer_DomCursor.prototype = {
 };
 var coconut_ui_macros_Helper = function() { };
 coconut_ui_macros_Helper.__name__ = true;
-var haxe_ds_StringMap = function() {
-	this.h = { };
-};
-haxe_ds_StringMap.__name__ = true;
-haxe_ds_StringMap.prototype = {
-	set: function(key,value) {
-		if(__map_reserved[key] != null) {
-			this.setReserved(key,value);
-		} else {
-			this.h[key] = value;
-		}
-	}
-	,get: function(key) {
-		if(__map_reserved[key] != null) {
-			return this.getReserved(key);
-		}
-		return this.h[key];
-	}
-	,exists: function(key) {
-		if(__map_reserved[key] != null) {
-			return this.existsReserved(key);
-		}
-		return this.h.hasOwnProperty(key);
-	}
-	,setReserved: function(key,value) {
-		if(this.rh == null) {
-			this.rh = { };
-		}
-		this.rh["$" + key] = value;
-	}
-	,getReserved: function(key) {
-		if(this.rh == null) {
-			return null;
-		} else {
-			return this.rh["$" + key];
-		}
-	}
-	,existsReserved: function(key) {
-		if(this.rh == null) {
-			return false;
-		}
-		return this.rh.hasOwnProperty("$" + key);
-	}
-	,remove: function(key) {
-		if(__map_reserved[key] != null) {
-			key = "$" + key;
-			if(this.rh == null || !this.rh.hasOwnProperty(key)) {
-				return false;
-			}
-			delete(this.rh[key]);
-			return true;
-		} else {
-			if(!this.h.hasOwnProperty(key)) {
-				return false;
-			}
-			delete(this.h[key]);
-			return true;
-		}
-	}
-	,keys: function() {
-		return HxOverrides.iter(this.arrayKeys());
-	}
-	,arrayKeys: function() {
-		var out = [];
-		for( var key in this.h ) {
-		if(this.h.hasOwnProperty(key)) {
-			out.push(key);
-		}
-		}
-		if(this.rh != null) {
-			for( var key in this.rh ) {
-			if(key.charCodeAt(0) == 36) {
-				out.push(key.substr(1));
-			}
-			}
-		}
-		return out;
-	}
-	,iterator: function() {
-		return new haxe_ds__$StringMap_StringMapIterator(this,this.arrayKeys());
-	}
-	,toString: function() {
-		var s_b = "";
-		s_b = "{";
-		var keys = this.arrayKeys();
-		var _g = 0;
-		var _g1 = keys.length;
-		while(_g < _g1) {
-			var i = _g++;
-			var k = keys[i];
-			s_b += k == null ? "null" : "" + k;
-			s_b += " => ";
-			s_b += Std.string(Std.string(__map_reserved[k] != null ? this.getReserved(k) : this.h[k]));
-			if(i < keys.length - 1) {
-				s_b += ", ";
-			}
-		}
-		s_b += "}";
-		return s_b;
-	}
-};
 var coconut_vdom__$Html_Elt = function(tag) {
 	var _g = tag.split(":");
 	var tmp;
@@ -4743,7 +4496,7 @@ fomantic_Button.prototype = $extend(coconut_ui_View.prototype,{
 	}
 });
 var fomantic_Form = function(__coco_data_) {
-	this.__tink_defaults98 = { className : null};
+	this.__tink_defaults101 = { className : null};
 	this.__slots = { children : new coconut_ui_tools_Slot(this,null), className : new coconut_ui_tools_Slot(this,null)};
 	this.__initAttributes(__coco_data_);
 	coconut_ui_View.call(this,$bind(this,this.render),null,null,null,null,null);
@@ -4782,7 +4535,7 @@ fomantic_Form.prototype = $extend(coconut_ui_View.prototype,{
 	,__initAttributes: function(attributes) {
 		this.__slots.children.setData(attributes.children);
 		var this1 = attributes.className;
-		this.__slots.className.setData(this1 == null ? this.__tink_defaults98.className : this1);
+		this.__slots.className.setData(this1 == null ? this.__tink_defaults101.className : this1);
 	}
 });
 var fomantic_Icon = function(__coco_data_) {
@@ -4967,8 +4720,8 @@ var fomantic_Input = function(__coco_data_) {
 	var _gthis = this;
 	this.__tink_defaults62 = { value : tink_state__$Observable_Observable_$Impl_$.const(""), placeholder : tink_state__$Observable_Observable_$Impl_$.const("..."), focus : null, loading : null, disabled : tink_state__$Observable_Observable_$Impl_$.const(false), error : null, type : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
 		return "text";
-	}}), direction : null, img : null, name : null, className : null};
-	this.__slots = { value : new coconut_ui_tools_Slot(this,null), placeholder : new coconut_ui_tools_Slot(this,null), focus : new coconut_ui_tools_Slot(this,null), loading : new coconut_ui_tools_Slot(this,null), disabled : new coconut_ui_tools_Slot(this,null), error : new coconut_ui_tools_Slot(this,null), type : new coconut_ui_tools_Slot(this,null), direction : new coconut_ui_tools_Slot(this,null), img : new coconut_ui_tools_Slot(this,null), name : new coconut_ui_tools_Slot(this,null), className : new coconut_ui_tools_Slot(this,null)};
+	}}), direction : null, img : null, name : null, onChange : null, className : null};
+	this.__slots = { value : new coconut_ui_tools_Slot(this,null), placeholder : new coconut_ui_tools_Slot(this,null), focus : new coconut_ui_tools_Slot(this,null), loading : new coconut_ui_tools_Slot(this,null), disabled : new coconut_ui_tools_Slot(this,null), error : new coconut_ui_tools_Slot(this,null), type : new coconut_ui_tools_Slot(this,null), direction : new coconut_ui_tools_Slot(this,null), img : new coconut_ui_tools_Slot(this,null), name : new coconut_ui_tools_Slot(this,null), onChange : new coconut_ui_tools_Slot(this,null), className : new coconut_ui_tools_Slot(this,null)};
 	this.__coco_classes = tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
 		var b = tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.className);
 		if(tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.disabled)) {
@@ -5001,7 +4754,7 @@ fomantic_Input.prototype = $extend(coconut_ui_View.prototype,{
 		var __ret = { className : tink_domspec__$ClassName_ClassName_$Impl_$.ofString(" ui input  " + tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.direction) + "  " + tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__coco_classes))};
 		var __r1 = [];
 		var hxxMeta1 = { };
-		var __ret1 = { name : tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.name), type : "" + tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.type), value : tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.value), placeholder : tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.placeholder)};
+		var __ret1 = { name : tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.name), type : "" + tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.type), value : tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.value), onchange : tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.onChange), placeholder : tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.placeholder)};
 		__r1.push(coconut_diffing_VNodeData.VNative(coconut_vdom_Html.INPUT,hxxMeta1.ref,hxxMeta1.key,__ret1,null));
 		if(tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.img) != null) {
 			var __ret2 = { img : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
@@ -5042,6 +4795,9 @@ fomantic_Input.prototype = $extend(coconut_ui_View.prototype,{
 	,get_name: function() {
 		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.name);
 	}
+	,get_onChange: function() {
+		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.onChange);
+	}
 	,get_className: function() {
 		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.className);
 	}
@@ -5066,16 +4822,133 @@ fomantic_Input.prototype = $extend(coconut_ui_View.prototype,{
 		this.__slots.img.setData(this9 == null ? this.__tink_defaults62.img : this9);
 		var this10 = attributes.name;
 		this.__slots.name.setData(this10 == null ? this.__tink_defaults62.name : this10);
-		var this11 = attributes.className;
-		this.__slots.className.setData(this11 == null ? this.__tink_defaults62.className : this11);
+		var this11 = attributes.onChange;
+		this.__slots.onChange.setData(this11 == null ? this.__tink_defaults62.onChange : this11);
+		var this12 = attributes.className;
+		this.__slots.className.setData(this12 == null ? this.__tink_defaults62.className : this12);
 	}
 	,get_classes: function() {
 		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__coco_classes);
 	}
 });
-var fomantic_Login = function(__coco_data_) {
-	this.__tink_defaults95 = { className : null};
+var fomantic_Inscript = function(__coco_data_) {
+	this.__tink_defaults114 = { className : null};
 	this.__slots = { act : new coconut_ui_tools_Slot(this,null), className : new coconut_ui_tools_Slot(this,null)};
+	this.__coco_email = new tink_state__$State_SimpleState(null,null,null);
+	this.__coco_name = new tink_state__$State_SimpleState(null,null,null);
+	this.__initAttributes(__coco_data_);
+	coconut_ui_View.call(this,$bind(this,this.render),null,null,null,null,null);
+};
+fomantic_Inscript.__name__ = true;
+fomantic_Inscript.fromHxx = function(hxxMeta,attributes) {
+	return coconut_diffing_VNodeData.VWidget(fomantic_Inscript.__type,hxxMeta.ref,hxxMeta.key,attributes);
+};
+fomantic_Inscript.__super__ = coconut_ui_View;
+fomantic_Inscript.prototype = $extend(coconut_ui_View.prototype,{
+	act: function(a0) {
+		var _g = tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.act);
+		if(_g == null) {
+			throw new js__$Boot_HaxeError("mandatory attribute " + "act" + " of <" + "Inscript" + "/> was set to null");
+		} else {
+			_g(a0);
+		}
+		return;
+	}
+	,gather: function(e) {
+		e.preventDefault();
+		this.act({ email : tink_state__$State_State_$Impl_$.get_value(this.__coco_email), name : tink_state__$State_State_$Impl_$.get_value(this.__coco_name)});
+	}
+	,valid: function(form) {
+		$(form).form({ fields : { email : { identifier : "email", rules : [{ type : "empty", prompt : "Please enter your e-mail"},{ type : "email", prompt : "Please enter a valid e-mail"}]}, name : { identifier : "name", rules : [{ type : "empty", prompt : "Please enter your name"},{ type : "length[6]", prompt : "Your name must be at least 6 characters"}]}}});
+	}
+	,render: function() {
+		var _gthis = this;
+		var __r = [];
+		var hxxMeta = { ref : $bind(this,this.valid)};
+		var __ret = { className : tink_domspec__$ClassName_ClassName_$Impl_$.ofString("" + tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.className))};
+		var __r1 = [];
+		var this1 = { f : function() {
+			var __r2 = [];
+			var __ret1 = tink_state__$Observable_Observable_$Impl_$.const("name");
+			var this2 = { f : function() {
+				return "lock";
+			}};
+			var __ret2 = tink_state__$Observable_Observable_$Impl_$.auto(this2);
+			var this3 = { f : function() {
+				return function(e) {
+					var param = e.currentTarget.value;
+					_gthis.__coco_name.set(param);
+					return param;
+				};
+			}};
+			var __ret3 = tink_state__$Observable_Observable_$Impl_$.auto(this3);
+			var this4 = { f : function() {
+				return "text";
+			}};
+			var __ret4 = { name : __ret1, img : __ret2, onChange : __ret3, placeholder : tink_state__$Observable_Observable_$Impl_$.const("name"), type : tink_state__$Observable_Observable_$Impl_$.auto(this4)};
+			__r2.push(fomantic_Input.fromHxx({ },__ret4));
+			var __ret5 = tink_state__$Observable_Observable_$Impl_$.const("email");
+			var this5 = { f : function() {
+				return "user";
+			}};
+			var __ret6 = tink_state__$Observable_Observable_$Impl_$.auto(this5);
+			var this6 = { f : function() {
+				return function(e1) {
+					var param1 = e1.currentTarget.value;
+					_gthis.__coco_email.set(param1);
+					return param1;
+				};
+			}};
+			var __ret7 = tink_state__$Observable_Observable_$Impl_$.auto(this6);
+			var this7 = { f : function() {
+				return "email";
+			}};
+			var __ret8 = { name : __ret5, img : __ret6, onChange : __ret7, placeholder : tink_state__$Observable_Observable_$Impl_$.const("email"), type : tink_state__$Observable_Observable_$Impl_$.auto(this7)};
+			__r2.push(fomantic_Input.fromHxx({ },__ret8));
+			var this8 = { f : function() {
+				return $bind(_gthis,_gthis.gather);
+			}};
+			var __ret9 = { text : tink_state__$Observable_Observable_$Impl_$.const("ok"), onClick : tink_state__$Observable_Observable_$Impl_$.auto(this8)};
+			__r2.push(fomantic_Button.fromHxx({ },__ret9));
+			return __r2;
+		}};
+		var __ret10 = { children : tink_state__$Observable_Observable_$Impl_$.auto(this1)};
+		__r1.push(fomantic_Form.fromHxx({ },__ret10));
+		var hxxMeta1 = { };
+		var __ret11 = { className : tink_domspec__$ClassName_ClassName_$Impl_$.ofString("ui error message")};
+		var __r3 = [];
+		__r1.push(coconut_diffing_VNodeData.VNative(coconut_vdom_Html.DIV,hxxMeta1.ref,hxxMeta1.key,__ret11,__r3));
+		__r.push(coconut_diffing_VNodeData.VNative(coconut_vdom_Html.DIV,hxxMeta.ref,hxxMeta.key,__ret,__r1));
+		return __r[0];
+	}
+	,get_className: function() {
+		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.className);
+	}
+	,get_email: function() {
+		return tink_state__$State_State_$Impl_$.get_value(this.__coco_email);
+	}
+	,set_email: function(param) {
+		this.__coco_email.set(param);
+		return param;
+	}
+	,get_name: function() {
+		return tink_state__$State_State_$Impl_$.get_value(this.__coco_name);
+	}
+	,set_name: function(param) {
+		this.__coco_name.set(param);
+		return param;
+	}
+	,__initAttributes: function(attributes) {
+		this.__slots.act.setData(attributes.act);
+		var this1 = attributes.className;
+		this.__slots.className.setData(this1 == null ? this.__tink_defaults114.className : this1);
+	}
+});
+var fomantic_Login = function(__coco_data_) {
+	this.__tink_defaults96 = { className : null};
+	this.__slots = { act : new coconut_ui_tools_Slot(this,null), className : new coconut_ui_tools_Slot(this,null)};
+	this.__coco_email = new tink_state__$State_SimpleState("",null,null);
+	this.__coco_password = new tink_state__$State_SimpleState("",null,null);
 	this.__initAttributes(__coco_data_);
 	coconut_ui_View.call(this,$bind(this,this.render),null,null,null,null,null);
 };
@@ -5094,6 +4967,10 @@ fomantic_Login.prototype = $extend(coconut_ui_View.prototype,{
 		}
 		return;
 	}
+	,gather: function(e) {
+		e.preventDefault();
+		this.act({ email : tink_state__$State_State_$Impl_$.get_value(this.__coco_email), password : tink_state__$State_State_$Impl_$.get_value(this.__coco_password)});
+	}
 	,valid: function(form) {
 		$(form).form({ fields : { email : { identifier : "email", rules : [{ type : "empty", prompt : "Please enter your e-mail"},{ type : "email", prompt : "Please enter a valid e-mail"}]}, password : { identifier : "password", rules : [{ type : "empty", prompt : "Please enter your password"},{ type : "length[6]", prompt : "Your password must be at least 6 characters"}]}}});
 	}
@@ -5103,39 +4980,81 @@ fomantic_Login.prototype = $extend(coconut_ui_View.prototype,{
 		var hxxMeta = { ref : $bind(this,this.valid)};
 		var __ret = { className : tink_domspec__$ClassName_ClassName_$Impl_$.ofString("" + tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.className))};
 		var __r1 = [];
-		var __ret1 = { children : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
+		var this1 = { f : function() {
 			var __r2 = [];
-			var __ret2 = { name : tink_state__$Observable_Observable_$Impl_$.const("password"), img : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
+			var __ret1 = tink_state__$Observable_Observable_$Impl_$.const("password");
+			var this2 = { f : function() {
 				return "lock";
-			}}), placeholder : tink_state__$Observable_Observable_$Impl_$.const("paswword"), type : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
+			}};
+			var __ret2 = tink_state__$Observable_Observable_$Impl_$.auto(this2);
+			var this3 = { f : function() {
+				return function(e) {
+					var param = e.currentTarget.value;
+					_gthis.__coco_password.set(param);
+					return param;
+				};
+			}};
+			var __ret3 = tink_state__$Observable_Observable_$Impl_$.auto(this3);
+			var this4 = { f : function() {
 				return "password";
-			}})};
-			__r2.push(fomantic_Input.fromHxx({ },__ret2));
-			var __ret3 = { name : tink_state__$Observable_Observable_$Impl_$.const("email"), img : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
+			}};
+			var __ret4 = { name : __ret1, img : __ret2, onChange : __ret3, placeholder : tink_state__$Observable_Observable_$Impl_$.const("paswword"), type : tink_state__$Observable_Observable_$Impl_$.auto(this4)};
+			__r2.push(fomantic_Input.fromHxx({ },__ret4));
+			var __ret5 = tink_state__$Observable_Observable_$Impl_$.const("email");
+			var this5 = { f : function() {
 				return "user";
-			}}), placeholder : tink_state__$Observable_Observable_$Impl_$.const("name"), type : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
-				return "email";
-			}})};
-			__r2.push(fomantic_Input.fromHxx({ },__ret3));
-			var __ret4 = { text : tink_state__$Observable_Observable_$Impl_$.const("ok"), onClick : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
-				return $bind(_gthis,_gthis.act);
-			}})};
-			__r2.push(fomantic_Button.fromHxx({ },__ret4));
+			}};
+			var __ret6 = tink_state__$Observable_Observable_$Impl_$.auto(this5);
+			var this6 = { f : function() {
+				return function(e1) {
+					var param1 = e1.currentTarget.value;
+					_gthis.__coco_email.set(param1);
+					return param1;
+				};
+			}};
+			var __ret7 = tink_state__$Observable_Observable_$Impl_$.auto(this6);
+			var this7 = { f : function() {
+				return "password";
+			}};
+			var __ret8 = { name : __ret5, img : __ret6, onChange : __ret7, placeholder : tink_state__$Observable_Observable_$Impl_$.const("name"), type : tink_state__$Observable_Observable_$Impl_$.auto(this7)};
+			__r2.push(fomantic_Input.fromHxx({ },__ret8));
+			var this8 = { f : function() {
+				return $bind(_gthis,_gthis.gather);
+			}};
+			var __ret9 = { text : tink_state__$Observable_Observable_$Impl_$.const("ok"), onClick : tink_state__$Observable_Observable_$Impl_$.auto(this8)};
+			__r2.push(fomantic_Button.fromHxx({ },__ret9));
 			return __r2;
-		}})};
-		__r1.push(fomantic_Form.fromHxx({ },__ret1));
+		}};
+		var __ret10 = { children : tink_state__$Observable_Observable_$Impl_$.auto(this1)};
+		__r1.push(fomantic_Form.fromHxx({ },__ret10));
 		var hxxMeta1 = { };
-		__r1.push(coconut_diffing_VNodeData.VNative(coconut_vdom_Html.DIV,hxxMeta1.ref,hxxMeta1.key,{ className : tink_domspec__$ClassName_ClassName_$Impl_$.ofString("ui error message")},[]));
+		var __ret11 = { className : tink_domspec__$ClassName_ClassName_$Impl_$.ofString("ui error message")};
+		var __r3 = [];
+		__r1.push(coconut_diffing_VNodeData.VNative(coconut_vdom_Html.DIV,hxxMeta1.ref,hxxMeta1.key,__ret11,__r3));
 		__r.push(coconut_diffing_VNodeData.VNative(coconut_vdom_Html.DIV,hxxMeta.ref,hxxMeta.key,__ret,__r1));
 		return __r[0];
 	}
 	,get_className: function() {
 		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.className);
 	}
+	,get_email: function() {
+		return tink_state__$State_State_$Impl_$.get_value(this.__coco_email);
+	}
+	,set_email: function(param) {
+		this.__coco_email.set(param);
+		return param;
+	}
+	,get_password: function() {
+		return tink_state__$State_State_$Impl_$.get_value(this.__coco_password);
+	}
+	,set_password: function(param) {
+		this.__coco_password.set(param);
+		return param;
+	}
 	,__initAttributes: function(attributes) {
 		this.__slots.act.setData(attributes.act);
 		var this1 = attributes.className;
-		this.__slots.className.setData(this1 == null ? this.__tink_defaults95.className : this1);
+		this.__slots.className.setData(this1 == null ? this.__tink_defaults96.className : this1);
 	}
 });
 var fomantic_Search = function(__coco_data_) {
@@ -5285,6 +5204,165 @@ haxe_Log.trace = function(v,infos) {
 		console.log(str);
 	}
 };
+var haxe_ds_BalancedTree = function() {
+};
+haxe_ds_BalancedTree.__name__ = true;
+haxe_ds_BalancedTree.prototype = {
+	set: function(key,value) {
+		this.root = this.setLoop(key,value,this.root);
+	}
+	,get: function(key) {
+		var node = this.root;
+		while(node != null) {
+			var c = this.compare(key,node.key);
+			if(c == 0) {
+				return node.value;
+			}
+			if(c < 0) {
+				node = node.left;
+			} else {
+				node = node.right;
+			}
+		}
+		return null;
+	}
+	,remove: function(key) {
+		try {
+			this.root = this.removeLoop(key,this.root);
+			return true;
+		} catch( e ) {
+			if(typeof(((e) instanceof js__$Boot_HaxeError) ? e.val : e) == "string") {
+				return false;
+			} else {
+				throw e;
+			}
+		}
+	}
+	,exists: function(key) {
+		var node = this.root;
+		while(node != null) {
+			var c = this.compare(key,node.key);
+			if(c == 0) {
+				return true;
+			} else if(c < 0) {
+				node = node.left;
+			} else {
+				node = node.right;
+			}
+		}
+		return false;
+	}
+	,iterator: function() {
+		var ret = [];
+		this.iteratorLoop(this.root,ret);
+		return HxOverrides.iter(ret);
+	}
+	,keys: function() {
+		var ret = [];
+		this.keysLoop(this.root,ret);
+		return HxOverrides.iter(ret);
+	}
+	,setLoop: function(k,v,node) {
+		if(node == null) {
+			return new haxe_ds_TreeNode(null,k,v,null);
+		}
+		var c = this.compare(k,node.key);
+		if(c == 0) {
+			return new haxe_ds_TreeNode(node.left,k,v,node.right,node == null ? 0 : node._height);
+		} else if(c < 0) {
+			return this.balance(this.setLoop(k,v,node.left),node.key,node.value,node.right);
+		} else {
+			var nr = this.setLoop(k,v,node.right);
+			return this.balance(node.left,node.key,node.value,nr);
+		}
+	}
+	,removeLoop: function(k,node) {
+		if(node == null) {
+			throw new js__$Boot_HaxeError("Not_found");
+		}
+		var c = this.compare(k,node.key);
+		if(c == 0) {
+			return this.merge(node.left,node.right);
+		} else if(c < 0) {
+			return this.balance(this.removeLoop(k,node.left),node.key,node.value,node.right);
+		} else {
+			return this.balance(node.left,node.key,node.value,this.removeLoop(k,node.right));
+		}
+	}
+	,iteratorLoop: function(node,acc) {
+		if(node != null) {
+			this.iteratorLoop(node.left,acc);
+			acc.push(node.value);
+			this.iteratorLoop(node.right,acc);
+		}
+	}
+	,keysLoop: function(node,acc) {
+		if(node != null) {
+			this.keysLoop(node.left,acc);
+			acc.push(node.key);
+			this.keysLoop(node.right,acc);
+		}
+	}
+	,merge: function(t1,t2) {
+		if(t1 == null) {
+			return t2;
+		}
+		if(t2 == null) {
+			return t1;
+		}
+		var t = this.minBinding(t2);
+		return this.balance(t1,t.key,t.value,this.removeMinBinding(t2));
+	}
+	,minBinding: function(t) {
+		if(t == null) {
+			throw new js__$Boot_HaxeError("Not_found");
+		} else if(t.left == null) {
+			return t;
+		} else {
+			return this.minBinding(t.left);
+		}
+	}
+	,removeMinBinding: function(t) {
+		if(t.left == null) {
+			return t.right;
+		} else {
+			return this.balance(this.removeMinBinding(t.left),t.key,t.value,t.right);
+		}
+	}
+	,balance: function(l,k,v,r) {
+		var hl = l == null ? 0 : l._height;
+		var hr = r == null ? 0 : r._height;
+		if(hl > hr + 2) {
+			var _this = l.left;
+			var _this1 = l.right;
+			if((_this == null ? 0 : _this._height) >= (_this1 == null ? 0 : _this1._height)) {
+				return new haxe_ds_TreeNode(l.left,l.key,l.value,new haxe_ds_TreeNode(l.right,k,v,r));
+			} else {
+				return new haxe_ds_TreeNode(new haxe_ds_TreeNode(l.left,l.key,l.value,l.right.left),l.right.key,l.right.value,new haxe_ds_TreeNode(l.right.right,k,v,r));
+			}
+		} else if(hr > hl + 2) {
+			var _this2 = r.right;
+			var _this3 = r.left;
+			if((_this2 == null ? 0 : _this2._height) > (_this3 == null ? 0 : _this3._height)) {
+				return new haxe_ds_TreeNode(new haxe_ds_TreeNode(l,k,v,r.left),r.key,r.value,r.right);
+			} else {
+				return new haxe_ds_TreeNode(new haxe_ds_TreeNode(l,k,v,r.left.left),r.left.key,r.left.value,new haxe_ds_TreeNode(r.left.right,r.key,r.value,r.right));
+			}
+		} else {
+			return new haxe_ds_TreeNode(l,k,v,r,(hl > hr ? hl : hr) + 1);
+		}
+	}
+	,compare: function(k1,k2) {
+		return Reflect.compare(k1,k2);
+	}
+	,toString: function() {
+		if(this.root == null) {
+			return "{}";
+		} else {
+			return "{" + this.root.toString() + "}";
+		}
+	}
+};
 var haxe_ds_TreeNode = function(l,k,v,r,h) {
 	if(h == null) {
 		h = -1;
@@ -5319,11 +5397,114 @@ var haxe_ds_Either = $hxEnums["haxe.ds.Either"] = { __ename__ : true, __construc
 	,Left: ($_=function(v) { return {_hx_index:0,v:v,__enum__:"haxe.ds.Either",toString:$estr}; },$_.__params__ = ["v"],$_)
 	,Right: ($_=function(v) { return {_hx_index:1,v:v,__enum__:"haxe.ds.Either",toString:$estr}; },$_.__params__ = ["v"],$_)
 };
+var haxe_ds_EnumValueMap = function() {
+	haxe_ds_BalancedTree.call(this);
+};
+haxe_ds_EnumValueMap.__name__ = true;
+haxe_ds_EnumValueMap.__super__ = haxe_ds_BalancedTree;
+haxe_ds_EnumValueMap.prototype = $extend(haxe_ds_BalancedTree.prototype,{
+	compare: function(k1,k2) {
+		var d = k1._hx_index - k2._hx_index;
+		if(d != 0) {
+			return d;
+		}
+		var p1 = Type.enumParameters(k1);
+		var p2 = Type.enumParameters(k2);
+		if(p1.length == 0 && p2.length == 0) {
+			return 0;
+		}
+		return this.compareArgs(p1,p2);
+	}
+	,compareArgs: function(a1,a2) {
+		var ld = a1.length - a2.length;
+		if(ld != 0) {
+			return ld;
+		}
+		var _g = 0;
+		var _g1 = a1.length;
+		while(_g < _g1) {
+			var i = _g++;
+			var d = this.compareArg(a1[i],a2[i]);
+			if(d != 0) {
+				return d;
+			}
+		}
+		return 0;
+	}
+	,compareArg: function(v1,v2) {
+		if(Reflect.isEnumValue(v1) && Reflect.isEnumValue(v2)) {
+			return this.compare(v1,v2);
+		} else if(((v1) instanceof Array) && v1.__enum__ == null && (((v2) instanceof Array) && v2.__enum__ == null)) {
+			return this.compareArgs(v1,v2);
+		} else {
+			return Reflect.compare(v1,v2);
+		}
+	}
+});
 var haxe_ds__$List_ListNode = function(item,next) {
 	this.item = item;
 	this.next = next;
 };
 haxe_ds__$List_ListNode.__name__ = true;
+var haxe_ds_ObjectMap = function() {
+	this.h = { __keys__ : { }};
+};
+haxe_ds_ObjectMap.__name__ = true;
+haxe_ds_ObjectMap.prototype = {
+	set: function(key,value) {
+		var id = key.__id__ || (key.__id__ = $global.$haxeUID++);
+		this.h[id] = value;
+		this.h.__keys__[id] = key;
+	}
+	,get: function(key) {
+		return this.h[key.__id__];
+	}
+	,exists: function(key) {
+		return this.h.__keys__[key.__id__] != null;
+	}
+	,remove: function(key) {
+		var id = key.__id__;
+		if(this.h.__keys__[id] == null) {
+			return false;
+		}
+		delete(this.h[id]);
+		delete(this.h.__keys__[id]);
+		return true;
+	}
+	,keys: function() {
+		var a = [];
+		for( var key in this.h.__keys__ ) {
+		if(this.h.hasOwnProperty(key)) {
+			a.push(this.h.__keys__[key]);
+		}
+		}
+		return HxOverrides.iter(a);
+	}
+	,iterator: function() {
+		return { ref : this.h, it : this.keys(), hasNext : function() {
+			return this.it.hasNext();
+		}, next : function() {
+			var i = this.it.next();
+			return this.ref[i.__id__];
+		}};
+	}
+	,toString: function() {
+		var s_b = "";
+		s_b = "{";
+		var it = this.keys();
+		while(it.hasNext()) {
+			var i = it.next();
+			s_b += Std.string(Std.string(i));
+			s_b += " => ";
+			s_b += Std.string(Std.string(this.h[i.__id__]));
+			if(it.hasNext()) {
+				s_b += ", ";
+			}
+		}
+		s_b += "}";
+		return s_b;
+	}
+};
 var haxe_ds__$StringMap_StringMapIterator = function(map,keys) {
 	this.map = map;
 	this.keys = keys;
@@ -5345,103 +5526,127 @@ haxe_ds__$StringMap_StringMapIterator.prototype = {
 		}
 	}
 };
-var haxe_io_Bytes = function() { };
-haxe_io_Bytes.__name__ = true;
-var js_Boot = function() { };
-js_Boot.__name__ = true;
-js_Boot.__string_rec = function(o,s) {
-	if(o == null) {
-		return "null";
+var haxe_ds_StringMap = function() {
+	this.h = { };
+};
+haxe_ds_StringMap.__name__ = true;
+haxe_ds_StringMap.prototype = {
+	set: function(key,value) {
+		if(__map_reserved[key] != null) {
+			this.setReserved(key,value);
+		} else {
+			this.h[key] = value;
+		}
 	}
-	if(s.length >= 5) {
-		return "<...>";
+	,get: function(key) {
+		if(__map_reserved[key] != null) {
+			return this.getReserved(key);
+		}
+		return this.h[key];
 	}
-	var t = typeof(o);
-	if(t == "function" && (o.__name__ || o.__ename__)) {
-		t = "object";
+	,exists: function(key) {
+		if(__map_reserved[key] != null) {
+			return this.existsReserved(key);
+		}
+		return this.h.hasOwnProperty(key);
 	}
-	switch(t) {
-	case "function":
-		return "<function>";
-	case "object":
-		if(o.__enum__) {
-			var e = $hxEnums[o.__enum__];
-			var n = e.__constructs__[o._hx_index];
-			var con = e[n];
-			if(con.__params__) {
-				s = s + "\t";
-				return n + "(" + ((function($this) {
-					var $r;
-					var _g = [];
-					{
-						var _g1 = 0;
-						var _g2 = con.__params__;
-						while(true) {
-							if(!(_g1 < _g2.length)) {
-								break;
-							}
-							var p = _g2[_g1];
-							_g1 = _g1 + 1;
-							_g.push(js_Boot.__string_rec(o[p],s));
-						}
-					}
-					$r = _g;
-					return $r;
-				}(this))).join(",") + ")";
-			} else {
-				return n;
+	,setReserved: function(key,value) {
+		if(this.rh == null) {
+			this.rh = { };
+		}
+		this.rh["$" + key] = value;
+	}
+	,getReserved: function(key) {
+		if(this.rh == null) {
+			return null;
+		} else {
+			return this.rh["$" + key];
+		}
+	}
+	,existsReserved: function(key) {
+		if(this.rh == null) {
+			return false;
+		}
+		return this.rh.hasOwnProperty("$" + key);
+	}
+	,remove: function(key) {
+		if(__map_reserved[key] != null) {
+			key = "$" + key;
+			if(this.rh == null || !this.rh.hasOwnProperty(key)) {
+				return false;
+			}
+			delete(this.rh[key]);
+			return true;
+		} else {
+			if(!this.h.hasOwnProperty(key)) {
+				return false;
+			}
+			delete(this.h[key]);
+			return true;
+		}
+	}
+	,keys: function() {
+		return HxOverrides.iter(this.arrayKeys());
+	}
+	,arrayKeys: function() {
+		var out = [];
+		for( var key in this.h ) {
+		if(this.h.hasOwnProperty(key)) {
+			out.push(key);
+		}
+		}
+		if(this.rh != null) {
+			for( var key in this.rh ) {
+			if(key.charCodeAt(0) == 36) {
+				out.push(key.substr(1));
+			}
 			}
 		}
-		if(((o) instanceof Array)) {
-			var str = "[";
-			s += "\t";
-			var _g3 = 0;
-			var _g11 = o.length;
-			while(_g3 < _g11) {
-				var i = _g3++;
-				str += (i > 0 ? "," : "") + js_Boot.__string_rec(o[i],s);
-			}
-			str += "]";
-			return str;
-		}
-		var tostr;
-		try {
-			tostr = o.toString;
-		} catch( e1 ) {
-			var e2 = ((e1) instanceof js__$Boot_HaxeError) ? e1.val : e1;
-			return "???";
-		}
-		if(tostr != null && tostr != Object.toString && typeof(tostr) == "function") {
-			var s2 = o.toString();
-			if(s2 != "[object Object]") {
-				return s2;
+		return out;
+	}
+	,iterator: function() {
+		return new haxe_ds__$StringMap_StringMapIterator(this,this.arrayKeys());
+	}
+	,toString: function() {
+		var s_b = "";
+		s_b = "{";
+		var keys = this.arrayKeys();
+		var _g = 0;
+		var _g1 = keys.length;
+		while(_g < _g1) {
+			var i = _g++;
+			var k = keys[i];
+			s_b += k == null ? "null" : "" + k;
+			s_b += " => ";
+			s_b += Std.string(Std.string(__map_reserved[k] != null ? this.getReserved(k) : this.h[k]));
+			if(i < keys.length - 1) {
+				s_b += ", ";
 			}
 		}
-		var str1 = "{\n";
-		s += "\t";
-		var hasp = o.hasOwnProperty != null;
-		var k = null;
-		for( k in o ) {
-		if(hasp && !o.hasOwnProperty(k)) {
-			continue;
-		}
-		if(k == "prototype" || k == "__class__" || k == "__super__" || k == "__interfaces__" || k == "__properties__") {
-			continue;
-		}
-		if(str1.length != 2) {
-			str1 += ", \n";
-		}
-		str1 += s + k + " : " + js_Boot.__string_rec(o[k],s);
-		}
-		s = s.substring(1);
-		str1 += "\n" + s + "}";
-		return str1;
-	case "string":
-		return o;
-	default:
-		return String(o);
+		s_b += "}";
+		return s_b;
 	}
 };
+var haxe_io_Bytes = function() { };
+haxe_io_Bytes.__name__ = true;
+var js__$Boot_HaxeError = function(val) {
+	Error.call(this);
+	this.val = val;
+	if(Error.captureStackTrace) {
+		Error.captureStackTrace(this,js__$Boot_HaxeError);
+	}
+};
+js__$Boot_HaxeError.__name__ = true;
+js__$Boot_HaxeError.wrap = function(val) {
+	if(((val) instanceof Error)) {
+		return val;
+	} else {
+		return new js__$Boot_HaxeError(val);
+	}
+};
+js__$Boot_HaxeError.__super__ = Error;
+js__$Boot_HaxeError.prototype = $extend(Error.prototype,{
+});
 var js_jquery_JqEltsIterator = function(j) {
 	this.i = 0;
 	this.j = j;
@@ -8015,12 +8220,12 @@ if(typeof $global.$haxeUID == "undefined") $global.$haxeUID = 0;
 String.__name__ = true;
 Array.__name__ = true;
 Date.__name__ = "Date";
+js_Boot.__toStr = ({ }).toString;
+haxe_ds_ObjectMap.count = 0;
+var __map_reserved = {};
 Object.defineProperty(js__$Boot_HaxeError.prototype,"message",{ get : function() {
 	return String(this.val);
 }});
-haxe_ds_ObjectMap.count = 0;
-var __map_reserved = {};
-js_Boot.__toStr = ({ }).toString;
 var typeofJQuery = typeof($);
 if(typeofJQuery != "undefined" && $.fn != null) {
 	$.fn.elements = function() {
@@ -8155,6 +8360,7 @@ tink_state_ObservableIterator.TRIGGER = haxe_ds_Option.Some(tink_core_Noise.Nois
 Pages.__type = { create : function(__coco_data_) {
 	return new Pages(__coco_data_);
 }, update : function(attr,v) {
+	v.__initAttributes(attr);
 }};
 View0.__type = { create : function(__coco_data_) {
 	return new View0(__coco_data_);
@@ -8324,6 +8530,11 @@ fomantic_IconicInput.__type = { create : function(__coco_data_) {
 }};
 fomantic_Input.__type = { create : function(__coco_data_) {
 	return new fomantic_Input(__coco_data_);
+}, update : function(attr,v) {
+	v.__initAttributes(attr);
+}};
+fomantic_Inscript.__type = { create : function(__coco_data_) {
+	return new fomantic_Inscript(__coco_data_);
 }, update : function(attr,v) {
 	v.__initAttributes(attr);
 }};

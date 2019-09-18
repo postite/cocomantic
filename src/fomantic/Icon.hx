@@ -212,6 +212,7 @@ var user_outline ="user outline";
 var user_circle ="user circle";
 //var user_circle_outline ="user circle outline";
 var wifi ="wifi";
+var phone;
 
 //security
 
@@ -241,5 +242,7 @@ var unlock_alternate= "unlock alternate";
 var user_lock= "user lock";
 var user_secret= "user secret";
 var user_shield= "user shield";
+
+
 
  }
