@@ -48,10 +48,14 @@ class Search extends coconut.ui.View{
          source:content.toArray(),
          searchFields:["title"],
          fullTextSearch:false,
-         onSelect:(result, response)->{trace("res="+result.title);},
+         onSelect:(result, response)->{
+            trace("send"+result.title);
+            value=result;
+            trace("res="+result.title);
+            },
 
 
-         error : {
+error : {
   source      : 'Cannot search. No source used, and Semantic API module was not included',
   noResults   : 'pas d\'incrits',
   logging     : 'Error in debug logging, exiting.',
@@ -60,11 +64,15 @@ class Search extends coconut.ui.View{
   maxResults  : 'Results must be an array to use maxResults setting',
   method      : 'The method you called is not defined.'
    },
-			//onChange: function(value, text) if(onChange != null) onChange(value),
-		});
+
+			onChange: function(value, text) if(onChange != null) onChange(value),
+
+	});
 
 		//if(value == null) J(e).dropdown('clear');
 }
+
+
 
 
 function viewDidMount(){

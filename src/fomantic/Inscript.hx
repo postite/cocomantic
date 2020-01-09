@@ -5,12 +5,15 @@ import fomantic.Icon;
 import fomantic.Input;
 using Debug;
 import js.jquery.Helper.*;
+
 class Inscript extends coconut.ui.View{
 
   @:attr public var act:{email:String,name:String}->Void;
+  
   @:attribute var className:tink.domspec.ClassName = null;
   @:state var email:String=null;
   @:state var name:String=null;
+
 
   function gather(e){
     e.preventDefault();

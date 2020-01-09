@@ -109,7 +109,7 @@ class Pages extends View{
 				<case ${HomePage}>
 				<Hideable hidden={routes.get(HomePage)}>
 					<Login act={e->{goto(OnePage);}}/>
-					<Inscript act={e->e} />
+					<Inscript retour={false} act={e->e} />
 				</Hideable>
 				<case ${OnePage}><p>one</p>
 				<case ${TwoPage}><View2 hidden={routes.get(TwoPage)} done={e->router.push(OnePage)}/>
