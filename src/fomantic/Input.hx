@@ -12,14 +12,17 @@ class Input extends coconut.ui.View{
    @:attr @:optional public var focus:Bool;
    @:attr @:optional public var loading:Bool;
    @:attr @:optional public var disabled:Bool =false;
-   @:attr @:optional public var error:Bool;
+   @:attr @:optional public var error:Bool=false;
+   @:attr @:optional var labeled:Bool=false;
    @:attr @:optional public var type:InputType=text;
-   @:attr @:optional public var direction:Dir; // marche pas la dir.
+   @:attr @:optional public var direction:Dir=null; // marche pas la dir.
    @:attr @:optional public var img:IconName=null;
    @:attr @:optional public var name:String=null;
    @:attr @:optional var onChange:Event->Void;
+   
 
     @:attribute var className:tink.domspec.ClassName = null;
+
     @:computed  var classes:tink.domspec.ClassName={
       var b=className;
       if(disabled)
@@ -30,13 +33,21 @@ class Input extends coconut.ui.View{
       b=b.add("focus");
       if(img!=null)
       b=b.add("icon");
+
+      if(labeled)
+      b=b.add('labeled');
+
+      if(direction!=null)
+      b=b.add(cast direction);
+      
       return b;
+
    };
 
    
 
    function render()
-      <div  class=' ui input  $direction  ${classes}'>
+      <div class={className.add('ui input $direction')} >
          <input name={name} type='${type}' value={value} onchange={onChange}
          placeholder={placeholder} />
          <if {img!=null} >

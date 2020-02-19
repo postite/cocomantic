@@ -11,6 +11,7 @@ class Icon extends coconut.ui.View{
     @:attr @:optional public var outline:Bool=false;
     @:attr public var img:IconName=null;
     @:attr @:optional public var act:(js.html.Event)->Void;
+    @:attr @:optional public var toolTip:String;
 
    // @:attr @:optional public var direction:Dir;
     @:attribute var className:tink.domspec.ClassName = null;
@@ -29,10 +30,16 @@ class Icon extends coconut.ui.View{
       return b;
    };
 
+   function setup(el:js.html.Element){
+    if(toolTip!=null)
+      cast(el).dataset.tooltip=toolTip;
+   }
+
   function render()
    // <i class={{link:link,icon:true,}} ></i>
    // <i class=${"icon "+img+ {{(act!=null)?" link":" ";}+ {(disabled)?" disabled":" ";}}} onclick={act}></i>
-    <i class='$img icon $size ${classes}' onclick={act}></i>
+    <i ref={setup} class='$img icon $size ${classes}' onclick={act}>
+    </i>
     ;
 
 }
@@ -242,6 +249,39 @@ var unlock_alternate= "unlock alternate";
 var user_lock= "user lock";
 var user_secret= "user secret";
 var user_shield= "user shield";
+
+
+//textActions
+
+//var Align;// Center 
+//var Align;// Justify 
+//var Align;// Left 
+var Align;// Right 
+var Bold;// 
+var Copy;// 
+var Cut;// 
+//var Ellipsis;// Horizontal 
+var Ellipsis;// Vertical 
+var Font;// 
+var Indent;// Left 
+//var Indent;// Right 
+var Italic;// 
+var List;// 
+var Move;// 
+var Ordered;// List 
+var Paste;// 
+var Print;// 
+var Quote;// left 
+//var Quote;// right 
+var Strikethrough;// 
+var Subscript;// 
+var Superscript;// 
+//var Text;// Height 
+var Text;// Width 
+var Underline;// 
+var Undo;// 
+var Unlink;// 
+var Unordered;// List
 
 
 

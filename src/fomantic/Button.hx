@@ -16,8 +16,10 @@ class Button  extends View{
 
    @:attr @:optional public var type:ButtonType=basic;
    @:attr @:optional public var size:Size=null;
+   @:attr @:optional public var toolTip:String;
 
    @:attribute var className:tink.domspec.ClassName = null;
+   
    @:computed  var classes:tink.domspec.ClassName={
       var b=className;
       if(disabled)
@@ -30,8 +32,17 @@ class Button  extends View{
       return b;
    };
 
+   function setup(e:js.html.Element){
+
+
+      if(toolTip!=null)
+         cast(e).dataset.tooltip=toolTip;
+      
+     
+   }
+
    function render()
-      <button onclick={onClick} class='ui button $type $size ${classes}'>
+      <button ref={setup} onclick={onClick} class='ui button $type $size ${classes}' >
       <if {img!=null} >
       <Icon img={img} />
       </if>
