@@ -251,6 +251,50 @@ var user_secret= "user secret";
 var user_shield= "user shield";
 
 
+//files
+
+var archive;
+var clone;
+var clone;
+var clone_outline= "clone outline";
+var copy;
+var copy_outline="copy outline";
+var cut;
+var file;
+var file_alternate="file alternate";
+var file_alternate_outline="file alternate outline";
+var file_archive="file archive";
+var file_archive_outline= "file archive outline";
+var file_audio= "file audio";
+var file_audio_outline="file audio outline";
+var file_code="file code";
+var file_code_outline="file code outline";
+var file_excel="file excel";
+var file_excel_outline="file excel outline";
+var file_image="file image";
+var file_image_outline="file image outline";
+var file outline;
+var file_pdf="file pdf";
+var file_pdf_outline="file pdf outline";
+var file_powerpoint="file powerpoint";
+var file powerpoint outline;
+var file_video="file video";
+var file_video_outline="file video outline";
+var file_word="file word";
+var file_word_outline="file word outline";
+var folder;
+var folder_open="folder open";
+var folder_open_outline="folder open outline";
+var folder_outline="folder outline";
+var paste;
+var photo_video="photo video";
+var save;
+var save_outline__save="ave_outline="save" outline";
+var sticky_note="sticky note";
+var sticky_note_outline="sticky note outline";
+var Finance;
+
+
 //textActions
 
 //var Align;// Center 
