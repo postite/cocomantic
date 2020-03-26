@@ -430,7 +430,7 @@ var List;//
 var Move;// 
 var Ordered;// List 
 //var Paste;// 
-var Print;// 
+var print;// 
 var Quote;// left 
 //var Quote;// right 
 var Strikethrough;// 
