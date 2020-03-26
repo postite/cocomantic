@@ -39,6 +39,11 @@ class Input extends coconut.ui.View{
       if(labeled)
       b=b.add('labeled');
 
+      if(fluid)
+         b=b.add('fluid');
+      if(transparent)
+         b=b.add('transparent');
+
       if(direction!=null)
       b=b.add(cast direction);
       
@@ -49,7 +54,7 @@ class Input extends coconut.ui.View{
    
 
    function render()
-      <div class={className.add('ui input $direction $fluid')} >
+      <div class={className.add('ui input $direction ')} >
          <input name={name} type='${type}' value={value} onchange={onChange}
          placeholder={placeholder} />
          <if {img!=null} >
