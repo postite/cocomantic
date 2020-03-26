@@ -41,6 +41,7 @@ class Input extends coconut.ui.View{
 
       if(fluid)
          b=b.add('fluid');
+      
       if(transparent)
          b=b.add('transparent');
 
@@ -54,7 +55,7 @@ class Input extends coconut.ui.View{
    
 
    function render()
-      <div class={className.add('ui input ${direction}')} >
+      <div class={className.add('ui input')} >
          <input name={name} type='${type}' value={value} onchange={onChange}
          placeholder={placeholder} />
          <if {img!=null} >
