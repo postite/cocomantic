@@ -14,6 +14,8 @@ class Input extends coconut.ui.View{
    @:attr @:optional public var disabled:Bool =false;
    @:attr @:optional public var error:Bool=false;
    @:attr @:optional var labeled:Bool=false;
+   @:attr @:optional var fluid:Bool=false;
+   @:attr @:optional var transparent:Bool=false;
    @:attr @:optional public var type:InputType=text;
    @:attr @:optional public var direction:Dir=null; // marche pas la dir.
    @:attr @:optional public var img:IconName=null;
@@ -47,7 +49,7 @@ class Input extends coconut.ui.View{
    
 
    function render()
-      <div class={className.add('ui input $direction')} >
+      <div class={className.add('ui input $direction $fluid')} >
          <input name={name} type='${type}' value={value} onchange={onChange}
          placeholder={placeholder} />
          <if {img!=null} >
