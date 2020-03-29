@@ -5,6 +5,7 @@ import js.html.Text;
 import js.html.Event;
 import fomantic.Types;
 import fomantic.Icon;
+import js.html.*;
 class Input extends coconut.ui.View{
 
    @:attr public var value:String="";
