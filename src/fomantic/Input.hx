@@ -21,7 +21,7 @@ class Input extends coconut.ui.View{
    @:attr @:optional public var img:IconName=null;
    @:attr @:optional public var name:String=null;
    @:attr @:optional var onChange:Event->Void;
-   
+   @:attr @:optional var onFocus:Event->Void;
 
     @:attribute var className:tink.domspec.ClassName = null;
 
@@ -51,6 +51,17 @@ class Input extends coconut.ui.View{
       return b;
 
    };
+
+   var input:js.html.InputElement;
+   function setup(el:Element){
+      this.input=cast el;
+   }
+   public function clear(){
+      input.value="";
+   }
+   public function getValue(){
+      return input.value;
+   }
 
    
 
