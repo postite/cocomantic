@@ -68,7 +68,7 @@ class Input extends coconut.ui.View{
 
    function render()
       <div class={className.add('ui input')} >
-         <input name={name} type='${type}' value={value} onchange={onChange}
+         <input ref={setup} name={name} type='${type}' value={value} onchange={onChange}
          placeholder={placeholder} />
          <if {img!=null} >
             <Icon img={img} />
