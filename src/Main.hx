@@ -5,10 +5,11 @@ import fomantic.*;
 import fomantic.Types;
 import js.Browser.document as doc;
 import fomantic.Icon;
-import tink.pure.List;
+using tink.pure.List; // incompat with IconName
 import animation.Hideable;
 import js.html.Event;
 import tink.state.ObservableMap;
+import fomantic.Accordion;
 using Debug;
 
 	enum Route {
@@ -47,10 +48,10 @@ class Main {
 
 	static function main() {
 		trace("Hello, world!");
-	
+		var accordionListe=new AccList({items:[for (a in 0 ...4) AccItem.create('item$a','content$a')].fromArray()});
 	 coconut.ui.Renderer.mount(
 		cast doc.body.appendChild(doc.createDivElement()),
-        hxx('<App router=${router} />')
+        hxx('<App router=${router} elements={accordionListe} />')
 		//   hxx('<Bouton text="op" />')
 		);
 	
@@ -62,11 +63,12 @@ class Main {
 class App extends coconut.ui.View {
 
 	@:attr var router:coconut.router.BrowserRouter<Route>;
-
+	@:attr var elements:AccList;
 	function render() 
 		<div >
 			<div class="menu">bim</div>
-			 <Pages  router={router}/>
+			 <Pages  router={router} />
+			 <Accordion elements={elements}></Accordion> 
 			<a href="/two">totwo</a>
 			<a href="/other">toother</a>
 		</div>
@@ -101,15 +103,16 @@ class Pages extends View{
 	function render(){
 	
 	return <div ref=${router.intercept} class="pages">
-	
+		
+		
+		
 		<p>{Std.string(router.route)}</p>
 			
-		<switch ${router.route}>
-				
+		<switch ${router.route}>	
 				<case ${HomePage}>
 				<Hideable hidden={routes.get(HomePage)}>
 					<Login act={e->{goto(OnePage);}}/>
-					<Inscript retour={false} act={e->e} />
+					<Inscript  act={e->e} />
 				</Hideable>
 				<case ${OnePage}><p>one</p>
 				<case ${TwoPage}><View2 hidden={routes.get(TwoPage)} done={e->router.push(OnePage)}/>

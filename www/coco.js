@@ -1816,11 +1816,19 @@ tink_state_ConstObservable.prototype = {
 var Main = function() { };
 Main.__name__ = true;
 Main.main = function() {
-	haxe_Log.trace("Hello, world!",{ fileName : "src/Main.hx", lineNumber : 49, className : "Main", methodName : "main"});
+	haxe_Log.trace("Hello, world!",{ fileName : "src/Main.hx", lineNumber : 50, className : "Main", methodName : "main"});
+	var _g = [];
+	_g.push(fomantic_AccItem.create("item" + 0,"content" + 0));
+	_g.push(fomantic_AccItem.create("item" + 1,"content" + 1));
+	_g.push(fomantic_AccItem.create("item" + 2,"content" + 2));
+	_g.push(fomantic_AccItem.create("item" + 3,"content" + 3));
+	var accordionListe = new fomantic_AccList({ items : tink_pure__$List_List_$Impl_$.fromArray(_g)});
 	var tmp = window.document.body.appendChild(window.document.createElement("div"));
 	var __r = [];
 	var __ret = { router : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
 		return Main.router;
+	}}), elements : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
+		return accordionListe;
 	}})};
 	__r.push(App.fromHxx({ },__ret));
 	coconut_ui_Renderer.mount(tmp,__r[0]);
@@ -2265,8 +2273,8 @@ var tink_core_Noise = $hxEnums["tink.core.Noise"] = { __ename__ : true, __constr
 	,Noise: {_hx_index:0,__enum__:"tink.core.Noise",toString:$estr}
 };
 var App = function(__coco_data_) {
-	this.__tink_defaults6 = { };
-	this.__slots = { router : new coconut_ui_tools_Slot(this,null)};
+	this.__tink_defaults734 = { };
+	this.__slots = { router : new coconut_ui_tools_Slot(this,null), elements : new coconut_ui_tools_Slot(this,null)};
 	this.__initAttributes(__coco_data_);
 	coconut_ui_View.call(this,$bind(this,this.render),null,null,null,null,null);
 };
@@ -2290,6 +2298,10 @@ App.prototype = $extend(coconut_ui_View.prototype,{
 			return tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.router);
 		}})};
 		__r1.push(Pages.fromHxx({ },__ret1));
+		var __ret2 = { elements : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
+			return tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.elements);
+		}})};
+		__r1.push(fomantic_Accordion.fromHxx({ },__ret2));
 		var hxxMeta2 = { };
 		var __r3 = [];
 		__r3.push(coconut_diffing_VNodeData.VNative(coconut_vdom__$Html_Text.inst,null,null,"totwo",null));
@@ -2304,8 +2316,12 @@ App.prototype = $extend(coconut_ui_View.prototype,{
 	,get_router: function() {
 		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.router);
 	}
+	,get_elements: function() {
+		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.elements);
+	}
 	,__initAttributes: function(attributes) {
 		this.__slots.router.setData(attributes.router);
+		this.__slots.elements.setData(attributes.elements);
 	}
 });
 var tink_state_ObservableBase = function() {
@@ -2324,10 +2340,10 @@ tink_state_ObservableBase.prototype = {
 			} else {
 				var f = when;
 				var a1 = ret1;
-				var this2 = function(a2) {
+				var this11 = function(a2) {
 					return f(a1,a2);
 				};
-				this1 = tink_core__$Signal_Signal_$Impl_$.filter(_gthis.changes,this2,false);
+				this1 = tink_core__$Signal_Signal_$Impl_$.filter(_gthis.changes,this11,false);
 			}
 			return new tink_core_MPair(ret1,tink_core__$Signal_Signal_$Impl_$.nextTime(this1).map(function(_) {
 				return tink_core_Noise.Noise;
@@ -2522,7 +2538,7 @@ var Pages = function(__coco_data_) {
 	_g.set(Route.OnePage,true);
 	_g.set(Route.TwoPage,true);
 	this.routes = new tink_state_ObservableMap(_g);
-	this.__tink_defaults5 = { };
+	this.__tink_defaults733 = { };
 	this.__slots = { router : new coconut_ui_tools_Slot(this,null)};
 	this.__initAttributes(__coco_data_);
 	coconut_ui_View.call(this,$bind(this,this.render),null,null,null,function() {
@@ -2537,7 +2553,7 @@ Pages.fromHxx = function(hxxMeta,attributes) {
 Pages.__super__ = coconut_ui_View;
 Pages.prototype = $extend(coconut_ui_View.prototype,{
 	goto: function(where) {
-		Debug.Log("goto " + Std.string(where),null,{ fileName : "src/Main.hx", lineNumber : 88, className : "Pages", methodName : "goto"});
+		Debug.Log("goto " + Std.string(where),null,{ fileName : "src/Main.hx", lineNumber : 90, className : "Pages", methodName : "goto"});
 		var key = tink_state__$Observable_Observable_$Impl_$.get_value(this.routes.observableKeys);
 		while(key.hasNext()) {
 			var key1 = key.next();
@@ -2574,9 +2590,7 @@ Pages.prototype = $extend(coconut_ui_View.prototype,{
 					};
 				}})};
 				__r3.push(fomantic_Login.fromHxx({ },__ret2));
-				var __ret3 = { retour : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
-					return false;
-				}}), act : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
+				var __ret3 = { act : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
 					return function(e1) {
 						return e1;
 					};
@@ -2622,7 +2636,7 @@ Pages.prototype = $extend(coconut_ui_View.prototype,{
 	}
 });
 var View0 = function(__coco_data_) {
-	this.__tink_defaults4 = { contents : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
+	this.__tink_defaults732 = { contents : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
 		return tink_pure__$List_List_$Impl_$.fromArray([{ title : "one"},{ title : "two"},{ title : "three"}]);
 	}})};
 	this.__slots = { done : new coconut_ui_tools_Slot(this,null), contents : new coconut_ui_tools_Slot(this,null)};
@@ -2662,7 +2676,7 @@ View0.prototype = $extend(coconut_ui_View.prototype,{
 			return "check";
 		}}), onClick : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
 			return function(e) {
-				return Debug.Log(e,null,{ fileName : "src/Main.hx", lineNumber : 195, className : "View0", methodName : "render"});
+				return Debug.Log(e,null,{ fileName : "src/Main.hx", lineNumber : 198, className : "View0", methodName : "render"});
 			};
 		}})};
 		__r1.push(fomantic_Button.fromHxx({ },__ret2));
@@ -2672,7 +2686,7 @@ View0.prototype = $extend(coconut_ui_View.prototype,{
 			return "left";
 		}}), act : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
 			return function(e1) {
-				return Debug.Log(e1,null,{ fileName : "src/Main.hx", lineNumber : 196, className : "View0", methodName : "render"});
+				return Debug.Log(e1,null,{ fileName : "src/Main.hx", lineNumber : 199, className : "View0", methodName : "render"});
 			};
 		}})};
 		__r1.push(fomantic_IconicInput.fromHxx({ },__ret3));
@@ -2689,11 +2703,11 @@ View0.prototype = $extend(coconut_ui_View.prototype,{
 	,__initAttributes: function(attributes) {
 		this.__slots.done.setData(attributes.done);
 		var this1 = attributes.contents;
-		this.__slots.contents.setData(this1 == null ? this.__tink_defaults4.contents : this1);
+		this.__slots.contents.setData(this1 == null ? this.__tink_defaults732.contents : this1);
 	}
 });
 var View1 = function(__coco_data_) {
-	this.__tink_defaults3 = { hidden : tink_state__$Observable_Observable_$Impl_$.const(true)};
+	this.__tink_defaults731 = { hidden : tink_state__$Observable_Observable_$Impl_$.const(true)};
 	this.__slots = { hidden : new coconut_ui_tools_Slot(this,null), done : new coconut_ui_tools_Slot(this,null)};
 	this.__initAttributes(__coco_data_);
 	coconut_ui_View.call(this,$bind(this,this.render),null,null,null,null,null);
@@ -2738,12 +2752,12 @@ View1.prototype = $extend(coconut_ui_View.prototype,{
 	}
 	,__initAttributes: function(attributes) {
 		var this1 = attributes.hidden;
-		this.__slots.hidden.setData(this1 == null ? this.__tink_defaults3.hidden : this1);
+		this.__slots.hidden.setData(this1 == null ? this.__tink_defaults731.hidden : this1);
 		this.__slots.done.setData(attributes.done);
 	}
 });
 var View2 = function(__coco_data_) {
-	this.__tink_defaults2 = { hidden : tink_state__$Observable_Observable_$Impl_$.const(true)};
+	this.__tink_defaults730 = { hidden : tink_state__$Observable_Observable_$Impl_$.const(true)};
 	this.__slots = { hidden : new coconut_ui_tools_Slot(this,null), done : new coconut_ui_tools_Slot(this,null)};
 	this.__initAttributes(__coco_data_);
 	coconut_ui_View.call(this,$bind(this,this.render),null,null,null,null,null);
@@ -2788,12 +2802,12 @@ View2.prototype = $extend(coconut_ui_View.prototype,{
 	}
 	,__initAttributes: function(attributes) {
 		var this1 = attributes.hidden;
-		this.__slots.hidden.setData(this1 == null ? this.__tink_defaults2.hidden : this1);
+		this.__slots.hidden.setData(this1 == null ? this.__tink_defaults730.hidden : this1);
 		this.__slots.done.setData(attributes.done);
 	}
 });
 var View3 = function(__coco_data_) {
-	this.__tink_defaults1 = { };
+	this.__tink_defaults729 = { };
 	this.__slots = { };
 	coconut_ui_View.call(this,$bind(this,this.render),null,null,null,null,null);
 };
@@ -2815,7 +2829,7 @@ View3.prototype = $extend(coconut_ui_View.prototype,{
 	}
 });
 var Unknown = function(__coco_data_) {
-	this.__tink_defaults0 = { };
+	this.__tink_defaults728 = { };
 	this.__slots = { path : new coconut_ui_tools_Slot(this,null)};
 	this.__initAttributes(__coco_data_);
 	coconut_ui_View.call(this,$bind(this,this.render),null,null,null,null,null);
@@ -2929,7 +2943,7 @@ tink_core_SimpleLink.prototype = {
 var animation_Hideable = function(__coco_data_) {
 	this.timeoutHandle = null;
 	var _gthis = this;
-	this.__tink_defaults7 = { fast : tink_state__$Observable_Observable_$Impl_$.const(false), animationIn : tink_state__$Observable_Observable_$Impl_$.const("fadeIn"), animationOut : tink_state__$Observable_Observable_$Impl_$.const("fadeOut")};
+	this.__tink_defaults750 = { fast : tink_state__$Observable_Observable_$Impl_$.const(false), animationIn : tink_state__$Observable_Observable_$Impl_$.const("fadeIn"), animationOut : tink_state__$Observable_Observable_$Impl_$.const("fadeOut")};
 	this.__slots = { hidden : new coconut_ui_tools_Slot(this,null), fast : new coconut_ui_tools_Slot(this,null), animationIn : new coconut_ui_tools_Slot(this,null), animationOut : new coconut_ui_tools_Slot(this,null), children : new coconut_ui_tools_Slot(this,null)};
 	this.__coco_shouldRender = new tink_state__$State_SimpleState(false,null,null);
 	this.__coco_classes = tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
@@ -3022,11 +3036,11 @@ animation_Hideable.prototype = $extend(coconut_ui_View.prototype,{
 	,__initAttributes: function(attributes) {
 		this.__slots.hidden.setData(attributes.hidden);
 		var this1 = attributes.fast;
-		this.__slots.fast.setData(this1 == null ? this.__tink_defaults7.fast : this1);
+		this.__slots.fast.setData(this1 == null ? this.__tink_defaults750.fast : this1);
 		var this2 = attributes.animationIn;
-		this.__slots.animationIn.setData(this2 == null ? this.__tink_defaults7.animationIn : this2);
+		this.__slots.animationIn.setData(this2 == null ? this.__tink_defaults750.animationIn : this2);
 		var this3 = attributes.animationOut;
-		this.__slots.animationOut.setData(this3 == null ? this.__tink_defaults7.animationOut : this3);
+		this.__slots.animationOut.setData(this3 == null ? this.__tink_defaults750.animationOut : this3);
 		this.__slots.children.setData(attributes.children);
 	}
 	,get_classes: function() {
@@ -3105,21 +3119,21 @@ coconut_diffing_Differ.prototype = {
 							process(n.nodes);
 							break;
 						case 3:
-							var _g2 = n.key;
-							var _g11 = n.ref;
+							var _g5 = n.key;
+							var _g4 = n.ref;
 							var attr = n.a;
 							var type1 = n.type;
-							var real = $with.native(type1,_g2,attr,n.children);
-							var ref2 = [_g11];
-							var n2 = coconut_diffing_RNode.RNative(attr,real,_g11);
+							var real = $with.native(type1,_g5,attr,n.children);
+							var ref2 = [_g4];
+							var n2 = coconut_diffing_RNode.RNative(attr,real,_g4);
 							var registry1;
-							var _g3 = byType.h[type1.__id__];
-							if(_g3 == null) {
+							var _g2 = byType.h[type1.__id__];
+							if(_g2 == null) {
 								var v1 = new coconut_diffing_TypeRegistry();
 								byType.set(type1,v1);
 								registry1 = v1;
 							} else {
-								registry1 = _g3;
+								registry1 = _g2;
 							}
 							if(ref2[0] != null) {
 								var process2 = (function(ref3,r1) {
@@ -3129,10 +3143,10 @@ coconut_diffing_Differ.prototype = {
 								})(ref2,[real]);
 								later(process2);
 							}
-							if(_g2 == null) {
+							if(_g5 == null) {
 								registry1.put(n2);
 							} else {
-								registry1.set(_g2,n2);
+								registry1.set(_g5,n2);
 							}
 							childList.push(n2);
 							break;
@@ -3144,13 +3158,13 @@ coconut_diffing_Differ.prototype = {
 							var ref4 = [_g9];
 							var n3 = coconut_diffing_RNode.RWidget(w1,_g9);
 							var registry2;
-							var _g4 = byType.h[type2.__id__];
-							if(_g4 == null) {
+							var _g3 = byType.h[type2.__id__];
+							if(_g3 == null) {
 								var v2 = new coconut_diffing_TypeRegistry();
 								byType.set(type2,v2);
 								registry2 = v2;
 							} else {
-								registry2 = _g4;
+								registry2 = _g3;
 							}
 							if(ref4[0] != null) {
 								var process3 = (function(ref5,r2) {
@@ -4296,7 +4310,7 @@ coconut_vdom_Html.a = function(hxxMeta,attr,children) {
 };
 var coconut_vdom__$Html_HtmlFragment = function(__coco_data_) {
 	var _gthis = this;
-	this.__tink_defaults12 = { tag : tink_state__$Observable_Observable_$Impl_$.const("span"), className : null};
+	this.__tink_defaults755 = { tag : tink_state__$Observable_Observable_$Impl_$.const("span"), className : null};
 	this.__slots = { content : new coconut_ui_tools_Slot(this,null), tag : new coconut_ui_tools_Slot(this,null), className : new coconut_ui_tools_Slot(this,null)};
 	this.__initAttributes(__coco_data_);
 	coconut_ui_View.call(this,$bind(this,this.render),null,function() {
@@ -4343,9 +4357,223 @@ coconut_vdom__$Html_HtmlFragment.prototype = $extend(coconut_ui_View.prototype,{
 	,__initAttributes: function(attributes) {
 		this.__slots.content.setData(attributes.content);
 		var this1 = attributes.tag;
-		this.__slots.tag.setData(this1 == null ? this.__tink_defaults12.tag : this1);
+		this.__slots.tag.setData(this1 == null ? this.__tink_defaults755.tag : this1);
 		var this2 = attributes.className;
-		this.__slots.className.setData(this2 == null ? this.__tink_defaults12.className : this2);
+		this.__slots.className.setData(this2 == null ? this.__tink_defaults755.className : this2);
+	}
+});
+var fomantic_Accordion = function(__coco_data_) {
+	this.__tink_defaults749 = { className : null, elements : null};
+	this.__slots = { className : new coconut_ui_tools_Slot(this,null), elements : new coconut_ui_tools_Slot(this,null)};
+	this.__initAttributes(__coco_data_);
+	coconut_ui_View.call(this,$bind(this,this.render),null,null,null,function() {
+		haxe_Log.trace("mount",{ fileName : "src/fomantic/Accordion.hx", lineNumber : 16, className : "fomantic.Accordion", methodName : "new"});
+		$(".ui.accordion").accordion();
+	},null);
+};
+fomantic_Accordion.__name__ = true;
+fomantic_Accordion.fromHxx = function(hxxMeta,attributes) {
+	return coconut_diffing_VNodeData.VWidget(fomantic_Accordion.__type,hxxMeta.ref,hxxMeta.key,attributes);
+};
+fomantic_Accordion.__super__ = coconut_ui_View;
+fomantic_Accordion.prototype = $extend(coconut_ui_View.prototype,{
+	render: function() {
+		var __r = [];
+		var hxxMeta = { ref : $bind(this,this._coco_set_ME)};
+		var __ret = { className : tink_domspec__$ClassName_ClassName_$Impl_$.add(tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.className),tink_domspec__$ClassName_ClassName_$Impl_$.ofArray(["accordion","ui"]))};
+		var __r1 = [];
+		var _g = new tink_pure_NodeIterator(tink_state__$State_State_$Impl_$.get_value(tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.elements).__coco_items));
+		while(_g.list.length > 0) {
+			var item = [_g.next()];
+			var __ret1 = { title : item[0].__coco_title, content : tink_state__$Observable_Observable_$Impl_$.auto({ f : (function(item1) {
+				return function() {
+					var s = tink_state__$State_State_$Impl_$.get_value(item1[0].__coco_content);
+					return coconut_ui__$Children_Children_$Impl_$.ofSingle(coconut_diffing_VNodeData.VNative(coconut_vdom__$Html_Text.inst,null,null,s,null));
+				};
+			})(item)})};
+			__r1.push(fomantic_AccordionItem.fromHxx({ },__ret1));
+		}
+		__r.push(coconut_diffing_VNodeData.VNative(coconut_vdom_Html.DIV,hxxMeta.ref,hxxMeta.key,__ret,__r1));
+		return __r[0];
+	}
+	,get_className: function() {
+		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.className);
+	}
+	,get_elements: function() {
+		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.elements);
+	}
+	,_coco_set_ME: function(param) {
+		this.ME = param;
+	}
+	,__initAttributes: function(attributes) {
+		var this1 = attributes.className;
+		this.__slots.className.setData(this1 == null ? this.__tink_defaults749.className : this1);
+		var this2 = attributes.elements;
+		this.__slots.elements.setData(this2 == null ? this.__tink_defaults749.elements : this2);
+	}
+});
+var fomantic_AccList = function(__coco_init) {
+	this._updatePerformed = tink_core__$Signal_Signal_$Impl_$.trigger();
+	this.__coco_items = new tink_state__$State_SimpleState(__coco_init.items,null,null);
+	this.__coco_transitionCount = new tink_state__$State_SimpleState(0,null,null);
+	this.errorTrigger = tink_core__$Signal_Signal_$Impl_$.trigger();
+	this.transitionErrors = this.errorTrigger;
+	this.observables = { items : this.__coco_items, isInTransition : tink_state__$Observable_Observable_$Impl_$.map(this.__coco_transitionCount,tink_state__$Observable_Transform_$Impl_$.plain(function(count) {
+		return count > 0;
+	}))};
+};
+fomantic_AccList.__name__ = true;
+fomantic_AccList.prototype = {
+	get_items: function() {
+		return tink_state__$State_State_$Impl_$.get_value(this.__coco_items);
+	}
+	,__cocoupdate: function(ret) {
+		var _gthis = this;
+		var sync = true;
+		var done = false;
+		ret.handle(function(o) {
+			done = true;
+			if(!sync) {
+				_gthis.__coco_transitionCount.set(tink_state__$State_State_$Impl_$.get_value(_gthis.__coco_transitionCount) - 1);
+			}
+			switch(o._hx_index) {
+			case 0:
+				var _g = o.data;
+				var existent = tink_Anon.getExistentFields(_g);
+				if(Object.prototype.hasOwnProperty.call(existent,"items")) {
+					_gthis.__coco_items.set(_g.items);
+				}
+				tink_core__$Callback_CallbackList_$Impl_$.invoke(_gthis._updatePerformed.handlers,_g);
+				break;
+			case 1:
+				tink_core__$Callback_CallbackList_$Impl_$.invoke(_gthis.errorTrigger.handlers,o.failure);
+				break;
+			}
+		});
+		if(!done) {
+			sync = false;
+		}
+		if(!sync) {
+			this.__coco_transitionCount.set(tink_state__$State_State_$Impl_$.get_value(this.__coco_transitionCount) + 1);
+		}
+		return ret;
+	}
+	,get_updatePerformed: function() {
+		return this._updatePerformed;
+	}
+	,get_isInTransition: function() {
+		return tink_state__$State_State_$Impl_$.get_value(this.__coco_transitionCount) > 0;
+	}
+};
+var fomantic_AccItem = function(__coco_init) {
+	this._updatePerformed = tink_core__$Signal_Signal_$Impl_$.trigger();
+	this.__coco_title = new tink_state__$State_SimpleState(__coco_init.title,null,null);
+	this.__coco_content = new tink_state__$State_SimpleState(__coco_init.content,null,null);
+	this.__coco_transitionCount = new tink_state__$State_SimpleState(0,null,null);
+	this.errorTrigger = tink_core__$Signal_Signal_$Impl_$.trigger();
+	this.transitionErrors = this.errorTrigger;
+	this.observables = { title : this.__coco_title, content : this.__coco_content, isInTransition : tink_state__$Observable_Observable_$Impl_$.map(this.__coco_transitionCount,tink_state__$Observable_Transform_$Impl_$.plain(function(count) {
+		return count > 0;
+	}))};
+};
+fomantic_AccItem.__name__ = true;
+fomantic_AccItem.create = function(title,content) {
+	return new fomantic_AccItem({ title : title, content : content});
+};
+fomantic_AccItem.prototype = {
+	get_title: function() {
+		return tink_state__$State_State_$Impl_$.get_value(this.__coco_title);
+	}
+	,get_content: function() {
+		return tink_state__$State_State_$Impl_$.get_value(this.__coco_content);
+	}
+	,__cocoupdate: function(ret) {
+		var _gthis = this;
+		var sync = true;
+		var done = false;
+		ret.handle(function(o) {
+			done = true;
+			if(!sync) {
+				_gthis.__coco_transitionCount.set(tink_state__$State_State_$Impl_$.get_value(_gthis.__coco_transitionCount) - 1);
+			}
+			switch(o._hx_index) {
+			case 0:
+				var _g = o.data;
+				var existent = tink_Anon.getExistentFields(_g);
+				if(Object.prototype.hasOwnProperty.call(existent,"title")) {
+					_gthis.__coco_title.set(_g.title);
+				}
+				if(Object.prototype.hasOwnProperty.call(existent,"content")) {
+					_gthis.__coco_content.set(_g.content);
+				}
+				tink_core__$Callback_CallbackList_$Impl_$.invoke(_gthis._updatePerformed.handlers,_g);
+				break;
+			case 1:
+				tink_core__$Callback_CallbackList_$Impl_$.invoke(_gthis.errorTrigger.handlers,o.failure);
+				break;
+			}
+		});
+		if(!done) {
+			sync = false;
+		}
+		if(!sync) {
+			this.__coco_transitionCount.set(tink_state__$State_State_$Impl_$.get_value(this.__coco_transitionCount) + 1);
+		}
+		return ret;
+	}
+	,get_updatePerformed: function() {
+		return this._updatePerformed;
+	}
+	,get_isInTransition: function() {
+		return tink_state__$State_State_$Impl_$.get_value(this.__coco_transitionCount) > 0;
+	}
+};
+var fomantic_AccordionItem = function(__coco_data_) {
+	this.__tink_defaults735 = { };
+	this.__slots = { title : new coconut_ui_tools_Slot(this,null), content : new coconut_ui_tools_Slot(this,null)};
+	this.__initAttributes(__coco_data_);
+	coconut_ui_View.call(this,$bind(this,this.render),null,null,null,null,null);
+};
+fomantic_AccordionItem.__name__ = true;
+fomantic_AccordionItem.fromHxx = function(hxxMeta,attributes) {
+	return coconut_diffing_VNodeData.VWidget(fomantic_AccordionItem.__type,hxxMeta.ref,hxxMeta.key,attributes);
+};
+fomantic_AccordionItem.__super__ = coconut_ui_View;
+fomantic_AccordionItem.prototype = $extend(coconut_ui_View.prototype,{
+	render: function() {
+		var __r = [];
+		var hxxMeta = { };
+		var __ret = { className : tink_domspec__$ClassName_ClassName_$Impl_$.ofString("accordion_item")};
+		var __r1 = [];
+		var hxxMeta1 = { };
+		var __ret1 = { className : tink_domspec__$ClassName_ClassName_$Impl_$.ofString("title")};
+		var __r2 = [];
+		var s = tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.title);
+		__r2.push(coconut_diffing_VNodeData.VNative(coconut_vdom__$Html_Text.inst,null,null,s,null));
+		__r1.push(coconut_diffing_VNodeData.VNative(coconut_vdom_Html.DIV,hxxMeta1.ref,hxxMeta1.key,__ret1,__r2));
+		var hxxMeta2 = { };
+		var __ret2 = { className : tink_domspec__$ClassName_ClassName_$Impl_$.ofString("content")};
+		var __r3 = [];
+		var _g = 0;
+		var _g1 = tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.content);
+		while(_g < (_g1 == null ? 0 : _g1.length)) {
+			var _0 = _g1 == null ? null : _g1[_g];
+			++_g;
+			__r3.push(_0);
+		}
+		__r1.push(coconut_diffing_VNodeData.VNative(coconut_vdom_Html.DIV,hxxMeta2.ref,hxxMeta2.key,__ret2,__r3));
+		__r.push(coconut_diffing_VNodeData.VNative(coconut_vdom_Html.DIV,hxxMeta.ref,hxxMeta.key,__ret,__r1));
+		return __r[0];
+	}
+	,get_title: function() {
+		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.title);
+	}
+	,get_content: function() {
+		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.content);
+	}
+	,__initAttributes: function(attributes) {
+		this.__slots.title.setData(attributes.title);
+		this.__slots.content.setData(attributes.content);
 	}
 });
 var tink_domspec__$ClassName_ClassName_$Impl_$ = {};
@@ -4397,10 +4625,10 @@ tink_domspec__$ClassName_ClassName_$Impl_$.ofDynamicAccess = function(parts) {
 };
 var fomantic_Button = function(__coco_data_) {
 	var _gthis = this;
-	this.__tink_defaults47 = { text : tink_state__$Observable_Observable_$Impl_$.const("ok"), img : null, disabled : tink_state__$Observable_Observable_$Impl_$.const(false), loading : tink_state__$Observable_Observable_$Impl_$.const(false), active : tink_state__$Observable_Observable_$Impl_$.const(true), type : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
+	this.__tink_defaults794 = { text : tink_state__$Observable_Observable_$Impl_$.const("ok"), img : null, disabled : tink_state__$Observable_Observable_$Impl_$.const(false), loading : tink_state__$Observable_Observable_$Impl_$.const(false), active : tink_state__$Observable_Observable_$Impl_$.const(true), type : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
 		return "basic";
-	}}), size : null, className : null};
-	this.__slots = { text : new coconut_ui_tools_Slot(this,null), img : new coconut_ui_tools_Slot(this,null), onClick : new coconut_ui_tools_Slot(this,null), disabled : new coconut_ui_tools_Slot(this,null), loading : new coconut_ui_tools_Slot(this,null), active : new coconut_ui_tools_Slot(this,null), type : new coconut_ui_tools_Slot(this,null), size : new coconut_ui_tools_Slot(this,null), className : new coconut_ui_tools_Slot(this,null)};
+	}}), size : null, toolTip : null, className : null};
+	this.__slots = { text : new coconut_ui_tools_Slot(this,null), img : new coconut_ui_tools_Slot(this,null), onClick : new coconut_ui_tools_Slot(this,null), disabled : new coconut_ui_tools_Slot(this,null), loading : new coconut_ui_tools_Slot(this,null), active : new coconut_ui_tools_Slot(this,null), type : new coconut_ui_tools_Slot(this,null), size : new coconut_ui_tools_Slot(this,null), toolTip : new coconut_ui_tools_Slot(this,null), className : new coconut_ui_tools_Slot(this,null)};
 	this.__coco_classes = tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
 		var b = tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.className);
 		if(tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.disabled)) {
@@ -4432,10 +4660,16 @@ fomantic_Button.prototype = $extend(coconut_ui_View.prototype,{
 		}
 		return;
 	}
+	,setup: function(e) {
+		if(tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.toolTip) != null) {
+			var tmp = tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.toolTip);
+			e.dataset.tooltip = tmp;
+		}
+	}
 	,render: function() {
 		var _gthis = this;
 		var __r = [];
-		var hxxMeta = { };
+		var hxxMeta = { ref : $bind(this,this.setup)};
 		var __ret = "ui button " + tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.type) + " " + tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.size) + " " + tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__coco_classes);
 		var __ret1 = { onclick : $bind(_gthis,_gthis.onClick), className : tink_domspec__$ClassName_ClassName_$Impl_$.ofString(__ret)};
 		var __r1 = [];
@@ -4471,34 +4705,39 @@ fomantic_Button.prototype = $extend(coconut_ui_View.prototype,{
 	,get_size: function() {
 		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.size);
 	}
+	,get_toolTip: function() {
+		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.toolTip);
+	}
 	,get_className: function() {
 		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.className);
 	}
 	,__initAttributes: function(attributes) {
 		var this1 = attributes.text;
-		this.__slots.text.setData(this1 == null ? this.__tink_defaults47.text : this1);
+		this.__slots.text.setData(this1 == null ? this.__tink_defaults794.text : this1);
 		var this2 = attributes.img;
-		this.__slots.img.setData(this2 == null ? this.__tink_defaults47.img : this2);
+		this.__slots.img.setData(this2 == null ? this.__tink_defaults794.img : this2);
 		this.__slots.onClick.setData(attributes.onClick);
 		var this3 = attributes.disabled;
-		this.__slots.disabled.setData(this3 == null ? this.__tink_defaults47.disabled : this3);
+		this.__slots.disabled.setData(this3 == null ? this.__tink_defaults794.disabled : this3);
 		var this4 = attributes.loading;
-		this.__slots.loading.setData(this4 == null ? this.__tink_defaults47.loading : this4);
+		this.__slots.loading.setData(this4 == null ? this.__tink_defaults794.loading : this4);
 		var this5 = attributes.active;
-		this.__slots.active.setData(this5 == null ? this.__tink_defaults47.active : this5);
+		this.__slots.active.setData(this5 == null ? this.__tink_defaults794.active : this5);
 		var this6 = attributes.type;
-		this.__slots.type.setData(this6 == null ? this.__tink_defaults47.type : this6);
+		this.__slots.type.setData(this6 == null ? this.__tink_defaults794.type : this6);
 		var this7 = attributes.size;
-		this.__slots.size.setData(this7 == null ? this.__tink_defaults47.size : this7);
-		var this8 = attributes.className;
-		this.__slots.className.setData(this8 == null ? this.__tink_defaults47.className : this8);
+		this.__slots.size.setData(this7 == null ? this.__tink_defaults794.size : this7);
+		var this8 = attributes.toolTip;
+		this.__slots.toolTip.setData(this8 == null ? this.__tink_defaults794.toolTip : this8);
+		var this9 = attributes.className;
+		this.__slots.className.setData(this9 == null ? this.__tink_defaults794.className : this9);
 	}
 	,get_classes: function() {
 		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__coco_classes);
 	}
 });
 var fomantic_Form = function(__coco_data_) {
-	this.__tink_defaults101 = { className : null};
+	this.__tink_defaults848 = { className : null};
 	this.__slots = { children : new coconut_ui_tools_Slot(this,null), className : new coconut_ui_tools_Slot(this,null)};
 	this.__initAttributes(__coco_data_);
 	coconut_ui_View.call(this,$bind(this,this.render),null,null,null,null,null);
@@ -4537,13 +4776,13 @@ fomantic_Form.prototype = $extend(coconut_ui_View.prototype,{
 	,__initAttributes: function(attributes) {
 		this.__slots.children.setData(attributes.children);
 		var this1 = attributes.className;
-		this.__slots.className.setData(this1 == null ? this.__tink_defaults101.className : this1);
+		this.__slots.className.setData(this1 == null ? this.__tink_defaults848.className : this1);
 	}
 });
 var fomantic_Icon = function(__coco_data_) {
 	var _gthis = this;
-	this.__tink_defaults8 = { disabled : tink_state__$Observable_Observable_$Impl_$.const(false), size : null, loading : tink_state__$Observable_Observable_$Impl_$.const(false), outline : tink_state__$Observable_Observable_$Impl_$.const(false), img : null, act : null, className : null};
-	this.__slots = { disabled : new coconut_ui_tools_Slot(this,null), size : new coconut_ui_tools_Slot(this,null), loading : new coconut_ui_tools_Slot(this,null), outline : new coconut_ui_tools_Slot(this,null), img : new coconut_ui_tools_Slot(this,null), act : new coconut_ui_tools_Slot(this,null), className : new coconut_ui_tools_Slot(this,null)};
+	this.__tink_defaults751 = { disabled : tink_state__$Observable_Observable_$Impl_$.const(false), size : null, loading : tink_state__$Observable_Observable_$Impl_$.const(false), outline : tink_state__$Observable_Observable_$Impl_$.const(false), img : null, act : null, toolTip : null, className : null};
+	this.__slots = { disabled : new coconut_ui_tools_Slot(this,null), size : new coconut_ui_tools_Slot(this,null), loading : new coconut_ui_tools_Slot(this,null), outline : new coconut_ui_tools_Slot(this,null), img : new coconut_ui_tools_Slot(this,null), act : new coconut_ui_tools_Slot(this,null), toolTip : new coconut_ui_tools_Slot(this,null), className : new coconut_ui_tools_Slot(this,null)};
 	this.__coco_classes = tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
 		var b = tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.className);
 		if(tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.disabled)) {
@@ -4569,10 +4808,16 @@ fomantic_Icon.fromHxx = function(hxxMeta,attributes) {
 };
 fomantic_Icon.__super__ = coconut_ui_View;
 fomantic_Icon.prototype = $extend(coconut_ui_View.prototype,{
-	render: function() {
+	setup: function(el) {
+		if(tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.toolTip) != null) {
+			var tmp = tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.toolTip);
+			el.dataset.tooltip = tmp;
+		}
+	}
+	,render: function() {
 		var _gthis = this;
 		var __r = [];
-		var hxxMeta = { };
+		var hxxMeta = { ref : $bind(this,this.setup)};
 		var __ret = { className : tink_domspec__$ClassName_ClassName_$Impl_$.ofString("" + tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.img) + " icon " + tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.size) + " " + tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__coco_classes)), onclick : tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.act)};
 		__r.push(coconut_diffing_VNodeData.VNative(coconut_vdom_Html.I,hxxMeta.ref,hxxMeta.key,__ret,[]));
 		return __r[0];
@@ -4595,24 +4840,29 @@ fomantic_Icon.prototype = $extend(coconut_ui_View.prototype,{
 	,get_act: function() {
 		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.act);
 	}
+	,get_toolTip: function() {
+		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.toolTip);
+	}
 	,get_className: function() {
 		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.className);
 	}
 	,__initAttributes: function(attributes) {
 		var this1 = attributes.disabled;
-		this.__slots.disabled.setData(this1 == null ? this.__tink_defaults8.disabled : this1);
+		this.__slots.disabled.setData(this1 == null ? this.__tink_defaults751.disabled : this1);
 		var this2 = attributes.size;
-		this.__slots.size.setData(this2 == null ? this.__tink_defaults8.size : this2);
+		this.__slots.size.setData(this2 == null ? this.__tink_defaults751.size : this2);
 		var this3 = attributes.loading;
-		this.__slots.loading.setData(this3 == null ? this.__tink_defaults8.loading : this3);
+		this.__slots.loading.setData(this3 == null ? this.__tink_defaults751.loading : this3);
 		var this4 = attributes.outline;
-		this.__slots.outline.setData(this4 == null ? this.__tink_defaults8.outline : this4);
+		this.__slots.outline.setData(this4 == null ? this.__tink_defaults751.outline : this4);
 		var this5 = attributes.img;
-		this.__slots.img.setData(this5 == null ? this.__tink_defaults8.img : this5);
+		this.__slots.img.setData(this5 == null ? this.__tink_defaults751.img : this5);
 		var this6 = attributes.act;
-		this.__slots.act.setData(this6 == null ? this.__tink_defaults8.act : this6);
-		var this7 = attributes.className;
-		this.__slots.className.setData(this7 == null ? this.__tink_defaults8.className : this7);
+		this.__slots.act.setData(this6 == null ? this.__tink_defaults751.act : this6);
+		var this7 = attributes.toolTip;
+		this.__slots.toolTip.setData(this7 == null ? this.__tink_defaults751.toolTip : this7);
+		var this8 = attributes.className;
+		this.__slots.className.setData(this8 == null ? this.__tink_defaults751.className : this8);
 	}
 	,get_classes: function() {
 		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__coco_classes);
@@ -4620,7 +4870,7 @@ fomantic_Icon.prototype = $extend(coconut_ui_View.prototype,{
 });
 var fomantic_IconicInput = function(__coco_data_) {
 	var _gthis = this;
-	this.__tink_defaults80 = { value : tink_state__$Observable_Observable_$Impl_$.const(""), placeholder : tink_state__$Observable_Observable_$Impl_$.const("..."), focus : null, loading : null, disabled : tink_state__$Observable_Observable_$Impl_$.const(false), error : null, img : null, act : null, direction : null, className : null};
+	this.__tink_defaults827 = { value : tink_state__$Observable_Observable_$Impl_$.const(""), placeholder : tink_state__$Observable_Observable_$Impl_$.const("..."), focus : null, loading : null, disabled : tink_state__$Observable_Observable_$Impl_$.const(false), error : null, img : null, act : null, direction : null, className : null};
 	this.__slots = { value : new coconut_ui_tools_Slot(this,null), placeholder : new coconut_ui_tools_Slot(this,null), focus : new coconut_ui_tools_Slot(this,null), loading : new coconut_ui_tools_Slot(this,null), disabled : new coconut_ui_tools_Slot(this,null), error : new coconut_ui_tools_Slot(this,null), img : new coconut_ui_tools_Slot(this,null), act : new coconut_ui_tools_Slot(this,null), direction : new coconut_ui_tools_Slot(this,null), className : new coconut_ui_tools_Slot(this,null)};
 	this.__coco_classes = tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
 		var b = tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.className);
@@ -4694,25 +4944,25 @@ fomantic_IconicInput.prototype = $extend(coconut_ui_View.prototype,{
 	}
 	,__initAttributes: function(attributes) {
 		var this1 = attributes.value;
-		this.__slots.value.setData(this1 == null ? this.__tink_defaults80.value : this1);
+		this.__slots.value.setData(this1 == null ? this.__tink_defaults827.value : this1);
 		var this2 = attributes.placeholder;
-		this.__slots.placeholder.setData(this2 == null ? this.__tink_defaults80.placeholder : this2);
+		this.__slots.placeholder.setData(this2 == null ? this.__tink_defaults827.placeholder : this2);
 		var this3 = attributes.focus;
-		this.__slots.focus.setData(this3 == null ? this.__tink_defaults80.focus : this3);
+		this.__slots.focus.setData(this3 == null ? this.__tink_defaults827.focus : this3);
 		var this4 = attributes.loading;
-		this.__slots.loading.setData(this4 == null ? this.__tink_defaults80.loading : this4);
+		this.__slots.loading.setData(this4 == null ? this.__tink_defaults827.loading : this4);
 		var this5 = attributes.disabled;
-		this.__slots.disabled.setData(this5 == null ? this.__tink_defaults80.disabled : this5);
+		this.__slots.disabled.setData(this5 == null ? this.__tink_defaults827.disabled : this5);
 		var this6 = attributes.error;
-		this.__slots.error.setData(this6 == null ? this.__tink_defaults80.error : this6);
+		this.__slots.error.setData(this6 == null ? this.__tink_defaults827.error : this6);
 		var this7 = attributes.img;
-		this.__slots.img.setData(this7 == null ? this.__tink_defaults80.img : this7);
+		this.__slots.img.setData(this7 == null ? this.__tink_defaults827.img : this7);
 		var this8 = attributes.act;
-		this.__slots.act.setData(this8 == null ? this.__tink_defaults80.act : this8);
+		this.__slots.act.setData(this8 == null ? this.__tink_defaults827.act : this8);
 		var this9 = attributes.direction;
-		this.__slots.direction.setData(this9 == null ? this.__tink_defaults80.direction : this9);
+		this.__slots.direction.setData(this9 == null ? this.__tink_defaults827.direction : this9);
 		var this10 = attributes.className;
-		this.__slots.className.setData(this10 == null ? this.__tink_defaults80.className : this10);
+		this.__slots.className.setData(this10 == null ? this.__tink_defaults827.className : this10);
 	}
 	,get_classes: function() {
 		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__coco_classes);
@@ -4720,10 +4970,10 @@ fomantic_IconicInput.prototype = $extend(coconut_ui_View.prototype,{
 });
 var fomantic_Input = function(__coco_data_) {
 	var _gthis = this;
-	this.__tink_defaults62 = { value : tink_state__$Observable_Observable_$Impl_$.const(""), placeholder : tink_state__$Observable_Observable_$Impl_$.const("..."), focus : null, loading : null, disabled : tink_state__$Observable_Observable_$Impl_$.const(false), error : null, type : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
+	this.__tink_defaults809 = { value : tink_state__$Observable_Observable_$Impl_$.const(""), placeholder : tink_state__$Observable_Observable_$Impl_$.const("..."), focus : null, loading : null, disabled : tink_state__$Observable_Observable_$Impl_$.const(false), error : tink_state__$Observable_Observable_$Impl_$.const(false), labeled : tink_state__$Observable_Observable_$Impl_$.const(false), fluid : tink_state__$Observable_Observable_$Impl_$.const(false), transparent : tink_state__$Observable_Observable_$Impl_$.const(false), type : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
 		return "text";
-	}}), direction : null, img : null, name : null, onChange : null, className : null};
-	this.__slots = { value : new coconut_ui_tools_Slot(this,null), placeholder : new coconut_ui_tools_Slot(this,null), focus : new coconut_ui_tools_Slot(this,null), loading : new coconut_ui_tools_Slot(this,null), disabled : new coconut_ui_tools_Slot(this,null), error : new coconut_ui_tools_Slot(this,null), type : new coconut_ui_tools_Slot(this,null), direction : new coconut_ui_tools_Slot(this,null), img : new coconut_ui_tools_Slot(this,null), name : new coconut_ui_tools_Slot(this,null), onChange : new coconut_ui_tools_Slot(this,null), className : new coconut_ui_tools_Slot(this,null)};
+	}}), direction : null, img : null, name : null, onChange : null, onFocus : null, className : null};
+	this.__slots = { value : new coconut_ui_tools_Slot(this,null), placeholder : new coconut_ui_tools_Slot(this,null), focus : new coconut_ui_tools_Slot(this,null), loading : new coconut_ui_tools_Slot(this,null), disabled : new coconut_ui_tools_Slot(this,null), error : new coconut_ui_tools_Slot(this,null), labeled : new coconut_ui_tools_Slot(this,null), fluid : new coconut_ui_tools_Slot(this,null), transparent : new coconut_ui_tools_Slot(this,null), type : new coconut_ui_tools_Slot(this,null), direction : new coconut_ui_tools_Slot(this,null), img : new coconut_ui_tools_Slot(this,null), name : new coconut_ui_tools_Slot(this,null), onChange : new coconut_ui_tools_Slot(this,null), onFocus : new coconut_ui_tools_Slot(this,null), className : new coconut_ui_tools_Slot(this,null)};
 	this.__coco_classes = tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
 		var b = tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.className);
 		if(tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.disabled)) {
@@ -4738,6 +4988,18 @@ var fomantic_Input = function(__coco_data_) {
 		if(tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.img) != null) {
 			b = tink_domspec__$ClassName_ClassName_$Impl_$.add(b,tink_domspec__$ClassName_ClassName_$Impl_$.ofString("icon"));
 		}
+		if(tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.labeled)) {
+			b = tink_domspec__$ClassName_ClassName_$Impl_$.add(b,tink_domspec__$ClassName_ClassName_$Impl_$.ofString("labeled"));
+		}
+		if(tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.fluid)) {
+			b = tink_domspec__$ClassName_ClassName_$Impl_$.add(b,tink_domspec__$ClassName_ClassName_$Impl_$.ofString("fluid"));
+		}
+		if(tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.transparent)) {
+			b = tink_domspec__$ClassName_ClassName_$Impl_$.add(b,tink_domspec__$ClassName_ClassName_$Impl_$.ofString("transparent"));
+		}
+		if(tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.direction) != null) {
+			b = tink_domspec__$ClassName_ClassName_$Impl_$.add(b,tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.direction));
+		}
 		return b;
 	}});
 	this.__initAttributes(__coco_data_);
@@ -4749,14 +5011,23 @@ fomantic_Input.fromHxx = function(hxxMeta,attributes) {
 };
 fomantic_Input.__super__ = coconut_ui_View;
 fomantic_Input.prototype = $extend(coconut_ui_View.prototype,{
-	render: function() {
+	setup: function(el) {
+		this.input = el;
+	}
+	,clear: function() {
+		this.input.value = "";
+	}
+	,getValue: function() {
+		return this.input.value;
+	}
+	,render: function() {
 		var _gthis = this;
 		var __r = [];
 		var hxxMeta = { };
-		var __ret = { className : tink_domspec__$ClassName_ClassName_$Impl_$.ofString(" ui input  " + tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.direction) + "  " + tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__coco_classes))};
+		var __ret = { className : tink_domspec__$ClassName_ClassName_$Impl_$.add(tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.className),tink_domspec__$ClassName_ClassName_$Impl_$.ofString("ui input"))};
 		var __r1 = [];
-		var hxxMeta1 = { };
-		var __ret1 = { name : tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.name), type : "" + tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.type), value : tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.value), onchange : tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.onChange), placeholder : tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.placeholder)};
+		var hxxMeta1 = { ref : $bind(this,this.setup)};
+		var __ret1 = { name : tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.name), type : "" + tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.type), value : tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.value), onfocus : tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.onFocus), onchange : tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.onChange), placeholder : tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.placeholder)};
 		__r1.push(coconut_diffing_VNodeData.VNative(coconut_vdom_Html.INPUT,hxxMeta1.ref,hxxMeta1.key,__ret1,null));
 		if(tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.img) != null) {
 			var __ret2 = { img : tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
@@ -4785,6 +5056,15 @@ fomantic_Input.prototype = $extend(coconut_ui_View.prototype,{
 	,get_error: function() {
 		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.error);
 	}
+	,get_labeled: function() {
+		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.labeled);
+	}
+	,get_fluid: function() {
+		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.fluid);
+	}
+	,get_transparent: function() {
+		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.transparent);
+	}
 	,get_type: function() {
 		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.type);
 	}
@@ -4800,42 +5080,53 @@ fomantic_Input.prototype = $extend(coconut_ui_View.prototype,{
 	,get_onChange: function() {
 		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.onChange);
 	}
+	,get_onFocus: function() {
+		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.onFocus);
+	}
 	,get_className: function() {
 		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.className);
 	}
 	,__initAttributes: function(attributes) {
 		var this1 = attributes.value;
-		this.__slots.value.setData(this1 == null ? this.__tink_defaults62.value : this1);
+		this.__slots.value.setData(this1 == null ? this.__tink_defaults809.value : this1);
 		var this2 = attributes.placeholder;
-		this.__slots.placeholder.setData(this2 == null ? this.__tink_defaults62.placeholder : this2);
+		this.__slots.placeholder.setData(this2 == null ? this.__tink_defaults809.placeholder : this2);
 		var this3 = attributes.focus;
-		this.__slots.focus.setData(this3 == null ? this.__tink_defaults62.focus : this3);
+		this.__slots.focus.setData(this3 == null ? this.__tink_defaults809.focus : this3);
 		var this4 = attributes.loading;
-		this.__slots.loading.setData(this4 == null ? this.__tink_defaults62.loading : this4);
+		this.__slots.loading.setData(this4 == null ? this.__tink_defaults809.loading : this4);
 		var this5 = attributes.disabled;
-		this.__slots.disabled.setData(this5 == null ? this.__tink_defaults62.disabled : this5);
+		this.__slots.disabled.setData(this5 == null ? this.__tink_defaults809.disabled : this5);
 		var this6 = attributes.error;
-		this.__slots.error.setData(this6 == null ? this.__tink_defaults62.error : this6);
-		var this7 = attributes.type;
-		this.__slots.type.setData(this7 == null ? this.__tink_defaults62.type : this7);
-		var this8 = attributes.direction;
-		this.__slots.direction.setData(this8 == null ? this.__tink_defaults62.direction : this8);
-		var this9 = attributes.img;
-		this.__slots.img.setData(this9 == null ? this.__tink_defaults62.img : this9);
-		var this10 = attributes.name;
-		this.__slots.name.setData(this10 == null ? this.__tink_defaults62.name : this10);
-		var this11 = attributes.onChange;
-		this.__slots.onChange.setData(this11 == null ? this.__tink_defaults62.onChange : this11);
-		var this12 = attributes.className;
-		this.__slots.className.setData(this12 == null ? this.__tink_defaults62.className : this12);
+		this.__slots.error.setData(this6 == null ? this.__tink_defaults809.error : this6);
+		var this7 = attributes.labeled;
+		this.__slots.labeled.setData(this7 == null ? this.__tink_defaults809.labeled : this7);
+		var this8 = attributes.fluid;
+		this.__slots.fluid.setData(this8 == null ? this.__tink_defaults809.fluid : this8);
+		var this9 = attributes.transparent;
+		this.__slots.transparent.setData(this9 == null ? this.__tink_defaults809.transparent : this9);
+		var this10 = attributes.type;
+		this.__slots.type.setData(this10 == null ? this.__tink_defaults809.type : this10);
+		var this11 = attributes.direction;
+		this.__slots.direction.setData(this11 == null ? this.__tink_defaults809.direction : this11);
+		var this12 = attributes.img;
+		this.__slots.img.setData(this12 == null ? this.__tink_defaults809.img : this12);
+		var this13 = attributes.name;
+		this.__slots.name.setData(this13 == null ? this.__tink_defaults809.name : this13);
+		var this14 = attributes.onChange;
+		this.__slots.onChange.setData(this14 == null ? this.__tink_defaults809.onChange : this14);
+		var this15 = attributes.onFocus;
+		this.__slots.onFocus.setData(this15 == null ? this.__tink_defaults809.onFocus : this15);
+		var this16 = attributes.className;
+		this.__slots.className.setData(this16 == null ? this.__tink_defaults809.className : this16);
 	}
 	,get_classes: function() {
 		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__coco_classes);
 	}
 });
 var fomantic_Inscript = function(__coco_data_) {
-	this.__tink_defaults114 = { className : null};
-	this.__slots = { act : new coconut_ui_tools_Slot(this,null), retour : new coconut_ui_tools_Slot(this,null), className : new coconut_ui_tools_Slot(this,null)};
+	this.__tink_defaults861 = { className : null};
+	this.__slots = { act : new coconut_ui_tools_Slot(this,null), className : new coconut_ui_tools_Slot(this,null)};
 	this.__coco_email = new tink_state__$State_SimpleState(null,null,null);
 	this.__coco_name = new tink_state__$State_SimpleState(null,null,null);
 	this.__initAttributes(__coco_data_);
@@ -4908,31 +5199,20 @@ fomantic_Inscript.prototype = $extend(coconut_ui_View.prototype,{
 			var __ret8 = { name : __ret5, img : __ret6, onChange : __ret7, placeholder : tink_state__$Observable_Observable_$Impl_$.const("email"), type : tink_state__$Observable_Observable_$Impl_$.auto(this7)};
 			__r2.push(fomantic_Input.fromHxx({ },__ret8));
 			var this8 = { f : function() {
-				if(tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.retour)) {
-					return "check";
-				} else {
-					return "circle";
-				}
-			}};
-			var __ret9 = tink_state__$Observable_Observable_$Impl_$.auto(this8);
-			var this9 = { f : function() {
 				return $bind(_gthis,_gthis.gather);
 			}};
-			var __ret10 = { img : __ret9, text : tink_state__$Observable_Observable_$Impl_$.const("ok"), onClick : tink_state__$Observable_Observable_$Impl_$.auto(this9)};
-			__r2.push(fomantic_Button.fromHxx({ },__ret10));
+			var __ret9 = { text : tink_state__$Observable_Observable_$Impl_$.const("ok"), onClick : tink_state__$Observable_Observable_$Impl_$.auto(this8)};
+			__r2.push(fomantic_Button.fromHxx({ },__ret9));
 			return __r2;
 		}};
-		var __ret11 = { children : tink_state__$Observable_Observable_$Impl_$.auto(this1)};
-		__r1.push(fomantic_Form.fromHxx({ },__ret11));
+		var __ret10 = { children : tink_state__$Observable_Observable_$Impl_$.auto(this1)};
+		__r1.push(fomantic_Form.fromHxx({ },__ret10));
 		var hxxMeta1 = { };
-		var __ret12 = { className : tink_domspec__$ClassName_ClassName_$Impl_$.ofString("ui error message")};
+		var __ret11 = { className : tink_domspec__$ClassName_ClassName_$Impl_$.ofString("ui error message")};
 		var __r3 = [];
-		__r1.push(coconut_diffing_VNodeData.VNative(coconut_vdom_Html.DIV,hxxMeta1.ref,hxxMeta1.key,__ret12,__r3));
+		__r1.push(coconut_diffing_VNodeData.VNative(coconut_vdom_Html.DIV,hxxMeta1.ref,hxxMeta1.key,__ret11,__r3));
 		__r.push(coconut_diffing_VNodeData.VNative(coconut_vdom_Html.DIV,hxxMeta.ref,hxxMeta.key,__ret,__r1));
 		return __r[0];
-	}
-	,get_retour: function() {
-		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.retour);
 	}
 	,get_className: function() {
 		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.className);
@@ -4953,13 +5233,12 @@ fomantic_Inscript.prototype = $extend(coconut_ui_View.prototype,{
 	}
 	,__initAttributes: function(attributes) {
 		this.__slots.act.setData(attributes.act);
-		this.__slots.retour.setData(attributes.retour);
 		var this1 = attributes.className;
-		this.__slots.className.setData(this1 == null ? this.__tink_defaults114.className : this1);
+		this.__slots.className.setData(this1 == null ? this.__tink_defaults861.className : this1);
 	}
 });
 var fomantic_Login = function(__coco_data_) {
-	this.__tink_defaults96 = { className : null};
+	this.__tink_defaults843 = { className : null};
 	this.__slots = { act : new coconut_ui_tools_Slot(this,null), className : new coconut_ui_tools_Slot(this,null)};
 	this.__coco_email = new tink_state__$State_SimpleState("",null,null);
 	this.__coco_password = new tink_state__$State_SimpleState("",null,null);
@@ -5068,12 +5347,12 @@ fomantic_Login.prototype = $extend(coconut_ui_View.prototype,{
 	,__initAttributes: function(attributes) {
 		this.__slots.act.setData(attributes.act);
 		var this1 = attributes.className;
-		this.__slots.className.setData(this1 == null ? this.__tink_defaults96.className : this1);
+		this.__slots.className.setData(this1 == null ? this.__tink_defaults843.className : this1);
 	}
 });
 var fomantic_Search = function(__coco_data_) {
 	var _gthis = this;
-	this.__tink_defaults71 = { placeholder : tink_state__$Observable_Observable_$Impl_$.const("..."), fluid : null, disabled : tink_state__$Observable_Observable_$Impl_$.const(false), url : null, aligned : null, loading : null, searchOnFocus : tink_state__$Observable_Observable_$Impl_$.const(false), className : null};
+	this.__tink_defaults818 = { placeholder : tink_state__$Observable_Observable_$Impl_$.const("..."), fluid : null, disabled : tink_state__$Observable_Observable_$Impl_$.const(false), url : null, aligned : null, loading : null, searchOnFocus : tink_state__$Observable_Observable_$Impl_$.const(false), className : null};
 	this.__slots = { placeholder : new coconut_ui_tools_Slot(this,null), fluid : new coconut_ui_tools_Slot(this,null), disabled : new coconut_ui_tools_Slot(this,null), content : new coconut_ui_tools_Slot(this,null), url : new coconut_ui_tools_Slot(this,null), aligned : new coconut_ui_tools_Slot(this,null), loading : new coconut_ui_tools_Slot(this,null), searchOnFocus : new coconut_ui_tools_Slot(this,null), className : new coconut_ui_tools_Slot(this,null)};
 	this.__coco_value = new tink_state__$State_SimpleState({ title : "bim"},null,null);
 	this.__coco_classes = tink_state__$Observable_Observable_$Impl_$.auto({ f : function() {
@@ -5099,7 +5378,7 @@ var fomantic_Search = function(__coco_data_) {
 	coconut_ui_View.call(this,$bind(this,this.render),null,function() {
 		tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.content);
 	},null,function() {
-		haxe_Log.trace(tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.content),{ fileName : "src/fomantic/Search.hx", lineNumber : 71, className : "fomantic.Search", methodName : "new"});
+		haxe_Log.trace(tink_state__$Observable_Observable_$Impl_$.get_value(_gthis.__slots.content),{ fileName : "src/fomantic/Search.hx", lineNumber : 79, className : "fomantic.Search", methodName : "new"});
 	},null);
 };
 fomantic_Search.__name__ = true;
@@ -5109,13 +5388,20 @@ fomantic_Search.fromHxx = function(hxxMeta,attributes) {
 fomantic_Search.__super__ = coconut_ui_View;
 fomantic_Search.prototype = $extend(coconut_ui_View.prototype,{
 	setup: function(e) {
+		var _gthis = this;
 		$(e).search({ source : tink_pure__$List_List_$Impl_$.toArray(tink_state__$Observable_Observable_$Impl_$.get_value(this.__slots.content)), searchFields : ["title"], fullTextSearch : false, onSelect : function(result,response) {
-			haxe_Log.trace("res=" + result.title,{ fileName : "src/fomantic/Search.hx", lineNumber : 51, className : "fomantic.Search", methodName : "setup"});
+			haxe_Log.trace("send" + result.title,{ fileName : "src/fomantic/Search.hx", lineNumber : 52, className : "fomantic.Search", methodName : "setup"});
+			_gthis.__coco_value.set(result);
+			haxe_Log.trace("res=" + result.title,{ fileName : "src/fomantic/Search.hx", lineNumber : 54, className : "fomantic.Search", methodName : "setup"});
 			return;
-		}, error : { source : "Cannot search. No source used, and Semantic API module was not included", noResults : "pas d'incrits", logging : "Error in debug logging, exiting.", noTemplate : "A valid template name was not specified.", serverError : "There was an issue with querying the server.", maxResults : "Results must be an array to use maxResults setting", method : "The method you called is not defined."}});
+		}, error : { source : "Cannot search. No source used, and Semantic API module was not included", noResults : "pas d'incrits", logging : "Error in debug logging, exiting.", noTemplate : "A valid template name was not specified.", serverError : "There was an issue with querying the server.", maxResults : "Results must be an array to use maxResults setting", method : "The method you called is not defined."}, onChange : function(value,text) {
+			if(onChange != null) {
+				onChange(value);
+			}
+		}});
 	}
 	,render: function() {
-		haxe_Log.trace("rendering saerch",{ fileName : "src/fomantic/Search.hx", lineNumber : 87, className : "fomantic.Search", methodName : "render"});
+		haxe_Log.trace("rendering saerch",{ fileName : "src/fomantic/Search.hx", lineNumber : 95, className : "fomantic.Search", methodName : "render"});
 		var __r = [];
 		var hxxMeta = { ref : $bind(this,this.setup)};
 		var __ret = { className : tink_domspec__$ClassName_ClassName_$Impl_$.ofString("ui search " + tink_state__$Observable_Observable_$Impl_$.get_value(this.__coco_classes) + " ")};
@@ -5167,22 +5453,22 @@ fomantic_Search.prototype = $extend(coconut_ui_View.prototype,{
 	}
 	,__initAttributes: function(attributes) {
 		var this1 = attributes.placeholder;
-		this.__slots.placeholder.setData(this1 == null ? this.__tink_defaults71.placeholder : this1);
+		this.__slots.placeholder.setData(this1 == null ? this.__tink_defaults818.placeholder : this1);
 		var this2 = attributes.fluid;
-		this.__slots.fluid.setData(this2 == null ? this.__tink_defaults71.fluid : this2);
+		this.__slots.fluid.setData(this2 == null ? this.__tink_defaults818.fluid : this2);
 		var this3 = attributes.disabled;
-		this.__slots.disabled.setData(this3 == null ? this.__tink_defaults71.disabled : this3);
+		this.__slots.disabled.setData(this3 == null ? this.__tink_defaults818.disabled : this3);
 		this.__slots.content.setData(attributes.content);
 		var this4 = attributes.url;
-		this.__slots.url.setData(this4 == null ? this.__tink_defaults71.url : this4);
+		this.__slots.url.setData(this4 == null ? this.__tink_defaults818.url : this4);
 		var this5 = attributes.aligned;
-		this.__slots.aligned.setData(this5 == null ? this.__tink_defaults71.aligned : this5);
+		this.__slots.aligned.setData(this5 == null ? this.__tink_defaults818.aligned : this5);
 		var this6 = attributes.loading;
-		this.__slots.loading.setData(this6 == null ? this.__tink_defaults71.loading : this6);
+		this.__slots.loading.setData(this6 == null ? this.__tink_defaults818.loading : this6);
 		var this7 = attributes.searchOnFocus;
-		this.__slots.searchOnFocus.setData(this7 == null ? this.__tink_defaults71.searchOnFocus : this7);
+		this.__slots.searchOnFocus.setData(this7 == null ? this.__tink_defaults818.searchOnFocus : this7);
 		var this8 = attributes.className;
-		this.__slots.className.setData(this8 == null ? this.__tink_defaults71.className : this8);
+		this.__slots.className.setData(this8 == null ? this.__tink_defaults818.className : this8);
 	}
 	,get_classes: function() {
 		return tink_state__$Observable_Observable_$Impl_$.get_value(this.__coco_classes);
@@ -8139,11 +8425,11 @@ xdom_html__$EventSource_EventSource_$Impl_$.get_signal = function(this1) {
 	var self = this1;
 	if(self.__xdomSignal == null) {
 		self.__xdomSignal = new tink_core__$Signal_Suspendable(function(cb) {
-			var this2 = this1(cb);
-			if(this2 == null) {
+			var this11 = this1(cb);
+			if(this11 == null) {
 				return tink_core__$Callback_CallbackLink_$Impl_$.noop;
 			} else {
-				return ($_=this2,$bind($_,$_.cancel));
+				return ($_=this11,$bind($_,$_.cancel));
 			}
 		});
 	}
@@ -8522,6 +8808,16 @@ coconut_vdom__$Html_HtmlFragment.__type = { create : function(__coco_data_) {
 }, update : function(attr,v) {
 	v.__initAttributes(attr);
 }};
+fomantic_Accordion.__type = { create : function(__coco_data_) {
+	return new fomantic_Accordion(__coco_data_);
+}, update : function(attr,v) {
+	v.__initAttributes(attr);
+}};
+fomantic_AccordionItem.__type = { create : function(__coco_data_) {
+	return new fomantic_AccordionItem(__coco_data_);
+}, update : function(attr,v) {
+	v.__initAttributes(attr);
+}};
 fomantic_Button.__type = { create : function(__coco_data_) {
 	return new fomantic_Button(__coco_data_);
 }, update : function(attr,v) {
@@ -8582,9 +8878,19 @@ xdom_XDom.console = window.console;
 xdom__$Selector_Selector_$Impl_$.hasScope = (function($this) {
 	var $r;
 	try {
-		$r = true;
+		$r = (function($this) {
+			var $r;
+			xdom_XDom.document.body.querySelectorAll(":scope>*");
+			$r = true;
+			return $r;
+		}($this));
 	} catch( e ) {
-		$r = false;
+		$r = (function($this) {
+			var $r;
+			((e) instanceof js__$Boot_HaxeError);
+			$r = false;
+			return $r;
+		}($this));
 	}
 	return $r;
 }(this));

@@ -426,7 +426,7 @@ var Font;//
 var Indent;// Left 
 //var Indent;// Right 
 var Italic;// 
-var List;// 
+var Liste;// 
 var Move;// 
 var Ordered;// List 
 //var Paste;// 
