@@ -23,6 +23,8 @@ class Input extends coconut.ui.View{
    @:attr @:optional public var name:String=null;
    @:attr @:optional var onChange:Event->Void;
    @:attr @:optional var onFocus:Event->Void;
+   @:attr @:optional var onBlur:String->Void=n->{};
+   @:attr @:optional var autocomplete:Bool=false;
 
     @:attribute var className:tink.domspec.ClassName = null;
 
@@ -69,7 +71,7 @@ class Input extends coconut.ui.View{
    function render()
       <div class={className.add('ui input')} >
          <input ref={setup} name={name} type='${type}' value={value} onfocus={onFocus} onchange={onChange}
-         placeholder={placeholder} />
+         placeholder={placeholder} onblur={e->onBlur(untyped(e.currentTarget).value)} autocomplete={if(autocomplete)"on" else "off"}/>
          <if {img!=null} >
             <Icon img={img} />
          </if>
@@ -88,6 +90,7 @@ enum abstract InputType(String){
     var time;
     var url;
     var week;
+    var file;
 
 }
 

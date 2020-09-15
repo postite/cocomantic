@@ -1,0 +1,3 @@
+-cp /Users/postite/Documents/LAB/EasyMD//extern/
+-D easymde=1.0.0
+--macro Sys.println("haxe_libraries/easymde.hxml:2: [Warning] Using dev version of library easymde")

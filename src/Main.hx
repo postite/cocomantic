@@ -51,7 +51,7 @@ class Main {
 		var accordionListe=new AccList({items:[for (a in 0 ...4) AccItem.create('item$a','content$a')].fromArray()});
 	 coconut.ui.Renderer.mount(
 		cast doc.body.appendChild(doc.createDivElement()),
-        hxx('<App router=${router} elements={accordionListe} />')
+        hxx('<App router=${router}  elements={accordionListe} />')
 		//   hxx('<Bouton text="op" />')
 		);
 	
@@ -68,7 +68,14 @@ class App extends coconut.ui.View {
 		<div >
 			<div class="menu">bim</div>
 			 <Pages  router={router} />
-			 <Accordion elements={elements}></Accordion> 
+			 <Calendar onChange={v->v} />
+			 <Accordion class="styled">
+				 <for {a in 0...3} >
+					 <AccordionItem  content={'content '+a} >
+					 	<Input value={'input$a'}/>
+					 </AccordionItem>
+				 </for>
+			 </Accordion> 
 			<a href="/two">totwo</a>
 			<a href="/other">toother</a>
 		</div>

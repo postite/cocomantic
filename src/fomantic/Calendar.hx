@@ -1,15 +1,17 @@
 package fomantic;
 import js.jquery.Helper.*;
+import Date as HxDate;
 using DateTools;
+
 // borowwed from kevinREsol :)
 class Calendar extends coconut.ui.View {
     
 	@:attr var type:CalendarType = Date;
 	@:attr var inlined:Bool = false;
-	@:attr var onChange:Date->Void = null;
-	@:attr var formatDate:Date->String = function(date:Date) return date.format('%F');
-	@:attr var formatTime:Date->String = function(date:Date) return date.format('%H:%M');
-	@:attr var value:Date = null;
+	@:attr var onChange:HxDate->Void = d->{};
+	@:attr var formatDate:HxDate->String = function(date:Date) return date.format('%F');
+	@:attr var formatTime:HxDate->String = function(date:Date) return date.format('%H:%M');
+	@:attr var value:Date = HxDate.now();
 	
 	function render() '
 		<div ref=${setup} class="ui calendar">
@@ -17,15 +19,18 @@ class Calendar extends coconut.ui.View {
 				<div class="ui input left icon">
 					<div class="ui popup calendar"/>
 					<i class="calendar icon"/>
-					<input type="text"/>
+					<input type="text" value={value.toString()} />
 				</div>
 			</if>
 		</div>
 	';
 	
 	
-	function setup(e) {
-		(cast J(e)).calendar({
+	function setup(e:js.html.Element) {
+		trace("setup" +e);
+		
+		
+		 untyped (J(e)).calendar({
 			type: type,
 			'inline': inlined,
 			parser: {
@@ -34,7 +39,7 @@ class Calendar extends coconut.ui.View {
 			formatter: {
 				time: _formatTime,
 				date: _formatDate,
-				cell: function(cell:Array<Dynamic>, date:Date, options) {
+				cell: function(cell:Array<Dynamic>, date:HxDate, options) {
 					var c:Dynamic = cell[0];
 					c.style.cursor = 'pointer';
 					
@@ -56,18 +61,18 @@ class Calendar extends coconut.ui.View {
 				if(date == null) return;
 				var date = switch type {
 					case DateTime: date;
-					case Date: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
-					case Time: new Date(1970, 0, 1, date.getHours(), date.getMinutes(), date.getSeconds());
-					case Month: new Date(date.getFullYear(), date.getMonth(), 0, 0, 0, 0);
-					case Year: new Date(date.getFullYear(), 0, 0, 0, 0, 0);
+					case Date: new HxDate(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
+					case Time: new HxDate(1970, 0, 1, date.getHours(), date.getMinutes(), date.getSeconds());
+					case Month: new HxDate(date.getFullYear(), date.getMonth(), 0, 0, 0, 0);
+					case Year: new HxDate(date.getFullYear(), 0, 0, 0, 0, 0);
 				}
 				onChange(date);
 			}
 		});
 	}
 	
-	function _formatDate(date:Date) return date == null ? '' : formatDate(date);
-	function _formatTime(date:Date) return date == null ? '' : formatTime(date);
+	function _formatTime(date:HxDate) return date == null ? '' : formatTime(date);
+	function _formatDate(date:HxDate) return date == null ? '' : formatDate(date);
 }
 
 @:enum abstract CalendarType(String) to String {

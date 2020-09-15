@@ -1,14 +1,13 @@
 -cp src
 -D analyzer-optimize
--lib coconut.ui
--lib coconut.vdom
 -lib jQueryExtern
--lib coconut.router
--debug
+--debug
 --times
--main Main
+-main Simple
+-lib tink_core
+-lib coconut.vdom
 --macro js.jquery.Config.addPlugin('uiplug.FomanticPlugin')
 #--macro js.jquery.Config.addPlugin('fomantic.JSearchPlugin')
 -D no-deprecation-warnings
---js www/coco.js
+--js www/simple.js
 
