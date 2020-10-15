@@ -2,7 +2,7 @@ package fomantic;
 import js.jquery.Helper.*;
 import Date as HxDate;
 using DateTools;
-
+import tink.pure.List;
 // borowwed from kevinREsol :)
 class Calendar extends coconut.ui.View {
     
@@ -12,6 +12,9 @@ class Calendar extends coconut.ui.View {
 	@:attr var formatDate:HxDate->String = function(date:Date) return date.format('%F');
 	@:attr var formatTime:HxDate->String = function(date:Date) return date.format('%H:%M');
 	@:attr var value:Date = HxDate.now();
+
+	@:skipCheck
+	@:attr var eventDates:List<{date:Date,message:String,classe:String}>=new List();
 	
 	function render() '
 		<div ref=${setup} class="ui calendar">
@@ -28,7 +31,12 @@ class Calendar extends coconut.ui.View {
 	
 	function setup(e:js.html.Element) {
 		trace("setup" +e);
-		
+		var p=this.eventDates.map(n->
+			{
+			Reflect.setField(n,"class",n.classe);
+			n;
+			} 
+			).toArray();
 		
 		 untyped (J(e)).calendar({
 			type: type,
@@ -36,6 +44,8 @@ class Calendar extends coconut.ui.View {
 			parser: {
 				date: function (text) return text == '' ? null : untyped __js__('new Date({0})', text),
 			},
+			//eventDates:this.eventDates.map(n->{Reflect.setField(n,"classe",n.classe);n;}),
+			eventDates:p,
 			formatter: {
 				time: _formatTime,
 				date: _formatDate,

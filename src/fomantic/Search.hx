@@ -5,15 +5,21 @@ import js.jquery.Helper.*;
 import fomantic.Types;
 using tink.state.Promised;
 
+
+
+//maybe cast if no id 
 @:pure
 typedef SearchContent={
    public var title(default,never):String;
+   @:optional 
+   public var id(default,never):Int;
 }
 
 class Search extends coconut.ui.View{
-   @:state public var value:SearchContent={title:"bim"};
-   @:attr @:optional public var placeholder:String="...";
-   
+   @:state public var _value:SearchContent= {title:"bim"};
+   @:attr public var value:String;
+   @:attr @:optional public var placeholder:String= "...";
+   @:attr public var onChange:SearchContent->Void;
    @:attr @:optional public var fluid:Bool;
    @:attr @:optional public var disabled:Bool =false;
    @:tracked
@@ -50,7 +56,8 @@ class Search extends coconut.ui.View{
          fullTextSearch:false,
          onSelect:(result, response)->{
             trace("send"+result.title);
-            value=result;
+            _value=result;
+            onChange(_value);
             trace("res="+result.title);
             },
 
@@ -65,7 +72,7 @@ error : {
   method      : 'The method you called is not defined.'
    },
 
-			onChange: function(value, text) if(onChange != null) onChange(value),
+			onChange: function(value, text) if(this.onChange != null) this.onChange(value),
 
 	});
 
@@ -94,7 +101,7 @@ function viewDidMount(){
    function render(){
    trace("rendering saerch" );
      return  <div ref=${setup} class='ui search ${classes} '>
-         <input class="prompt" type="text" placeholder="Common passwords..."/>
+         <input value={value} class="prompt" type="text" placeholder={placeholder}/>
          <Icon img={IconName.search} />
          <div class="results"></div>
         
