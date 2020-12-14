@@ -17,10 +17,11 @@ class Inscript extends coconut.ui.View{
 
   function gather(e){
     e.preventDefault();
-    act({email:email, name:name});
+    valid();
+    //act({email:email, name:name});
   }
 
-   function valid(form){
+   function valid(){
       
     untyped (J(form))
         .form({
@@ -51,7 +52,15 @@ class Inscript extends coconut.ui.View{
                 }
               ]
             }
-          }
+          },
+          onSuccess: function() {
+            trace( ('Success');
+            return false; // false is required if you do don't want to let it submit
+          },
+            onFailure: function() {
+            trace('Failure');
+            return false; // false is required if you do don't want to let it submit                                            
+            }
         })
       ;
    }

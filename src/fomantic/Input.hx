@@ -26,7 +26,7 @@ class Input extends coconut.ui.View{
    @:attr @:optional var onBlur:String->Void=n->{};
    @:attr @:optional var autocomplete:Bool=false;
 
-    @:attribute var className:tink.domspec.ClassName = null;
+    @:attribute var className:tink.domspec.ClassName = classes;
 
     @:computed  var classes:tink.domspec.ClassName={
       var b=className;

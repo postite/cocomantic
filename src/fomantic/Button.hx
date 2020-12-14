@@ -13,8 +13,8 @@ class Button  extends View{
    @:attr @:optional public var disabled:Bool=false;
    @:attr @:optional public var loading:Bool=false;
    @:attr @:optional public var active:Bool=true;
-
-   @:attr @:optional public var type:ButtonType=basic;
+   @:attr @:optional public var role:ButtonRole=button;
+   @:attr @:optional public var type:ButtonType=primary;
    @:attr @:optional public var size:Size=null;
    @:attr @:optional public var toolTip:String;
 
@@ -42,12 +42,23 @@ class Button  extends View{
    }
 
    function render()
-      <button ref={setup} onclick={onClick} class='ui button $type $size ${classes}' >
+      <button ref={setup} onclick={onClick} class='ui button $type $size ${classes}' type={role}>
       <if {img!=null} >
       <Icon img={img} />
       </if>
+      <if {text!=""} >
          {text} 
+      </if>
       </button>;
+}
+
+enum abstract ButtonRole(String){
+   //   l'activation du bouton entraîne la soumission du formulaire au serveur distant (après validation des contraintes du formulaire);
+var submit ;
+   // l'activation du bouton entraîne la réinitialisation du formulaire et dans ce cas-là, l'élément est exclu de la validation des contraintes;
+var reset ;
+//l'activation du bouton n'entraîne aucun action automatique et dans ce cas-là également, l'élément est exclu de la validation des contraintes. C'est cette valeur qui doit être utilisée si le bouton n'est pas utilisé pour envoyer un formulaire.
+var button;
 }
 
 enum abstract ButtonType(String){

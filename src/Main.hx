@@ -24,8 +24,8 @@ using Debug;
 typedef Listed={
 	public var title(default,never):String;
 }
-class Main {
 
+class Main {
 
 	static var router = new coconut.router.BrowserRouter({
 			routeToLocation: function(route) {
