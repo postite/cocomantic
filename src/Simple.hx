@@ -21,7 +21,8 @@ class Simple {
         coconut.ui.Renderer.mount(
             cast doc.body.appendChild(doc.createDivElement()),
             //hxx('<div/>')
-              hxx('<Calendar />')
+            hxx('<Dropdown />')
+             // hxx('<Calendar />')
             );
 
     });

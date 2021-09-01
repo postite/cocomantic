@@ -21,9 +21,10 @@ class Inscript extends coconut.ui.View{
     //act({email:email, name:name});
   }
 
-   function valid(){
+   function valid(el:js.html.Element){
       
-    untyped (J(form))
+    //untyped (J('.klij.ui.form'))
+    untyped (J(el))
         .form({
           fields: {
             email: {
@@ -47,14 +48,14 @@ class Inscript extends coconut.ui.View{
                   prompt : 'Please enter your name'
                 },
                 {
-                  type   : 'length[6]',
+                  type   : 'length[3]',
                   prompt : 'Your name must be at least 6 characters'
                 }
               ]
             }
           },
           onSuccess: function() {
-            trace( ('Success');
+            trace( 'Success');
             return false; // false is required if you do don't want to let it submit
           },
             onFailure: function() {
@@ -65,13 +66,12 @@ class Inscript extends coconut.ui.View{
       ;
    }
    function render(){
-      <div ref=${valid} class='${className}'>
+      <div ref=${valid} class='${className.add('klij')}'>
       <Form>    
          <Input name="name" img={IconName.lock} onChange={e->name=untyped(e.currentTarget).value} placeholder="name" type={text}/>        
          <Input name="email" img={IconName.user} onChange={e->email=untyped(e.currentTarget).value} placeholder="email" type={InputType.email}/>
          <Button text="ok" onClick={gather}/>
       </Form>
-      <div class="ui error message"></div>
       </div>
    }
 }

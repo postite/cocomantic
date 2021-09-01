@@ -1597,6 +1597,38 @@ coconut_ui_tools_Slot.prototype = {
 	}
 	,__class__: coconut_ui_tools_Slot
 };
+var haxe_IMap = function() { };
+haxe_IMap.__name__ = true;
+var haxe_ds_StringMap = function() {
+	this.h = Object.create(null);
+};
+haxe_ds_StringMap.__name__ = true;
+haxe_ds_StringMap.__interfaces__ = [haxe_IMap];
+haxe_ds_StringMap.keysIterator = function(h) {
+	var keys = Object.keys(h);
+	var len = keys.length;
+	var idx = 0;
+	return { hasNext : function() {
+		return idx < len;
+	}, next : function() {
+		idx += 1;
+		return keys[idx - 1];
+	}};
+};
+haxe_ds_StringMap.valueIterator = function(h) {
+	var keys = Object.keys(h);
+	var len = keys.length;
+	var idx = 0;
+	return { hasNext : function() {
+		return idx < len;
+	}, next : function() {
+		idx += 1;
+		return h[keys[idx - 1]];
+	}};
+};
+haxe_ds_StringMap.prototype = {
+	__class__: haxe_ds_StringMap
+};
 var coconut_vdom__$Html_Elt = function(tag) {
 	this.tag = tag;
 };
@@ -2012,6 +2044,54 @@ coconut_vdom__$Html_Svg.prototype = {
 	}
 	,__class__: coconut_vdom__$Html_Svg
 };
+var haxe_Exception = function(message,previous,native) {
+	Error.call(this,message);
+	this.message = message;
+	this.__previousException = previous;
+	this.__nativeException = native != null ? native : this;
+};
+haxe_Exception.__name__ = true;
+haxe_Exception.caught = function(value) {
+	if(((value) instanceof haxe_Exception)) {
+		return value;
+	} else if(((value) instanceof Error)) {
+		return new haxe_Exception(value.message,null,value);
+	} else {
+		return new haxe_ValueException(value,null,value);
+	}
+};
+haxe_Exception.thrown = function(value) {
+	if(((value) instanceof haxe_Exception)) {
+		return value.get_native();
+	} else if(((value) instanceof Error)) {
+		return value;
+	} else {
+		var e = new haxe_ValueException(value);
+		return e;
+	}
+};
+haxe_Exception.__super__ = Error;
+haxe_Exception.prototype = $extend(Error.prototype,{
+	unwrap: function() {
+		return this.__nativeException;
+	}
+	,get_native: function() {
+		return this.__nativeException;
+	}
+	,__class__: haxe_Exception
+});
+var haxe_ValueException = function(value,previous,native) {
+	haxe_Exception.call(this,String(value),previous,native);
+	this.value = value;
+};
+haxe_ValueException.__name__ = true;
+haxe_ValueException.__super__ = haxe_Exception;
+haxe_ValueException.prototype = $extend(haxe_Exception.prototype,{
+	unwrap: function() {
+		return this.value;
+	}
+	,__class__: haxe_ValueException
+});
 var coconut_vdom_Html = function() { };
 coconut_vdom_Html.__name__ = true;
 coconut_vdom_Html.nodeType = function(tag) {
@@ -2926,6 +3006,39 @@ tink_core_FutureTrigger.prototype = {
 	}
 	,__class__: tink_core_FutureTrigger
 };
+var haxe_ds_ObjectMap = function() {
+	this.h = { __keys__ : { }};
+};
+haxe_ds_ObjectMap.__name__ = true;
+haxe_ds_ObjectMap.__interfaces__ = [haxe_IMap];
+haxe_ds_ObjectMap.prototype = {
+	set: function(key,value) {
+		var id = key.__id__;
+		if(id == null) {
+			id = (key.__id__ = $global.$haxeUID++);
+		}
+		this.h[id] = value;
+		this.h.__keys__[id] = key;
+	}
+	,keys: function() {
+		var a = [];
+		for( var key in this.h.__keys__ ) {
+		if(this.h.hasOwnProperty(key)) {
+			a.push(this.h.__keys__[key]);
+		}
+		}
+		return new haxe_iterators_ArrayIterator(a);
+	}
+	,iterator: function() {
+		return { ref : this.h, it : this.keys(), hasNext : function() {
+			return this.it.hasNext();
+		}, next : function() {
+			var i = this.it.next();
+			return this.ref[i.__id__];
+		}};
+	}
+	,__class__: haxe_ds_ObjectMap
+};
 var tink_state_State = {};
 tink_state_State.get_value = function(this1) {
 	return tink_state_Observable.get_value(this1);
@@ -3535,13 +3648,224 @@ fomantic_AccordionItem.prototype = $extend(coconut_vdom_View.prototype,{
 	}
 	,__class__: fomantic_AccordionItem
 });
+var tink_pure_List = {};
+tink_pure_List.get_length = function(this1) {
+	if(this1 == null) {
+		return 0;
+	} else {
+		return this1.length;
+	}
+};
+tink_pure_List.first = function(this1,predicate) {
+	var _g = new tink_pure_NodeIterator(this1);
+	while(_g.list.length > 0) {
+		var x = _g.next();
+		if(predicate == null || predicate(x)) {
+			return haxe_ds_Option.Some(x);
+		}
+	}
+	return haxe_ds_Option.None;
+};
+tink_pure_List.last = function(this1,predicate) {
+	if(this1 == null) {
+		return haxe_ds_Option.None;
+	} else if(predicate == null) {
+		var _last = null;
+		_last = function(v) {
+			while(true) {
+				var _g = v.tails;
+				if(_g.length == 0) {
+					return haxe_ds_Option.Some(v.value);
+				} else {
+					v = _g[_g.length - 1];
+					continue;
+				}
+			}
+		};
+		return _last(this1);
+	} else {
+		var found = false;
+		var ret = null;
+		var _g = new tink_pure_NodeIterator(this1);
+		while(_g.list.length > 0) {
+			var x = _g.next();
+			if(predicate(x)) {
+				found = true;
+				ret = x;
+			}
+		}
+		if(found) {
+			return haxe_ds_Option.Some(ret);
+		} else {
+			return haxe_ds_Option.None;
+		}
+	}
+};
+tink_pure_List.get = function(this1,index) {
+	if(index < 0) {
+		return haxe_ds_Option.None;
+	}
+	var iter = new tink_pure_NodeIterator(this1);
+	var v = null;
+	while(index-- >= 0) {
+		if(iter.list.length <= 0) {
+			return haxe_ds_Option.None;
+		}
+		v = iter.next();
+	}
+	return haxe_ds_Option.Some(v);
+};
+tink_pure_List._new = function() {
+	var this1 = null;
+	return this1;
+};
+tink_pure_List.node = function(this1) {
+	return this1;
+};
+tink_pure_List.concat = function(this1,that) {
+	if(this1 == null) {
+		return that;
+	} else if(that == null) {
+		return this1;
+	} else {
+		return new tink_pure__$List_Node(this1.length + (that == null ? 0 : that.length),this1.value,this1.tails.concat([that]));
+	}
+};
+tink_pure_List.sort = function(this1,compare) {
+	var arr = tink_pure_List.toArray(this1);
+	arr.sort(compare);
+	return tink_pure_List.fromArray(arr);
+};
+tink_pure_List.append = function(this1,value) {
+	if(this1 == null) {
+		return new tink_pure__$List_Node(1,value);
+	} else {
+		return new tink_pure__$List_Node(this1.length + 1,this1.value,this1.tails.concat([new tink_pure__$List_Node(1,value)]));
+	}
+};
+tink_pure_List.prepend = function(this1,value) {
+	if(this1 == null) {
+		return new tink_pure__$List_Node(1,value);
+	} else {
+		return new tink_pure__$List_Node(this1.length + 1,value,[this1]);
+	}
+};
+tink_pure_List.replace = function(this1,select,generate) {
+	var _g = [];
+	var _g1 = new tink_pure_NodeIterator(this1);
+	while(_g1.list.length > 0) {
+		var v = _g1.next();
+		if(select(v)) {
+			_g.push(generate(v));
+		} else {
+			_g.push(v);
+		}
+	}
+	return tink_pure_List.fromArray(_g);
+};
+tink_pure_List.exists = function(this1,predicate) {
+	var ret = false;
+	var _g = new tink_pure_NodeIterator(this1);
+	while(_g.list.length > 0) {
+		var x = _g.next();
+		if(predicate(x)) {
+			ret = true;
+			break;
+		}
+	}
+	return ret;
+};
+tink_pure_List.count = function(this1,predicate) {
+	var ret = 0;
+	var _g = new tink_pure_NodeIterator(this1);
+	while(_g.list.length > 0) {
+		var x = _g.next();
+		if(predicate(x)) {
+			++ret;
+		}
+	}
+	return ret;
+};
+tink_pure_List.iterator = function(this1) {
+	return new tink_pure_NodeIterator(this1);
+};
+tink_pure_List.toIterable = function(this1) {
+	var _e = this1;
+	return { iterator : function() {
+		return new tink_pure_NodeIterator(_e);
+	}};
+};
+tink_pure_List.filter = function(this1,f) {
+	if(this1 == null) {
+		return null;
+	} else {
+		return this1.filter(f);
+	}
+};
+tink_pure_List.map = function(this1,f) {
+	var _g = [];
+	var _g1 = new tink_pure_NodeIterator(this1);
+	while(_g1.list.length > 0) {
+		var i = _g1.next();
+		_g.push(f(i));
+	}
+	return tink_pure_List.fromArray(_g);
+};
+tink_pure_List.select = function(this1,f) {
+	var arr = [];
+	var _g = new tink_pure_NodeIterator(this1);
+	while(_g.list.length > 0) {
+		var i = _g.next();
+		var _g1 = f(i);
+		switch(_g1._hx_index) {
+		case 0:
+			arr.push(_g1.v);
+			break;
+		case 1:
+			break;
+		}
+	}
+	return tink_pure_List.fromArray(arr);
+};
+tink_pure_List.fold = function(this1,f,first) {
+	var _g = new tink_pure_NodeIterator(this1);
+	while(_g.list.length > 0) {
+		var x = _g.next();
+		first = f(x,first);
+	}
+	return first;
+};
+tink_pure_List.single = function(v) {
+	return new tink_pure__$List_Node(1,v);
+};
+tink_pure_List.toArray = function(this1) {
+	var _g = [];
+	var _g1 = new tink_pure_NodeIterator(this1);
+	while(_g1.list.length > 0) {
+		var v = _g1.next();
+		_g.push(v);
+	}
+	return _g;
+};
+tink_pure_List.fromArray = function(i) {
+	var ret = null;
+	var len = 0;
+	var pos = i.length;
+	while(pos-- > 0) ret = new tink_pure__$List_Node(++len,i[pos],ret == null ? tink_pure__$List_Node.EMPTY : [ret]);
+	return ret;
+};
 var fomantic_Calendar = function(__coco_data_) {
 	var this1 = { f : function() {
 		return "date";
 	}};
 	this.__coco_type = new coconut_ui_tools_Slot(this,null,tink_state_Observable.auto(this1));
 	this.__coco_inlined = new coconut_ui_tools_Slot(this,null,tink_state_Observable.const(false));
-	this.__coco_onChange = new coconut_ui_tools_Slot(this,null,null);
+	var this1 = { f : function() {
+		return function(d) {
+			return;
+		};
+	}};
+	this.__coco_onChange = new coconut_ui_tools_Slot(this,null,tink_state_Observable.auto(this1));
 	var this1 = { f : function() {
 		return function(date) {
 			return DateTools.format(date,"%F");
@@ -3558,6 +3882,10 @@ var fomantic_Calendar = function(__coco_data_) {
 		return new Date();
 	}};
 	this.__coco_value = new coconut_ui_tools_Slot(this,null,tink_state_Observable.auto(this1));
+	var this1 = { f : function() {
+		return tink_pure_List._new();
+	}};
+	this.__coco_eventDates = new coconut_ui_tools_Slot(this,null,tink_state_Observable.auto(this1));
 	this.__initAttributes(__coco_data_);
 	coconut_vdom_View.call(this,$bind(this,this.render),null,null,null,null);
 };
@@ -3567,7 +3895,10 @@ fomantic_Calendar.fromHxx = function(hxxMeta,attributes) {
 };
 fomantic_Calendar.__super__ = coconut_vdom_View;
 fomantic_Calendar.prototype = $extend(coconut_vdom_View.prototype,{
-	formatDate: function(a0) {
+	onChange: function(a0) {
+		(tink_state_Observable.get_value(this.__coco_onChange))(a0);
+	}
+	,formatDate: function(a0) {
 		return (tink_state_Observable.get_value(this.__coco_formatDate))(a0);
 	}
 	,formatTime: function(a0) {
@@ -3596,14 +3927,18 @@ fomantic_Calendar.prototype = $extend(coconut_vdom_View.prototype,{
 	}
 	,setup: function(e) {
 		var _gthis = this;
-		haxe_Log.trace("setup" + Std.string(e),{ fileName : "src/fomantic/Calendar.hx", lineNumber : 30, className : "fomantic.Calendar", methodName : "setup"});
+		haxe_Log.trace("setup" + Std.string(e),{ fileName : "src/fomantic/Calendar.hx", lineNumber : 33, className : "fomantic.Calendar", methodName : "setup"});
+		var p = tink_pure_List.toArray(tink_pure_List.map(tink_state_Observable.get_value(this.__coco_eventDates),function(n) {
+			n["class"] = n.classe;
+			return n;
+		}));
 		$(e).calendar({ type : tink_state_Observable.get_value(this.__coco_type), "inline" : tink_state_Observable.get_value(this.__coco_inlined), parser : { date : function(text) {
 			if(text == "") {
 				return null;
 			} else {
 				return new Date(text);
 			}
-		}}, formatter : { time : $bind(this,this._formatTime), date : $bind(this,this._formatDate), cell : function(cell,date,options) {
+		}}, eventDates : p, formatter : { time : $bind(this,this._formatTime), date : $bind(this,this._formatDate), cell : function(cell,date,options) {
 			var c = cell[0];
 			c.style.cursor = "pointer";
 			if(!options.disabled) {
@@ -3654,7 +3989,7 @@ fomantic_Calendar.prototype = $extend(coconut_vdom_View.prototype,{
 				date1 = new Date(date.getFullYear(),0,0,0,0,0);
 				break;
 			}
-			(tink_state_Observable.get_value(_gthis.__coco_onChange))(date1);
+			_gthis.onChange(date1);
 		}});
 	}
 	,_formatTime: function(date) {
@@ -3677,11 +4012,11 @@ fomantic_Calendar.prototype = $extend(coconut_vdom_View.prototype,{
 	,get_inlined: function() {
 		return tink_state_Observable.get_value(this.__coco_inlined);
 	}
-	,get_onChange: function() {
-		return tink_state_Observable.get_value(this.__coco_onChange);
-	}
 	,get_value: function() {
 		return tink_state_Observable.get_value(this.__coco_value);
+	}
+	,get_eventDates: function() {
+		return tink_state_Observable.get_value(this.__coco_eventDates);
 	}
 	,toString: function() {
 		return "Calendar" + "#" + this.viewId;
@@ -3693,6 +4028,7 @@ fomantic_Calendar.prototype = $extend(coconut_vdom_View.prototype,{
 		this.__coco_formatDate.setData(attributes.formatDate);
 		this.__coco_formatTime.setData(attributes.formatTime);
 		this.__coco_value.setData(attributes.value);
+		this.__coco_eventDates.setData(attributes.eventDates);
 	}
 	,__class__: fomantic_Calendar
 });
@@ -3845,44 +4181,6 @@ var haxe_StackItem = $hxEnums["haxe.StackItem"] = { __ename__ : true, __construc
 	,Method: ($_=function(classname,method) { return {_hx_index:3,classname:classname,method:method,__enum__:"haxe.StackItem",toString:$estr}; },$_.__params__ = ["classname","method"],$_)
 	,LocalFunction: ($_=function(v) { return {_hx_index:4,v:v,__enum__:"haxe.StackItem",toString:$estr}; },$_.__params__ = ["v"],$_)
 };
-var haxe_IMap = function() { };
-haxe_IMap.__name__ = true;
-var haxe_Exception = function(message,previous,native) {
-	Error.call(this,message);
-	this.message = message;
-	this.__previousException = previous;
-	this.__nativeException = native != null ? native : this;
-};
-haxe_Exception.__name__ = true;
-haxe_Exception.caught = function(value) {
-	if(((value) instanceof haxe_Exception)) {
-		return value;
-	} else if(((value) instanceof Error)) {
-		return new haxe_Exception(value.message,null,value);
-	} else {
-		return new haxe_ValueException(value,null,value);
-	}
-};
-haxe_Exception.thrown = function(value) {
-	if(((value) instanceof haxe_Exception)) {
-		return value.get_native();
-	} else if(((value) instanceof Error)) {
-		return value;
-	} else {
-		var e = new haxe_ValueException(value);
-		return e;
-	}
-};
-haxe_Exception.__super__ = Error;
-haxe_Exception.prototype = $extend(Error.prototype,{
-	unwrap: function() {
-		return this.__nativeException;
-	}
-	,get_native: function() {
-		return this.__nativeException;
-	}
-	,__class__: haxe_Exception
-});
 var haxe_Log = function() { };
 haxe_Log.__name__ = true;
 haxe_Log.formatOutput = function(v,infos) {
@@ -3908,18 +4206,6 @@ haxe_Log.trace = function(v,infos) {
 		console.log(str);
 	}
 };
-var haxe_ValueException = function(value,previous,native) {
-	haxe_Exception.call(this,String(value),previous,native);
-	this.value = value;
-};
-haxe_ValueException.__name__ = true;
-haxe_ValueException.__super__ = haxe_Exception;
-haxe_ValueException.prototype = $extend(haxe_Exception.prototype,{
-	unwrap: function() {
-		return this.value;
-	}
-	,__class__: haxe_ValueException
-});
 var haxe_ds_Either = $hxEnums["haxe.ds.Either"] = { __ename__ : true, __constructs__ : ["Left","Right"]
 	,Left: ($_=function(v) { return {_hx_index:0,v:v,__enum__:"haxe.ds.Either",toString:$estr}; },$_.__params__ = ["v"],$_)
 	,Right: ($_=function(v) { return {_hx_index:1,v:v,__enum__:"haxe.ds.Either",toString:$estr}; },$_.__params__ = ["v"],$_)
@@ -3932,72 +4218,9 @@ haxe_ds__$List_ListNode.__name__ = true;
 haxe_ds__$List_ListNode.prototype = {
 	__class__: haxe_ds__$List_ListNode
 };
-var haxe_ds_ObjectMap = function() {
-	this.h = { __keys__ : { }};
-};
-haxe_ds_ObjectMap.__name__ = true;
-haxe_ds_ObjectMap.__interfaces__ = [haxe_IMap];
-haxe_ds_ObjectMap.prototype = {
-	set: function(key,value) {
-		var id = key.__id__;
-		if(id == null) {
-			id = (key.__id__ = $global.$haxeUID++);
-		}
-		this.h[id] = value;
-		this.h.__keys__[id] = key;
-	}
-	,keys: function() {
-		var a = [];
-		for( var key in this.h.__keys__ ) {
-		if(this.h.hasOwnProperty(key)) {
-			a.push(this.h.__keys__[key]);
-		}
-		}
-		return new haxe_iterators_ArrayIterator(a);
-	}
-	,iterator: function() {
-		return { ref : this.h, it : this.keys(), hasNext : function() {
-			return this.it.hasNext();
-		}, next : function() {
-			var i = this.it.next();
-			return this.ref[i.__id__];
-		}};
-	}
-	,__class__: haxe_ds_ObjectMap
-};
 var haxe_ds_Option = $hxEnums["haxe.ds.Option"] = { __ename__ : true, __constructs__ : ["Some","None"]
 	,Some: ($_=function(v) { return {_hx_index:0,v:v,__enum__:"haxe.ds.Option",toString:$estr}; },$_.__params__ = ["v"],$_)
 	,None: {_hx_index:1,__enum__:"haxe.ds.Option",toString:$estr}
-};
-var haxe_ds_StringMap = function() {
-	this.h = Object.create(null);
-};
-haxe_ds_StringMap.__name__ = true;
-haxe_ds_StringMap.__interfaces__ = [haxe_IMap];
-haxe_ds_StringMap.keysIterator = function(h) {
-	var keys = Object.keys(h);
-	var len = keys.length;
-	var idx = 0;
-	return { hasNext : function() {
-		return idx < len;
-	}, next : function() {
-		idx += 1;
-		return keys[idx - 1];
-	}};
-};
-haxe_ds_StringMap.valueIterator = function(h) {
-	var keys = Object.keys(h);
-	var len = keys.length;
-	var idx = 0;
-	return { hasNext : function() {
-		return idx < len;
-	}, next : function() {
-		idx += 1;
-		return h[keys[idx - 1]];
-	}};
-};
-haxe_ds_StringMap.prototype = {
-	__class__: haxe_ds_StringMap
 };
 var haxe_iterators_ArrayIterator = function(array) {
 	this.current = 0;
@@ -5787,212 +6010,6 @@ tink_pure_FilterResult.fromBool = function(b) {
 		return 0;
 	}
 };
-var tink_pure_List = {};
-tink_pure_List.get_length = function(this1) {
-	if(this1 == null) {
-		return 0;
-	} else {
-		return this1.length;
-	}
-};
-tink_pure_List.first = function(this1,predicate) {
-	var _g = new tink_pure_NodeIterator(this1);
-	while(_g.list.length > 0) {
-		var x = _g.next();
-		if(predicate == null || predicate(x)) {
-			return haxe_ds_Option.Some(x);
-		}
-	}
-	return haxe_ds_Option.None;
-};
-tink_pure_List.last = function(this1,predicate) {
-	if(this1 == null) {
-		return haxe_ds_Option.None;
-	} else if(predicate == null) {
-		var _last = null;
-		_last = function(v) {
-			while(true) {
-				var _g = v.tails;
-				if(_g.length == 0) {
-					return haxe_ds_Option.Some(v.value);
-				} else {
-					v = _g[_g.length - 1];
-					continue;
-				}
-			}
-		};
-		return _last(this1);
-	} else {
-		var found = false;
-		var ret = null;
-		var _g = new tink_pure_NodeIterator(this1);
-		while(_g.list.length > 0) {
-			var x = _g.next();
-			if(predicate(x)) {
-				found = true;
-				ret = x;
-			}
-		}
-		if(found) {
-			return haxe_ds_Option.Some(ret);
-		} else {
-			return haxe_ds_Option.None;
-		}
-	}
-};
-tink_pure_List.get = function(this1,index) {
-	if(index < 0) {
-		return haxe_ds_Option.None;
-	}
-	var iter = new tink_pure_NodeIterator(this1);
-	var v = null;
-	while(index-- >= 0) {
-		if(iter.list.length <= 0) {
-			return haxe_ds_Option.None;
-		}
-		v = iter.next();
-	}
-	return haxe_ds_Option.Some(v);
-};
-tink_pure_List._new = function() {
-	var this1 = null;
-	return this1;
-};
-tink_pure_List.node = function(this1) {
-	return this1;
-};
-tink_pure_List.concat = function(this1,that) {
-	if(this1 == null) {
-		return that;
-	} else if(that == null) {
-		return this1;
-	} else {
-		return new tink_pure__$List_Node(this1.length + (that == null ? 0 : that.length),this1.value,this1.tails.concat([that]));
-	}
-};
-tink_pure_List.sort = function(this1,compare) {
-	var arr = tink_pure_List.toArray(this1);
-	arr.sort(compare);
-	return tink_pure_List.fromArray(arr);
-};
-tink_pure_List.append = function(this1,value) {
-	if(this1 == null) {
-		return new tink_pure__$List_Node(1,value);
-	} else {
-		return new tink_pure__$List_Node(this1.length + 1,this1.value,this1.tails.concat([new tink_pure__$List_Node(1,value)]));
-	}
-};
-tink_pure_List.prepend = function(this1,value) {
-	if(this1 == null) {
-		return new tink_pure__$List_Node(1,value);
-	} else {
-		return new tink_pure__$List_Node(this1.length + 1,value,[this1]);
-	}
-};
-tink_pure_List.replace = function(this1,select,generate) {
-	var _g = [];
-	var _g1 = new tink_pure_NodeIterator(this1);
-	while(_g1.list.length > 0) {
-		var v = _g1.next();
-		if(select(v)) {
-			_g.push(generate(v));
-		} else {
-			_g.push(v);
-		}
-	}
-	return tink_pure_List.fromArray(_g);
-};
-tink_pure_List.exists = function(this1,predicate) {
-	var ret = false;
-	var _g = new tink_pure_NodeIterator(this1);
-	while(_g.list.length > 0) {
-		var x = _g.next();
-		if(predicate(x)) {
-			ret = true;
-			break;
-		}
-	}
-	return ret;
-};
-tink_pure_List.count = function(this1,predicate) {
-	var ret = 0;
-	var _g = new tink_pure_NodeIterator(this1);
-	while(_g.list.length > 0) {
-		var x = _g.next();
-		if(predicate(x)) {
-			++ret;
-		}
-	}
-	return ret;
-};
-tink_pure_List.iterator = function(this1) {
-	return new tink_pure_NodeIterator(this1);
-};
-tink_pure_List.toIterable = function(this1) {
-	var _e = this1;
-	return { iterator : function() {
-		return new tink_pure_NodeIterator(_e);
-	}};
-};
-tink_pure_List.filter = function(this1,f) {
-	if(this1 == null) {
-		return null;
-	} else {
-		return this1.filter(f);
-	}
-};
-tink_pure_List.map = function(this1,f) {
-	var _g = [];
-	var _g1 = new tink_pure_NodeIterator(this1);
-	while(_g1.list.length > 0) {
-		var i = _g1.next();
-		_g.push(f(i));
-	}
-	return tink_pure_List.fromArray(_g);
-};
-tink_pure_List.select = function(this1,f) {
-	var arr = [];
-	var _g = new tink_pure_NodeIterator(this1);
-	while(_g.list.length > 0) {
-		var i = _g.next();
-		var _g1 = f(i);
-		switch(_g1._hx_index) {
-		case 0:
-			arr.push(_g1.v);
-			break;
-		case 1:
-			break;
-		}
-	}
-	return tink_pure_List.fromArray(arr);
-};
-tink_pure_List.fold = function(this1,f,first) {
-	var _g = new tink_pure_NodeIterator(this1);
-	while(_g.list.length > 0) {
-		var x = _g.next();
-		first = f(x,first);
-	}
-	return first;
-};
-tink_pure_List.single = function(v) {
-	return new tink_pure__$List_Node(1,v);
-};
-tink_pure_List.toArray = function(this1) {
-	var _g = [];
-	var _g1 = new tink_pure_NodeIterator(this1);
-	while(_g1.list.length > 0) {
-		var v = _g1.next();
-		_g.push(v);
-	}
-	return _g;
-};
-tink_pure_List.fromArray = function(i) {
-	var ret = null;
-	var len = 0;
-	var pos = i.length;
-	while(pos-- > 0) ret = new tink_pure__$List_Node(++len,i[pos],ret == null ? tink_pure__$List_Node.EMPTY : [ret]);
-	return ret;
-};
 var tink_pure__$List_Node = function(length,value,tails) {
 	this.value = value;
 	this.length = length;
@@ -7136,8 +7153,8 @@ String.__name__ = true;
 Array.__name__ = true;
 Date.prototype.__class__ = Date;
 Date.__name__ = "Date";
-js_Boot.__toStr = ({ }).toString;
 haxe_ds_ObjectMap.count = 0;
+js_Boot.__toStr = ({ }).toString;
 var typeofJQuery = typeof($);
 if(typeofJQuery != "undefined" && $.fn != null) {
 	$.fn.elements = function() {

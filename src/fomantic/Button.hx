@@ -42,7 +42,7 @@ class Button  extends View{
    }
 
    function render()
-      <button ref={setup} onclick={onClick} class='ui button $type $size ${classes}' type={role}>
+      <button ref={setup} onclick={onClick} class='ui button $type $size ${classes}' type='${role}'>
       <if {img!=null} >
       <Icon img={img} />
       </if>

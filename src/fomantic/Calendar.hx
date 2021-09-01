@@ -2,7 +2,7 @@ package fomantic;
 import js.jquery.Helper.*;
 import Date as HxDate;
 using DateTools;
-import tink.pure.List;
+using tink.pure.List;
 // borowwed from kevinREsol :)
 class Calendar extends coconut.ui.View {
     
