@@ -4,7 +4,7 @@
    "license": "MIT",
    "tags": ["semantic", "ui", "jquery", "coconut"],
    "description": "fomantic components to be used with coconut.ui",
-   "version": "0.0.6",
+   "version": "0.0.7",
    "classPath": "src/",
    "releasenote": "wip.",
    "contributors": ["postite"],

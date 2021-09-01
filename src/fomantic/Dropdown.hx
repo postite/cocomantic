@@ -1,23 +1,27 @@
 package fomantic;
 
+import js.jquery.JQuery;
 using tink.pure.List;
+
 import tink.domspec.ClassName;
 import js.jquery.Helper.*;
 
 using tink.CoreApi;
 using tink.state.Promised;
 
-@:enum abstract DropdownMatch(String){
+@:enum abstract DropdownMatch(String) {
 	var both;
 	var value;
 	var text;
 }
-@:enum abstract DropdownPlaceholder(String){
+
+@:enum abstract DropdownPlaceholder(String) {
 	var auto;
 	var value;
-	var nope="false"; //false is not a possible value...
+	var nope = "false"; // false is not a possible value...
 }
-@:enum abstract DropdownAction(String){
+
+@:enum abstract DropdownAction(String) {
 	var activate;
 	var select;
 	var combo;
@@ -31,8 +35,8 @@ class Dropdown<T> extends coconut.ui.View {
 	@:attr var name:String = null;
 	@:attr var value:T = null;
 	@:attr var defaultText:String = null;
-	@:attr var entries:Promised<List<Named<T>>> = Done( [new Named("default",null) ].fromArray() );
-	
+	@:attr var entries:Promised<List<Named<T>>> = @byDefault Done([new Named("default", null)].fromArray());
+
 	@:attr var onChange:T->Void = null;
 	//
 	@:attr var clearable:Bool = false;
@@ -58,7 +62,7 @@ class Dropdown<T> extends coconut.ui.View {
 		custom function is executed with values specified in callback
 	 */
 	@:attr var minCharacters:Int = 0; //	The minimum characters for a search to begin showing results
-	@:attr var match:DropdownMatch=both;
+	@:attr var match:DropdownMatch = both;
 	/*	both	When using search selection specifies how to match values.
 		both
 		Matches against text and value
@@ -70,7 +74,7 @@ class Dropdown<T> extends coconut.ui.View {
 	@:attr var selectOnKeydown:Bool = true; //	Whether dropdown should select new option when using keyboard shortcuts. Setting to false will require enter or left click to confirm a choice.
 	@:attr var forceSelection:Bool = true; //	Whether search selection will force currently selected choice when element is blurred.
 	@:attr var allowCategorySelection:Bool = false; //	Whether menu items with sub-menus (categories) should be selectable
-	@:attr var placeholder:DropdownPlaceholder=auto;
+	@:attr var placeholder:DropdownPlaceholder = auto;
 	/*	auto	
 		auto
 		Convert option with "" (blank string) value to placeholder text
@@ -82,36 +86,45 @@ class Dropdown<T> extends coconut.ui.View {
 	@:attr var ignoreDiacritics:Bool = false; //	When activated, searches will also match results for base diacritic letters. For example when searching for 'a', it will also match 'á' or 'â' or 'å' and so on... It will also ignore diacritics for the searchterm, so if searching for 'ó', it will match 'ó', but also 'o', 'ô' or 'õ' and so on...New in 2.7.2Not available in IE
 
 	///Multiple Select Settings
+	@:attr var multiple:Bool = @byDefault false;
 	@:attr var useLabels:Bool = true; //	Whether multiselect should use labels. Must be set to true when allowAdditions is true
-	@:attr var maxSelections:Bool = false; //	When set to a number, sets the maximum number of selections
+	@:attr var maxSelections:Int = 0; //	When set to a number, sets the maximum number of selections
 	@:attr var glyphWidth:Float = 1.0714; //	Maximum glyph width, used to calculate search size. This is usually size of a "W" in your font in em
-	///@:attr var label:{?transition:String,?duration:Int,?variation:Bool};
+	@:skipCheck
+	@:attr var label:{transition:String, duration:Int, variation:Bool} = {
+		transition: 'horizontal flip',
+		duration: 200,
+		variation: false
+	};
+
 	/*	
 		label: {
 		transition : 'horizontal flip',
 		duration   : 200,
 		variation  : false
 	}*/
-
-
 	// additional settings //todo
-
-
-
 	// callBacks
-	@:attr var onAdd:T->String->?T->Void = (null,null)->{};
-	@:attr var onRemove:(removedValue:T, removedText:String, ?removedChoice:T) -> Void=null;
-	@:attr var onLabelCreate:(value:T, text:String) -> Void=null;
-	@:attr var onLabelRemove:(value:T) -> Bool=null;
-	@:attr var onLabelSelect:(?selectedLabels:Array<String>) -> Void=null;
-	@:attr var onNoResults:(searchValue:T) -> Void=null;
-	@:attr var onShow:Void->Bool=null;
-	@:attr var onHide:Void->Bool=null;
-	@:attr var onSearch:Void->Bool=null;
+	@:attr var onAdd:T->String->T->Void = @byDefault (a, b, c) -> {};
+	@:attr var onRemove:(removedValue:T, removedText:String, removedChoice:T) -> Void = (a, b, c) -> {};
+	//not implemented
+	@:attr @:optional var onLabelCreate:(value:T, text:String) -> JQuery =
+	(a, b) -> 
+	{ var t=J("<label><i class='close'></i></label>");
+		t.addClass("ui label");
+		t.text(b);
+		return  t;
+	};
+	@:attr var onLabelRemove:(value:T) -> Bool = (a) -> true;
+	@:attr var onLabelSelect:(selectedLabels:Array<JQuery>) -> Void = @byDefault (a) -> {};
+	@:attr var onNoResults:(searchValue:T) -> Void = (a) -> {};
+	@:attr var onShow:Void->Bool = () -> true;
+	@:attr var onHide:Void->Bool = () -> true;
+	@:attr var onSearch:Void->Bool = () -> true;
 
 	function render()
 		'
-		<div ref=${setup} class=${getClassName()}>
+		<div ref=${setup} class=${getClassName()} >
 			<input type="hidden" name=${name} value=${Std.string(value)}/>
 			<i class="dropdown icon"></i>
 			<div class="default text">${defaultText}</div>
@@ -122,6 +135,8 @@ class Dropdown<T> extends coconut.ui.View {
 							<div class="item" data-value=${Std.string(entry.value)}>${entry.name}</div>
 						</for>
 					<case ${_}>
+					<div class="item" data-value="def">defVal</div>
+
 				</switch>
 			</div>
 		</div>
@@ -129,6 +144,8 @@ class Dropdown<T> extends coconut.ui.View {
 
 	inline function getClassName() {
 		var t = className.add('ui selection dropdown');
+		if (multiple)
+			t = t.add("multiple normal");
 		return t.add(switch entries {
 			case Loading: 'loading';
 			case Failed(_): 'error';
@@ -137,7 +154,8 @@ class Dropdown<T> extends coconut.ui.View {
 	}
 
 	function setup(e) {
-		untyped (J(e)).dropdown({
+		var t= (J(e));
+		untyped t.dropdown({
 			onChange: function(value, text) if (onChange != null)
 				onChange(value),
 			clearable: clearable,
@@ -154,17 +172,25 @@ class Dropdown<T> extends coconut.ui.View {
 			useLabels: useLabels,
 			maxSelections: maxSelections,
 			glyphWidth: glyphWidth,
+
 			label: label,
+			className: {
+				label: 'ui label'
+			},
 			onAdd: onAdd,
 			onRemove: onRemove,
-			onLabelCreate: onLabelCreate,
+			//onLabelCreate:  onLabelCreate,
 			onLabelRemove: onLabelRemove,
-			onLabelSelect: onLabelSelect,
 			onNoResults: onNoResults,
+			onLabelSelect: onLabelSelect,
 			onShow: onShow,
 			onHide: onHide,
 			onSearch: onSearch,
+			
 		});
+
+		
+
 		if (value == null)
 			untyped (J(e)).dropdown('clear');
 	}
