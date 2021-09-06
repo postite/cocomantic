@@ -29,15 +29,13 @@ class Simple {
   var onAdd=function(a,b,c){
     trace( "onAdd"+a);
   }
-  // var onLabelSelect= function(a:Array<String>){
-  //   trace( "onSelect"+a);
-  // }
+  var change=n->{trace("value="+n);};
 	
 	J(doc).ready(e->{
         coconut.ui.Renderer.mount(
             cast doc.body.appendChild(doc.createDivElement()),
             //hxx('<div/>')
-            hxx('<Dropdown entries={entries} onLabelSelect={onLabelSelect} onAdd={onAdd} useLabels={true} maxSelections={2} multiple={true} />')
+            hxx('<Dropdown entries={entries} onChange={change} onLabelSelect={onLabelSelect} onAdd={onAdd} useLabels={true} maxSelections={2} multiple={true} />')
              // hxx('<Calendar />')
             );
 

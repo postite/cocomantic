@@ -174,18 +174,24 @@ Simple.main = function() {
 	var onAdd = function(a,b,c) {
 		haxe_Log.trace("onAdd" + a,{ fileName : "src/Simple.hx", lineNumber : 30, className : "Simple", methodName : "main"});
 	};
+	var change = function(n) {
+		haxe_Log.trace("value=" + n,{ fileName : "src/Simple.hx", lineNumber : 32, className : "Simple", methodName : "main"});
+	};
 	$(window.document).ready(function(e) {
 		var tmp = window.document.body.appendChild(window.document.createElement("div"));
 		var tmp1 = new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
 			return entries;
 		}),null,null);
 		var tmp2 = new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
-			return Simple.onLabelSelect;
+			return change;
 		}),null,null);
 		var tmp3 = new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
+			return Simple.onLabelSelect;
+		}),null,null);
+		var tmp4 = new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
 			return onAdd;
 		}),null,null);
-		coconut_vdom_Renderer.mountInto(tmp,fomantic_Dropdown.fromHxx({ },{ entries : tmp1, onLabelSelect : tmp2, onAdd : tmp3, useLabels : new tink_state__$Observable_ConstObservable(true,null), maxSelections : new tink_state__$Observable_ConstObservable(2,null), multiple : new tink_state__$Observable_ConstObservable(true,null)}));
+		coconut_vdom_Renderer.mountInto(tmp,fomantic_Dropdown.fromHxx({ },{ entries : tmp1, onChange : tmp2, onLabelSelect : tmp3, onAdd : tmp4, useLabels : new tink_state__$Observable_ConstObservable(true,null), maxSelections : new tink_state__$Observable_ConstObservable(2,null), multiple : new tink_state__$Observable_ConstObservable(true,null)}));
 	});
 };
 var Std = function() { };
@@ -3119,7 +3125,11 @@ var fomantic_Dropdown = function(__coco_data_,implicits) {
 	this.__coco_entries = new coconut_ui_internal_Slot(this,null,new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
 		return tink_state_PromisedWith.Done(tink_pure_List.fromArray([new tink_core_NamedWith("default",null)]));
 	}),null,null));
-	this.__coco_onChange = new coconut_ui_internal_Slot(this,null,null);
+	this.__coco_onChange = new coconut_ui_internal_Slot(this,null,new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
+		return function(a) {
+			return;
+		};
+	}),null,null));
 	this.__coco_clearable = new coconut_ui_internal_Slot(this,null,new tink_state__$Observable_ConstObservable(false,null));
 	this.__coco_ignoreCase = new coconut_ui_internal_Slot(this,null,new tink_state__$Observable_ConstObservable(false,null));
 	this.__coco_ignoreSearchCase = new coconut_ui_internal_Slot(this,null,new tink_state__$Observable_ConstObservable(true,null));

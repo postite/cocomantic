@@ -37,7 +37,7 @@ class Dropdown<T> extends coconut.ui.View {
 	@:attr var defaultText:String = null;
 	@:attr var entries:Promised<List<Named<T>>> = @byDefault Done([new Named("default", null)].fromArray());
 
-	@:attr var onChange:T->Void = @byDefault null;
+	@:attr var onChange:T->Void = @byDefault (a)->{};
 	//
 	@:attr var clearable:Bool = false;
 	@:attr var ignoreCase:Bool = false; //	eNew in 2.2.13	Whether values with non matching cases should be treated as identical when adding them to a dropdown.
