@@ -8,7 +8,7 @@ import fomantic.Icon;
 import js.html.*;
 class Input extends coconut.ui.View{
 
-   @:attr public var value:String="";
+   @:attr public var value:String=@byDefault "";
    @:attr public var placeholder:String="...";
    @:attr @:optional public var focus:Bool;
    @:attr @:optional public var loading:Bool;

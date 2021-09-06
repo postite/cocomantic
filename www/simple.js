@@ -3223,7 +3223,10 @@ fomantic_Dropdown.fromHxx = function(hxxMeta,attributes) {
 };
 fomantic_Dropdown.__super__ = coconut_vdom_View;
 fomantic_Dropdown.prototype = $extend(coconut_vdom_View.prototype,{
-	onAdd: function(a0,a1,a2) {
+	onChange: function(a0) {
+		(tink_state_Observable.get_value(this.__coco_onChange))(a0);
+	}
+	,onAdd: function(a0,a1,a2) {
 		(tink_state_Observable.get_value(this.__coco_onAdd))(a0,a1,a2);
 	}
 	,onRemove: function(a0,a1,a2) {
@@ -3326,8 +3329,8 @@ fomantic_Dropdown.prototype = $extend(coconut_vdom_View.prototype,{
 		var _gthis = this;
 		var t = $(e);
 		t.dropdown({ onChange : function(value,text) {
-			if(tink_state_Observable.get_value(_gthis.__coco_onChange) != null) {
-				(tink_state_Observable.get_value(_gthis.__coco_onChange))(value);
+			if(_gthis.onChange != null) {
+				_gthis.onChange(value);
 			}
 		}, clearable : tink_state_Observable.get_value(this.__coco_clearable), ignoreCase : tink_state_Observable.get_value(this.__coco_ignoreCase), ignoreSearchCase : tink_state_Observable.get_value(this.__coco_ignoreSearchCase), allowReselection : tink_state_Observable.get_value(this.__coco_allowReselection), allowAdditions : tink_state_Observable.get_value(this.__coco_allowAdditions), minCharacters : tink_state_Observable.get_value(this.__coco_minCharacters), match : tink_state_Observable.get_value(this.__coco_match), selectOnKeydown : tink_state_Observable.get_value(this.__coco_selectOnKeydown), forceSelection : tink_state_Observable.get_value(this.__coco_forceSelection), allowCategorySelection : tink_state_Observable.get_value(this.__coco_allowCategorySelection), placeholder : tink_state_Observable.get_value(this.__coco_placeholder), useLabels : tink_state_Observable.get_value(this.__coco_useLabels), maxSelections : tink_state_Observable.get_value(this.__coco_maxSelections), glyphWidth : tink_state_Observable.get_value(this.__coco_glyphWidth), label : tink_state_Observable.get_value(this.__coco_label), className : { label : "ui label"}, onAdd : $bind(this,this.onAdd), onRemove : $bind(this,this.onRemove), onLabelRemove : $bind(this,this.onLabelRemove), onNoResults : $bind(this,this.onNoResults), onLabelSelect : $bind(this,this.onLabelSelect), onShow : $bind(this,this.onShow), onHide : $bind(this,this.onHide), onSearch : $bind(this,this.onSearch)});
 		if(tink_state_Observable.get_value(this.__coco_value) == null) {
@@ -3348,9 +3351,6 @@ fomantic_Dropdown.prototype = $extend(coconut_vdom_View.prototype,{
 	}
 	,get_entries: function() {
 		return tink_state_Observable.get_value(this.__coco_entries);
-	}
-	,get_onChange: function() {
-		return tink_state_Observable.get_value(this.__coco_onChange);
 	}
 	,get_clearable: function() {
 		return tink_state_Observable.get_value(this.__coco_clearable);
