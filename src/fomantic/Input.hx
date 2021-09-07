@@ -28,8 +28,10 @@ class Input extends coconut.ui.View{
 
     @:attribute var className:tink.domspec.ClassName = classes;
 
-    @:computed  var classes:tink.domspec.ClassName={
-      var b=className;
+    @:computed  
+    var classes:tink.domspec.ClassName={
+      var b:tink.domspec.ClassName="ui input";
+
       if(disabled)
       b=b.add("disabled");
       if(loading)
@@ -70,8 +72,17 @@ class Input extends coconut.ui.View{
 
    function render()
       <div class={className.add('ui input')} >
-         <input ref={setup} name={name} type='${type}' value={value} onfocus={onFocus} onchange={onChange}
-         placeholder={placeholder} onblur={e->onBlur(untyped(e.currentTarget).value)} autocomplete={if(autocomplete)"on" else "off"}/>
+         <input 
+         ref={setup}
+         name={name}
+         type='${type}'
+         value={value} 
+         onfocus={onFocus} 
+         onchange={onChange}
+         placeholder={placeholder} 
+         onblur={e->onBlur(untyped(e.currentTarget).value)} 
+         autocomplete={if(autocomplete)"on" else "off"}
+         />
          <if {img!=null} >
             <Icon img={img} />
          </if>

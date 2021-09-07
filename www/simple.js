@@ -163,37 +163,570 @@ Reflect.fields = function(o) {
 	}
 	return a;
 };
+var tink_state_PromisedWith = $hxEnums["tink.state.PromisedWith"] = { __ename__:true,__constructs__:null
+	,Loading: {_hx_name:"Loading",_hx_index:0,__enum__:"tink.state.PromisedWith",toString:$estr}
+	,Done: ($_=function(result) { return {_hx_index:1,result:result,__enum__:"tink.state.PromisedWith",toString:$estr}; },$_._hx_name="Done",$_.__params__ = ["result"],$_)
+	,Failed: ($_=function(error) { return {_hx_index:2,error:error,__enum__:"tink.state.PromisedWith",toString:$estr}; },$_._hx_name="Failed",$_.__params__ = ["error"],$_)
+};
+tink_state_PromisedWith.__constructs__ = [tink_state_PromisedWith.Loading,tink_state_PromisedWith.Done,tink_state_PromisedWith.Failed];
+var tink_pure_List = {};
+tink_pure_List.get_length = function(this1) {
+	if(this1 == null) {
+		return 0;
+	} else {
+		return this1.length;
+	}
+};
+tink_pure_List.first = function(this1,predicate) {
+	var _g = new tink_pure_NodeIterator(this1);
+	while(_g.list.length > 0) {
+		var x = _g.next();
+		if(predicate == null || predicate(x)) {
+			return haxe_ds_Option.Some(x);
+		}
+	}
+	return haxe_ds_Option.None;
+};
+tink_pure_List.last = function(this1,predicate) {
+	if(this1 == null) {
+		return haxe_ds_Option.None;
+	} else if(predicate == null) {
+		var _last = null;
+		_last = function(v) {
+			while(true) {
+				var _g = v.tails;
+				if(_g.length == 0) {
+					return haxe_ds_Option.Some(v.value);
+				} else {
+					v = _g[_g.length - 1];
+					continue;
+				}
+			}
+		};
+		return _last(this1);
+	} else {
+		var found = false;
+		var ret = null;
+		var _g = new tink_pure_NodeIterator(this1);
+		while(_g.list.length > 0) {
+			var x = _g.next();
+			if(predicate(x)) {
+				found = true;
+				ret = x;
+			}
+		}
+		if(found) {
+			return haxe_ds_Option.Some(ret);
+		} else {
+			return haxe_ds_Option.None;
+		}
+	}
+};
+tink_pure_List.get = function(this1,index) {
+	if(index < 0) {
+		return haxe_ds_Option.None;
+	}
+	var iter = new tink_pure_NodeIterator(this1);
+	var v = null;
+	while(index-- >= 0) {
+		if(iter.list.length <= 0) {
+			return haxe_ds_Option.None;
+		}
+		v = iter.next();
+	}
+	return haxe_ds_Option.Some(v);
+};
+tink_pure_List._new = function() {
+	var this1 = null;
+	return this1;
+};
+tink_pure_List.node = function(this1) {
+	return this1;
+};
+tink_pure_List.concat = function(this1,that) {
+	if(this1 == null) {
+		return that;
+	} else if(that == null) {
+		return this1;
+	} else {
+		return new tink_pure__$List_Node(this1.length + (that == null ? 0 : that.length),this1.value,this1.tails.concat([that]));
+	}
+};
+tink_pure_List.sort = function(this1,compare) {
+	var arr = tink_pure_List.toArray(this1);
+	arr.sort(compare);
+	return tink_pure_List.fromArray(arr);
+};
+tink_pure_List.append = function(this1,value) {
+	if(this1 == null) {
+		return new tink_pure__$List_Node(1,value);
+	} else {
+		return new tink_pure__$List_Node(this1.length + 1,this1.value,this1.tails.concat([new tink_pure__$List_Node(1,value)]));
+	}
+};
+tink_pure_List.prepend = function(this1,value) {
+	if(this1 == null) {
+		return new tink_pure__$List_Node(1,value);
+	} else {
+		return new tink_pure__$List_Node(this1.length + 1,value,[this1]);
+	}
+};
+tink_pure_List.replace = function(this1,select,generate) {
+	var _g = [];
+	var _g1 = new tink_pure_NodeIterator(this1);
+	while(_g1.list.length > 0) {
+		var v = _g1.next();
+		if(select(v)) {
+			_g.push(generate(v));
+		} else {
+			_g.push(v);
+		}
+	}
+	return tink_pure_List.fromArray(_g);
+};
+tink_pure_List.exists = function(this1,predicate) {
+	var ret = false;
+	var _g = new tink_pure_NodeIterator(this1);
+	while(_g.list.length > 0) {
+		var x = _g.next();
+		if(predicate(x)) {
+			ret = true;
+			break;
+		}
+	}
+	return ret;
+};
+tink_pure_List.count = function(this1,predicate) {
+	var ret = 0;
+	var _g = new tink_pure_NodeIterator(this1);
+	while(_g.list.length > 0) {
+		var x = _g.next();
+		if(predicate(x)) {
+			++ret;
+		}
+	}
+	return ret;
+};
+tink_pure_List.iterator = function(this1) {
+	return new tink_pure_NodeIterator(this1);
+};
+tink_pure_List.toIterable = function(this1) {
+	var _e = this1;
+	return { iterator : function() {
+		return new tink_pure_NodeIterator(_e);
+	}};
+};
+tink_pure_List.filter = function(this1,f) {
+	if(this1 == null) {
+		return null;
+	} else {
+		return this1.filter(f);
+	}
+};
+tink_pure_List.map = function(this1,f) {
+	var _g = [];
+	var _g1 = new tink_pure_NodeIterator(this1);
+	while(_g1.list.length > 0) {
+		var i = _g1.next();
+		_g.push(f(i));
+	}
+	return tink_pure_List.fromArray(_g);
+};
+tink_pure_List.select = function(this1,f) {
+	var arr = [];
+	var _g = new tink_pure_NodeIterator(this1);
+	while(_g.list.length > 0) {
+		var i = _g.next();
+		var _g1 = f(i);
+		switch(_g1._hx_index) {
+		case 0:
+			arr.push(_g1.v);
+			break;
+		case 1:
+			break;
+		}
+	}
+	return tink_pure_List.fromArray(arr);
+};
+tink_pure_List.fold = function(this1,f,first) {
+	var _g = new tink_pure_NodeIterator(this1);
+	while(_g.list.length > 0) {
+		var x = _g.next();
+		first = f(x,first);
+	}
+	return first;
+};
+tink_pure_List.single = function(v) {
+	return new tink_pure__$List_Node(1,v);
+};
+tink_pure_List.toArray = function(this1) {
+	var _g = [];
+	var _g1 = new tink_pure_NodeIterator(this1);
+	while(_g1.list.length > 0) {
+		var v = _g1.next();
+		_g.push(v);
+	}
+	return _g;
+};
+tink_pure_List.fromArray = function(i) {
+	var ret = null;
+	var len = 0;
+	var pos = i.length;
+	while(pos-- > 0) ret = new tink_pure__$List_Node(++len,i[pos],ret == null ? tink_pure__$List_Node.EMPTY : [ret]);
+	return ret;
+};
+var tink_pure__$List_Node = function(length,value,tails) {
+	this.value = value;
+	this.length = length;
+	this.tails = tails == null ? tink_pure__$List_Node.EMPTY : tails;
+};
+tink_pure__$List_Node.__name__ = true;
+tink_pure__$List_Node.prototype = {
+	filter: function(f) {
+		var iter = new tink_pure_NodeIterator(this);
+		var ret = [];
+		while(iter.list.length > 0) {
+			var value = iter.next();
+			var res = f(value);
+			if(res > 0) {
+				ret.push(value);
+			}
+			if((res & 3) == 3) {
+				break;
+			}
+		}
+		return tink_pure_List.fromArray(ret);
+	}
+	,__class__: tink_pure__$List_Node
+};
+var tink_core_NamedWith = function(name,value) {
+	this.name = name;
+	this.value = value;
+};
+tink_core_NamedWith.__name__ = true;
+tink_core_NamedWith.prototype = {
+	__class__: tink_core_NamedWith
+};
 var Simple = function() { };
 Simple.__name__ = true;
 Simple.onLabelSelect = function(a) {
 	haxe_Log.trace("onSelect" + Std.string(a),{ fileName : "src/Simple.hx", lineNumber : 17, className : "Simple", methodName : "onLabelSelect"});
 };
+Simple.change = function(n) {
+	haxe_Log.trace("value=" + n,{ fileName : "src/Simple.hx", lineNumber : 26, className : "Simple", methodName : "change"});
+};
 Simple.main = function() {
-	haxe_Log.trace("Hello, world!",{ fileName : "src/Simple.hx", lineNumber : 21, className : "Simple", methodName : "main"});
-	var entries = tink_state_PromisedWith.Done(tink_pure_List.fromArray([new tink_core_NamedWith("one","un"),new tink_core_NamedWith("two","deux"),new tink_core_NamedWith("troix","three")]));
-	var onAdd = function(a,b,c) {
-		haxe_Log.trace("onAdd" + a,{ fileName : "src/Simple.hx", lineNumber : 30, className : "Simple", methodName : "main"});
-	};
-	var change = function(n) {
-		haxe_Log.trace("value=" + n,{ fileName : "src/Simple.hx", lineNumber : 32, className : "Simple", methodName : "main"});
-	};
+	haxe_Log.trace("Hello, world!",{ fileName : "src/Simple.hx", lineNumber : 29, className : "Simple", methodName : "main"});
 	$(window.document).ready(function(e) {
-		var tmp = window.document.body.appendChild(window.document.createElement("div"));
-		var tmp1 = new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
-			return entries;
-		}),null,null);
-		var tmp2 = new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
-			return change;
-		}),null,null);
-		var tmp3 = new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
-			return Simple.onLabelSelect;
-		}),null,null);
-		var tmp4 = new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
-			return onAdd;
-		}),null,null);
-		coconut_vdom_Renderer.mountInto(tmp,fomantic_Dropdown.fromHxx({ },{ entries : tmp1, onChange : tmp2, onLabelSelect : tmp3, onAdd : tmp4, useLabels : new tink_state__$Observable_ConstObservable(true,null), maxSelections : new tink_state__$Observable_ConstObservable(2,null), multiple : new tink_state__$Observable_ConstObservable(true,null)}));
+		coconut_vdom_Renderer.mountInto(window.document.body.appendChild(window.document.createElement("div")),InputTest.fromHxx({ },{ }));
 	});
 };
+var coconut_diffing_Widget = function(rendered,mounted,updated,unmounting) {
+	this._coco_vStructure = rendered;
+	this._coco_viewMounted = mounted;
+	this._coco_viewUpdated = updated;
+	this._coco_viewUnmounting = unmounting;
+};
+coconut_diffing_Widget.__name__ = true;
+coconut_diffing_Widget.getAllNative = function(w) {
+	var _g = w._coco_lifeCycle;
+	if(_g == null) {
+		return [];
+	} else {
+		var ret = [];
+		_g.forEach(function(n) {
+			ret.push(n);
+		});
+		return ret;
+	}
+};
+coconut_diffing_Widget.prototype = {
+	__class__: coconut_diffing_Widget
+};
+var coconut_vdom_View = function(render,shouldUpdate,track,beforeRerender,rendered) {
+	this.__au = [];
+	this.__bc = [];
+	this.__bu = [];
+	this.viewId = coconut_vdom_View.idCounter++;
+	var _gthis = this;
+	var mounted;
+	if(rendered != null) {
+		var _g = rendered;
+		var a1 = true;
+		mounted = function() {
+			_g(a1);
+		};
+	} else {
+		mounted = null;
+	}
+	var updated;
+	if(rendered != null) {
+		var _g1 = rendered;
+		var a11 = false;
+		updated = function() {
+			_g1(a11);
+		};
+	} else {
+		updated = null;
+	}
+	var firstTime = true;
+	var last = null;
+	var hasBeforeRerender = beforeRerender != null;
+	var hasUpdated = updated != null;
+	var _coco_revision = tink_state_State._new(0);
+	var lastRev = tink_state_State.get_value(_coco_revision);
+	var renderView = function() {
+		var curRev = tink_state_State.get_value(_coco_revision);
+		if(track != null) {
+			track();
+		}
+		if(firstTime) {
+			firstTime = false;
+		} else {
+			if(curRev == lastRev && shouldUpdate != null && !shouldUpdate()) {
+				return last;
+			}
+			var hasCallbacks = _gthis.__bc.length > 0;
+			if(hasBeforeRerender || hasCallbacks) {
+				var before = tink_state_internal_AutoObservable.cur;
+				tink_state_internal_AutoObservable.cur = null;
+				if(hasBeforeRerender) {
+					beforeRerender();
+				}
+				if(hasCallbacks) {
+					var _g = 0;
+					var _g1 = _gthis.__bc.splice(0,_gthis.__bc.length);
+					while(_g < _g1.length) {
+						var c = _g1[_g];
+						++_g;
+						tink_core_Callback.invoke(c,false);
+					}
+				}
+				tink_state_internal_AutoObservable.cur = before;
+			}
+		}
+		lastRev = curRev;
+		last = render();
+		return last;
+	};
+	coconut_diffing_Widget.call(this,new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(renderView),null,null),mounted,function() {
+		var hasCallbacks = _gthis.__au.length > 0;
+		if(hasUpdated || hasCallbacks) {
+			var before = tink_state_internal_AutoObservable.cur;
+			tink_state_internal_AutoObservable.cur = null;
+			if(hasUpdated) {
+				updated();
+			}
+			if(hasCallbacks) {
+				var _g = 0;
+				var _g1 = _gthis.__au.splice(0,_gthis.__au.length);
+				while(_g < _g1.length) {
+					var c = _g1[_g];
+					++_g;
+					tink_core_Callback.invoke(c,null);
+				}
+			}
+			tink_state_internal_AutoObservable.cur = before;
+		}
+	},function() {
+		last = null;
+		firstTime = true;
+		_gthis.__beforeUnmount();
+	});
+	this._coco_revision = _coco_revision;
+};
+coconut_vdom_View.__name__ = true;
+coconut_vdom_View.__super__ = coconut_diffing_Widget;
+coconut_vdom_View.prototype = $extend(coconut_diffing_Widget.prototype,{
+	__beforeUnmount: function() {
+		var _g = 0;
+		var _g1 = this.__bu.splice(0,this.__bu.length);
+		while(_g < _g1.length) {
+			var c = _g1[_g];
+			++_g;
+			if(c != null) {
+				c.cancel();
+			}
+		}
+		var _g = 0;
+		var _g1 = this.__bc.splice(0,this.__bu.length);
+		while(_g < _g1.length) {
+			var c = _g1[_g];
+			++_g;
+			tink_core_Callback.invoke(c,true);
+		}
+	}
+	,forceUpdate: function(callback) {
+		this._coco_revision.set(tink_state_State.get_value(this._coco_revision) + 1);
+		if(callback != null) {
+			this.__au.push(callback);
+		}
+	}
+	,__class__: coconut_vdom_View
+});
+var InputTest = function(__coco_data_,implicits) {
+	var _gthis = this;
+	this._coco_implicits = implicits;
+	this.__initAttributes(__coco_data_);
+	coconut_vdom_View.call(this,function() {
+		return _gthis.render();
+	},null,null,null,null);
+};
+InputTest.__name__ = true;
+InputTest.get___factory = function() {
+	var _g = InputTest.__factory;
+	if(_g == null) {
+		return InputTest.__factory = new coconut_diffing_internal_WidgetFactory(function(__coco_data_,implicits) {
+			return new InputTest(__coco_data_,implicits);
+		},function(v,attr) {
+			v.__initAttributes(attr);
+		});
+	} else {
+		return _g;
+	}
+};
+InputTest.fromHxx = function(hxxMeta,attributes) {
+	var _g = InputTest.__factory;
+	return new coconut_diffing_internal_VWidget(_g == null ? InputTest.__factory = new coconut_diffing_internal_WidgetFactory(function(__coco_data_,implicits) {
+		return new InputTest(__coco_data_,implicits);
+	},function(v,attr) {
+		v.__initAttributes(attr);
+	}) : _g,attributes,hxxMeta.key,hxxMeta.ref);
+};
+InputTest.__super__ = coconut_vdom_View;
+InputTest.prototype = $extend(coconut_vdom_View.prototype,{
+	render: function() {
+		var tmp = new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
+			return "text";
+		}),null,null);
+		return fomantic_Input.fromHxx({ },{ type : tmp});
+	}
+	,__initAttributes: function(attributes) {
+	}
+	,__class__: InputTest
+});
+var Big = function(__coco_data_,implicits) {
+	var _gthis = this;
+	this._coco_implicits = implicits;
+	this.__coco_bim = tink_state_State._new(false,null);
+	this.__initAttributes(__coco_data_);
+	coconut_vdom_View.call(this,function() {
+		return _gthis.render();
+	},null,null,null,null);
+};
+Big.__name__ = true;
+Big.get___factory = function() {
+	var _g = Big.__factory;
+	if(_g == null) {
+		return Big.__factory = new coconut_diffing_internal_WidgetFactory(function(__coco_data_,implicits) {
+			return new Big(__coco_data_,implicits);
+		},function(v,attr) {
+			v.__initAttributes(attr);
+		});
+	} else {
+		return _g;
+	}
+};
+Big.fromHxx = function(hxxMeta,attributes) {
+	var _g = Big.__factory;
+	return new coconut_diffing_internal_VWidget(_g == null ? Big.__factory = new coconut_diffing_internal_WidgetFactory(function(__coco_data_,implicits) {
+		return new Big(__coco_data_,implicits);
+	},function(v,attr) {
+		v.__initAttributes(attr);
+	}) : _g,attributes,hxxMeta.key,hxxMeta.ref);
+};
+Big.__super__ = coconut_vdom_View;
+Big.prototype = $extend(coconut_vdom_View.prototype,{
+	render: function() {
+		var _gthis = this;
+		var hxxMeta = { };
+		var __r = [];
+		var s = Std.string(tink_state_State.get_value(this.__coco_bim));
+		__r.push(s == null ? null : coconut_vdom__$Html_Text.inst.vnode(s,null,null,null));
+		var target = new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
+			return _gthis;
+		}),null,null);
+		var tmp = tink_state_State.compound(new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
+			return tink_state_State.get_value(tink_state_Observable.get_value(target).__coco_bim);
+		}),null,null),function(value) {
+			tink_state_Observable.get_value(target).__coco_bim.set(value);
+		});
+		__r.push(ControlledTest.fromHxx({ },{ bim : tmp}));
+		return coconut_vdom_Html.DIV.vnode({ },hxxMeta.key,hxxMeta.ref,__r);
+	}
+	,get_bim: function() {
+		return tink_state_State.get_value(this.__coco_bim);
+	}
+	,set_bim: function(param) {
+		this.__coco_bim.set(param);
+		return param;
+	}
+	,__initAttributes: function(attributes) {
+	}
+	,__class__: Big
+});
+var ControlledTest = function(__coco_data_,implicits) {
+	var _gthis = this;
+	this._coco_implicits = implicits;
+	this.__coco_bim = new coconut_ui_internal_Slot(this,null,tink_state_State._new(false));
+	this.__initAttributes(__coco_data_);
+	coconut_vdom_View.call(this,function() {
+		return _gthis.render();
+	},null,null,null,null);
+};
+ControlledTest.__name__ = true;
+ControlledTest.get___factory = function() {
+	var _g = ControlledTest.__factory;
+	if(_g == null) {
+		return ControlledTest.__factory = new coconut_diffing_internal_WidgetFactory(function(__coco_data_,implicits) {
+			return new ControlledTest(__coco_data_,implicits);
+		},function(v,attr) {
+			v.__initAttributes(attr);
+		});
+	} else {
+		return _g;
+	}
+};
+ControlledTest.fromHxx = function(hxxMeta,attributes) {
+	var _g = ControlledTest.__factory;
+	return new coconut_diffing_internal_VWidget(_g == null ? ControlledTest.__factory = new coconut_diffing_internal_WidgetFactory(function(__coco_data_,implicits) {
+		return new ControlledTest(__coco_data_,implicits);
+	},function(v,attr) {
+		v.__initAttributes(attr);
+	}) : _g,attributes,hxxMeta.key,hxxMeta.ref);
+};
+ControlledTest.__super__ = coconut_vdom_View;
+ControlledTest.prototype = $extend(coconut_vdom_View.prototype,{
+	render: function() {
+		var _gthis = this;
+		var tmp = new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
+			return Simple.entries;
+		}),null,null);
+		var tmp1 = new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
+			return function(r) {
+				_gthis.set_bim(true);
+			};
+		}),null,null);
+		var tmp2 = new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
+			return Std.string(tink_state_Observable.get_value(_gthis.__coco_bim));
+		}),null,null);
+		return fomantic_Dropdown.fromHxx({ },{ entries : tmp, onChange : tmp1, value : tmp2});
+	}
+	,get_bim: function() {
+		return tink_state_Observable.get_value(this.__coco_bim);
+	}
+	,set_bim: function(param) {
+		var _g = this.__coco_bim.data;
+		if(_g != null) {
+			_g.set(param);
+		}
+		return param;
+	}
+	,__initAttributes: function(attributes) {
+		this.__coco_bim.setData(attributes.bim);
+	}
+	,__class__: ControlledTest
+});
 var Std = function() { };
 Std.__name__ = true;
 Std.string = function(s) {
@@ -288,6 +821,14 @@ coconut_data_Value.getValue = function(this1) {
 	return tink_state_Observable.get_value(this1);
 };
 coconut_data_Value.or = function(this1,fallback) {
+	if(this1 == null) {
+		return fallback;
+	} else {
+		return this1;
+	}
+};
+var coconut_data_Variable = {};
+coconut_data_Variable.or = function(this1,fallback) {
 	if(this1 == null) {
 		return fallback;
 	} else {
@@ -470,49 +1011,6 @@ coconut_diffing_internal_Parent.prototype = {
 	}
 	,__class__: coconut_diffing_internal_Parent
 };
-var haxe_IMap = function() { };
-haxe_IMap.__name__ = true;
-haxe_IMap.__isInterface__ = true;
-haxe_IMap.prototype = {
-	__class__: haxe_IMap
-};
-var haxe_ds_ObjectMap = function() {
-	this.h = { __keys__ : { }};
-};
-haxe_ds_ObjectMap.__name__ = true;
-haxe_ds_ObjectMap.__interfaces__ = [haxe_IMap];
-haxe_ds_ObjectMap.prototype = {
-	set: function(key,value) {
-		var id = key.__id__;
-		if(id == null) {
-			id = (key.__id__ = $global.$haxeUID++);
-		}
-		this.h[id] = value;
-		this.h.__keys__[id] = key;
-	}
-	,get: function(key) {
-		return this.h[key.__id__];
-	}
-	,remove: function(key) {
-		var id = key.__id__;
-		if(this.h.__keys__[id] == null) {
-			return false;
-		}
-		delete(this.h[id]);
-		delete(this.h.__keys__[id]);
-		return true;
-	}
-	,keys: function() {
-		var a = [];
-		for( var key in this.h.__keys__ ) {
-		if(this.h.hasOwnProperty(key)) {
-			a.push(this.h.__keys__[key]);
-		}
-		}
-		return new haxe_iterators_ArrayIterator(a);
-	}
-	,__class__: haxe_ds_ObjectMap
-};
 var coconut_diffing_Root = function(parent,applicator,content,hydration) {
 	if(hydration == null) {
 		hydration = 0;
@@ -558,28 +1056,6 @@ coconut_diffing_VNode.embed = function(n) {
 };
 coconut_diffing_VNode.many = function(c) {
 	return new coconut_diffing_internal_VMany(c);
-};
-var coconut_diffing_Widget = function(rendered,mounted,updated,unmounting) {
-	this._coco_vStructure = rendered;
-	this._coco_viewMounted = mounted;
-	this._coco_viewUpdated = updated;
-	this._coco_viewUnmounting = unmounting;
-};
-coconut_diffing_Widget.__name__ = true;
-coconut_diffing_Widget.getAllNative = function(w) {
-	var _g = w._coco_lifeCycle;
-	if(_g == null) {
-		return [];
-	} else {
-		var ret = [];
-		_g.forEach(function(n) {
-			ret.push(n);
-		});
-		return ret;
-	}
-};
-coconut_diffing_Widget.prototype = {
-	__class__: coconut_diffing_Widget
 };
 var coconut_diffing_internal_Cast = function() { };
 coconut_diffing_internal_Cast.__name__ = true;
@@ -1339,6 +1815,49 @@ coconut_ui_internal_ImplicitValues._new = function(a) {
 		_g.set(o.key,o.val);
 	}
 	return _g;
+};
+var haxe_IMap = function() { };
+haxe_IMap.__name__ = true;
+haxe_IMap.__isInterface__ = true;
+haxe_IMap.prototype = {
+	__class__: haxe_IMap
+};
+var haxe_ds_ObjectMap = function() {
+	this.h = { __keys__ : { }};
+};
+haxe_ds_ObjectMap.__name__ = true;
+haxe_ds_ObjectMap.__interfaces__ = [haxe_IMap];
+haxe_ds_ObjectMap.prototype = {
+	set: function(key,value) {
+		var id = key.__id__;
+		if(id == null) {
+			id = (key.__id__ = $global.$haxeUID++);
+		}
+		this.h[id] = value;
+		this.h.__keys__[id] = key;
+	}
+	,get: function(key) {
+		return this.h[key.__id__];
+	}
+	,remove: function(key) {
+		var id = key.__id__;
+		if(this.h.__keys__[id] == null) {
+			return false;
+		}
+		delete(this.h[id]);
+		delete(this.h.__keys__[id]);
+		return true;
+	}
+	,keys: function() {
+		var a = [];
+		for( var key in this.h.__keys__ ) {
+		if(this.h.hasOwnProperty(key)) {
+			a.push(this.h.__keys__[key]);
+		}
+		}
+		return new haxe_iterators_ArrayIterator(a);
+	}
+	,__class__: haxe_ds_ObjectMap
 };
 var tink_state_internal_ObservableObject = function() { };
 tink_state_internal_ObservableObject.__name__ = true;
@@ -2433,127 +2952,6 @@ coconut_vdom__$Renderer_DomCursor.prototype = $extend(coconut_diffing_Cursor.pro
 	}
 	,__class__: coconut_vdom__$Renderer_DomCursor
 });
-var coconut_vdom_View = function(render,shouldUpdate,track,beforeRerender,rendered) {
-	this.__au = [];
-	this.__bc = [];
-	this.__bu = [];
-	this.viewId = coconut_vdom_View.idCounter++;
-	var _gthis = this;
-	var mounted;
-	if(rendered != null) {
-		var _g = rendered;
-		var a1 = true;
-		mounted = function() {
-			_g(a1);
-		};
-	} else {
-		mounted = null;
-	}
-	var updated;
-	if(rendered != null) {
-		var _g1 = rendered;
-		var a11 = false;
-		updated = function() {
-			_g1(a11);
-		};
-	} else {
-		updated = null;
-	}
-	var firstTime = true;
-	var last = null;
-	var hasBeforeRerender = beforeRerender != null;
-	var hasUpdated = updated != null;
-	var _coco_revision = tink_state_State._new(0);
-	var lastRev = tink_state_State.get_value(_coco_revision);
-	var renderView = function() {
-		var curRev = tink_state_State.get_value(_coco_revision);
-		if(track != null) {
-			track();
-		}
-		if(firstTime) {
-			firstTime = false;
-		} else {
-			if(curRev == lastRev && shouldUpdate != null && !shouldUpdate()) {
-				return last;
-			}
-			var hasCallbacks = _gthis.__bc.length > 0;
-			if(hasBeforeRerender || hasCallbacks) {
-				var before = tink_state_internal_AutoObservable.cur;
-				tink_state_internal_AutoObservable.cur = null;
-				if(hasBeforeRerender) {
-					beforeRerender();
-				}
-				if(hasCallbacks) {
-					var _g = 0;
-					var _g1 = _gthis.__bc.splice(0,_gthis.__bc.length);
-					while(_g < _g1.length) {
-						var c = _g1[_g];
-						++_g;
-						tink_core_Callback.invoke(c,false);
-					}
-				}
-				tink_state_internal_AutoObservable.cur = before;
-			}
-		}
-		lastRev = curRev;
-		last = render();
-		return last;
-	};
-	coconut_diffing_Widget.call(this,new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(renderView),null,null),mounted,function() {
-		var hasCallbacks = _gthis.__au.length > 0;
-		if(hasUpdated || hasCallbacks) {
-			var before = tink_state_internal_AutoObservable.cur;
-			tink_state_internal_AutoObservable.cur = null;
-			if(hasUpdated) {
-				updated();
-			}
-			if(hasCallbacks) {
-				var _g = 0;
-				var _g1 = _gthis.__au.splice(0,_gthis.__au.length);
-				while(_g < _g1.length) {
-					var c = _g1[_g];
-					++_g;
-					tink_core_Callback.invoke(c,null);
-				}
-			}
-			tink_state_internal_AutoObservable.cur = before;
-		}
-	},function() {
-		last = null;
-		firstTime = true;
-		_gthis.__beforeUnmount();
-	});
-	this._coco_revision = _coco_revision;
-};
-coconut_vdom_View.__name__ = true;
-coconut_vdom_View.__super__ = coconut_diffing_Widget;
-coconut_vdom_View.prototype = $extend(coconut_diffing_Widget.prototype,{
-	__beforeUnmount: function() {
-		var _g = 0;
-		var _g1 = this.__bu.splice(0,this.__bu.length);
-		while(_g < _g1.length) {
-			var c = _g1[_g];
-			++_g;
-			if(c != null) {
-				c.cancel();
-			}
-		}
-		var _g = 0;
-		var _g1 = this.__bc.splice(0,this.__bu.length);
-		while(_g < _g1.length) {
-			var c = _g1[_g];
-			++_g;
-			tink_core_Callback.invoke(c,true);
-		}
-	}
-	,forceUpdate: function(callback) {
-		this._coco_revision.set(tink_state_State.get_value(this._coco_revision) + 1);
-		if(callback != null) {
-			this.__au.push(callback);
-		}
-	}
-	,__class__: coconut_vdom_View
-});
 var fomantic_Accordion = function(__coco_data_,implicits) {
 	var _gthis = this;
 	this._coco_implicits = implicits;
@@ -3561,6 +3959,196 @@ fomantic_Icon.prototype = $extend(coconut_vdom_View.prototype,{
 		return tink_state_Observable.get_value(this.__coco_classes);
 	}
 	,__class__: fomantic_Icon
+});
+var fomantic_Input = function(__coco_data_,implicits) {
+	var _gthis = this;
+	this._coco_implicits = implicits;
+	this.__coco_value = new coconut_ui_internal_Slot(this,null,new tink_state__$Observable_ConstObservable("",null));
+	this.__coco_placeholder = new coconut_ui_internal_Slot(this,null,new tink_state__$Observable_ConstObservable("...",null));
+	this.__coco_focus = new coconut_ui_internal_Slot(this,null,new tink_state__$Observable_ConstObservable(false,null));
+	this.__coco_loading = new coconut_ui_internal_Slot(this,null,new tink_state__$Observable_ConstObservable(false,null));
+	this.__coco_disabled = new coconut_ui_internal_Slot(this,null,new tink_state__$Observable_ConstObservable(false,null));
+	this.__coco_error = new coconut_ui_internal_Slot(this,null,new tink_state__$Observable_ConstObservable(false,null));
+	this.__coco_labeled = new coconut_ui_internal_Slot(this,null,new tink_state__$Observable_ConstObservable(false,null));
+	this.__coco_fluid = new coconut_ui_internal_Slot(this,null,new tink_state__$Observable_ConstObservable(false,null));
+	this.__coco_transparent = new coconut_ui_internal_Slot(this,null,new tink_state__$Observable_ConstObservable(false,null));
+	this.__coco_type = new coconut_ui_internal_Slot(this,null,new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
+		return "text";
+	}),null,null));
+	this.__coco_direction = new coconut_ui_internal_Slot(this,null,null);
+	this.__coco_img = new coconut_ui_internal_Slot(this,null,null);
+	this.__coco_name = new coconut_ui_internal_Slot(this,null,null);
+	this.__coco_onChange = new coconut_ui_internal_Slot(this,null,null);
+	this.__coco_onFocus = new coconut_ui_internal_Slot(this,null,null);
+	this.__coco_onBlur = new coconut_ui_internal_Slot(this,null,new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
+		return function(n) {
+			return;
+		};
+	}),null,null));
+	this.__coco_autocomplete = new coconut_ui_internal_Slot(this,null,new tink_state__$Observable_ConstObservable(false,null));
+	this.__coco_className = new coconut_ui_internal_Slot(this,null,new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
+		return tink_state_Observable.get_value(_gthis.__coco_classes);
+	}),null,null));
+	this.__coco_classes = new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
+		var b = tink_domspec_ClassName.ofString("ui input");
+		if(tink_state_Observable.get_value(_gthis.__coco_disabled)) {
+			b = tink_domspec_ClassName.add(b,tink_domspec_ClassName.ofString("disabled"));
+		}
+		if(tink_state_Observable.get_value(_gthis.__coco_loading)) {
+			b = tink_domspec_ClassName.add(b,tink_domspec_ClassName.ofString("loading"));
+		}
+		if(tink_state_Observable.get_value(_gthis.__coco_focus)) {
+			b = tink_domspec_ClassName.add(b,tink_domspec_ClassName.ofString("focus"));
+		}
+		if(tink_state_Observable.get_value(_gthis.__coco_img) != null) {
+			b = tink_domspec_ClassName.add(b,tink_domspec_ClassName.ofString("icon"));
+		}
+		if(tink_state_Observable.get_value(_gthis.__coco_labeled)) {
+			b = tink_domspec_ClassName.add(b,tink_domspec_ClassName.ofString("labeled"));
+		}
+		if(tink_state_Observable.get_value(_gthis.__coco_fluid)) {
+			b = tink_domspec_ClassName.add(b,tink_domspec_ClassName.ofString("fluid"));
+		}
+		if(tink_state_Observable.get_value(_gthis.__coco_transparent)) {
+			b = tink_domspec_ClassName.add(b,tink_domspec_ClassName.ofString("transparent"));
+		}
+		if(tink_state_Observable.get_value(_gthis.__coco_direction) != null) {
+			b = tink_domspec_ClassName.add(b,tink_state_Observable.get_value(_gthis.__coco_direction));
+		}
+		return b;
+	}),null,null);
+	this.__initAttributes(__coco_data_);
+	coconut_vdom_View.call(this,function() {
+		return _gthis.render();
+	},null,null,null,null);
+};
+fomantic_Input.__name__ = true;
+fomantic_Input.get___factory = function() {
+	var _g = fomantic_Input.__factory;
+	if(_g == null) {
+		return fomantic_Input.__factory = new coconut_diffing_internal_WidgetFactory(function(__coco_data_,implicits) {
+			return new fomantic_Input(__coco_data_,implicits);
+		},function(v,attr) {
+			v.__initAttributes(attr);
+		});
+	} else {
+		return _g;
+	}
+};
+fomantic_Input.fromHxx = function(hxxMeta,attributes) {
+	var _g = fomantic_Input.__factory;
+	return new coconut_diffing_internal_VWidget(_g == null ? fomantic_Input.__factory = new coconut_diffing_internal_WidgetFactory(function(__coco_data_,implicits) {
+		return new fomantic_Input(__coco_data_,implicits);
+	},function(v,attr) {
+		v.__initAttributes(attr);
+	}) : _g,attributes,hxxMeta.key,hxxMeta.ref);
+};
+fomantic_Input.__super__ = coconut_vdom_View;
+fomantic_Input.prototype = $extend(coconut_vdom_View.prototype,{
+	onBlur: function(a0) {
+		(tink_state_Observable.get_value(this.__coco_onBlur))(a0);
+	}
+	,setup: function(el) {
+		this.input = el;
+	}
+	,clear: function() {
+		this.input.value = "";
+	}
+	,getValue: function() {
+		return this.input.value;
+	}
+	,render: function() {
+		var _gthis = this;
+		var hxxMeta = { };
+		var attr = { className : tink_domspec_ClassName.add(tink_state_Observable.get_value(this.__coco_className),tink_domspec_ClassName.ofString("ui input"))};
+		var __r = [];
+		var hxxMeta1 = { ref : $bind(this,this.setup)};
+		__r.push(coconut_vdom_Html.INPUT.vnode({ name : tink_state_Observable.get_value(this.__coco_name), type : "" + tink_state_Observable.get_value(this.__coco_type), value : tink_state_Observable.get_value(this.__coco_value), onfocus : tink_state_Observable.get_value(this.__coco_onFocus), onchange : tink_state_Observable.get_value(this.__coco_onChange), placeholder : tink_state_Observable.get_value(this.__coco_placeholder), onblur : function(e) {
+			_gthis.onBlur(e.currentTarget.value);
+		}, autocomplete : tink_state_Observable.get_value(this.__coco_autocomplete) ? "on" : "off"},hxxMeta1.key,hxxMeta1.ref));
+		if(tink_state_Observable.get_value(this.__coco_img) != null) {
+			var tmp = new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
+				return tink_state_Observable.get_value(_gthis.__coco_img);
+			}),null,null);
+			__r.push(fomantic_Icon.fromHxx({ },{ img : tmp}));
+		}
+		return coconut_vdom_Html.DIV.vnode(attr,hxxMeta.key,hxxMeta.ref,__r);
+	}
+	,get_value: function() {
+		return tink_state_Observable.get_value(this.__coco_value);
+	}
+	,get_placeholder: function() {
+		return tink_state_Observable.get_value(this.__coco_placeholder);
+	}
+	,get_focus: function() {
+		return tink_state_Observable.get_value(this.__coco_focus);
+	}
+	,get_loading: function() {
+		return tink_state_Observable.get_value(this.__coco_loading);
+	}
+	,get_disabled: function() {
+		return tink_state_Observable.get_value(this.__coco_disabled);
+	}
+	,get_error: function() {
+		return tink_state_Observable.get_value(this.__coco_error);
+	}
+	,get_labeled: function() {
+		return tink_state_Observable.get_value(this.__coco_labeled);
+	}
+	,get_fluid: function() {
+		return tink_state_Observable.get_value(this.__coco_fluid);
+	}
+	,get_transparent: function() {
+		return tink_state_Observable.get_value(this.__coco_transparent);
+	}
+	,get_type: function() {
+		return tink_state_Observable.get_value(this.__coco_type);
+	}
+	,get_direction: function() {
+		return tink_state_Observable.get_value(this.__coco_direction);
+	}
+	,get_img: function() {
+		return tink_state_Observable.get_value(this.__coco_img);
+	}
+	,get_name: function() {
+		return tink_state_Observable.get_value(this.__coco_name);
+	}
+	,get_onChange: function() {
+		return tink_state_Observable.get_value(this.__coco_onChange);
+	}
+	,get_onFocus: function() {
+		return tink_state_Observable.get_value(this.__coco_onFocus);
+	}
+	,get_autocomplete: function() {
+		return tink_state_Observable.get_value(this.__coco_autocomplete);
+	}
+	,get_className: function() {
+		return tink_state_Observable.get_value(this.__coco_className);
+	}
+	,__initAttributes: function(attributes) {
+		this.__coco_value.setData(attributes.value);
+		this.__coco_placeholder.setData(attributes.placeholder);
+		this.__coco_focus.setData(attributes.focus);
+		this.__coco_loading.setData(attributes.loading);
+		this.__coco_disabled.setData(attributes.disabled);
+		this.__coco_error.setData(attributes.error);
+		this.__coco_labeled.setData(attributes.labeled);
+		this.__coco_fluid.setData(attributes.fluid);
+		this.__coco_transparent.setData(attributes.transparent);
+		this.__coco_type.setData(attributes.type);
+		this.__coco_direction.setData(attributes.direction);
+		this.__coco_img.setData(attributes.img);
+		this.__coco_name.setData(attributes.name);
+		this.__coco_onChange.setData(attributes.onChange);
+		this.__coco_onFocus.setData(attributes.onFocus);
+		this.__coco_onBlur.setData(attributes.onBlur);
+		this.__coco_autocomplete.setData(attributes.autocomplete);
+		this.__coco_className.setData(attributes.className);
+	}
+	,get_classes: function() {
+		return tink_state_Observable.get_value(this.__coco_classes);
+	}
+	,__class__: fomantic_Input
 });
 var fomantic_Types = function() { };
 fomantic_Types.__name__ = true;
@@ -5173,14 +5761,6 @@ tink_core__$Lazy_LazyFunc.prototype = {
 	}
 	,__class__: tink_core__$Lazy_LazyFunc
 };
-var tink_core_NamedWith = function(name,value) {
-	this.name = name;
-	this.value = value;
-};
-tink_core_NamedWith.__name__ = true;
-tink_core_NamedWith.prototype = {
-	__class__: tink_core_NamedWith
-};
 var tink_core_Noise = {};
 tink_core_Noise.ofAny = function(t) {
 	return null;
@@ -6493,236 +7073,6 @@ tink_pure_FilterResult.fromBool = function(b) {
 		return 0;
 	}
 };
-var tink_pure_List = {};
-tink_pure_List.get_length = function(this1) {
-	if(this1 == null) {
-		return 0;
-	} else {
-		return this1.length;
-	}
-};
-tink_pure_List.first = function(this1,predicate) {
-	var _g = new tink_pure_NodeIterator(this1);
-	while(_g.list.length > 0) {
-		var x = _g.next();
-		if(predicate == null || predicate(x)) {
-			return haxe_ds_Option.Some(x);
-		}
-	}
-	return haxe_ds_Option.None;
-};
-tink_pure_List.last = function(this1,predicate) {
-	if(this1 == null) {
-		return haxe_ds_Option.None;
-	} else if(predicate == null) {
-		var _last = null;
-		_last = function(v) {
-			while(true) {
-				var _g = v.tails;
-				if(_g.length == 0) {
-					return haxe_ds_Option.Some(v.value);
-				} else {
-					v = _g[_g.length - 1];
-					continue;
-				}
-			}
-		};
-		return _last(this1);
-	} else {
-		var found = false;
-		var ret = null;
-		var _g = new tink_pure_NodeIterator(this1);
-		while(_g.list.length > 0) {
-			var x = _g.next();
-			if(predicate(x)) {
-				found = true;
-				ret = x;
-			}
-		}
-		if(found) {
-			return haxe_ds_Option.Some(ret);
-		} else {
-			return haxe_ds_Option.None;
-		}
-	}
-};
-tink_pure_List.get = function(this1,index) {
-	if(index < 0) {
-		return haxe_ds_Option.None;
-	}
-	var iter = new tink_pure_NodeIterator(this1);
-	var v = null;
-	while(index-- >= 0) {
-		if(iter.list.length <= 0) {
-			return haxe_ds_Option.None;
-		}
-		v = iter.next();
-	}
-	return haxe_ds_Option.Some(v);
-};
-tink_pure_List._new = function() {
-	var this1 = null;
-	return this1;
-};
-tink_pure_List.node = function(this1) {
-	return this1;
-};
-tink_pure_List.concat = function(this1,that) {
-	if(this1 == null) {
-		return that;
-	} else if(that == null) {
-		return this1;
-	} else {
-		return new tink_pure__$List_Node(this1.length + (that == null ? 0 : that.length),this1.value,this1.tails.concat([that]));
-	}
-};
-tink_pure_List.sort = function(this1,compare) {
-	var arr = tink_pure_List.toArray(this1);
-	arr.sort(compare);
-	return tink_pure_List.fromArray(arr);
-};
-tink_pure_List.append = function(this1,value) {
-	if(this1 == null) {
-		return new tink_pure__$List_Node(1,value);
-	} else {
-		return new tink_pure__$List_Node(this1.length + 1,this1.value,this1.tails.concat([new tink_pure__$List_Node(1,value)]));
-	}
-};
-tink_pure_List.prepend = function(this1,value) {
-	if(this1 == null) {
-		return new tink_pure__$List_Node(1,value);
-	} else {
-		return new tink_pure__$List_Node(this1.length + 1,value,[this1]);
-	}
-};
-tink_pure_List.replace = function(this1,select,generate) {
-	var _g = [];
-	var _g1 = new tink_pure_NodeIterator(this1);
-	while(_g1.list.length > 0) {
-		var v = _g1.next();
-		if(select(v)) {
-			_g.push(generate(v));
-		} else {
-			_g.push(v);
-		}
-	}
-	return tink_pure_List.fromArray(_g);
-};
-tink_pure_List.exists = function(this1,predicate) {
-	var ret = false;
-	var _g = new tink_pure_NodeIterator(this1);
-	while(_g.list.length > 0) {
-		var x = _g.next();
-		if(predicate(x)) {
-			ret = true;
-			break;
-		}
-	}
-	return ret;
-};
-tink_pure_List.count = function(this1,predicate) {
-	var ret = 0;
-	var _g = new tink_pure_NodeIterator(this1);
-	while(_g.list.length > 0) {
-		var x = _g.next();
-		if(predicate(x)) {
-			++ret;
-		}
-	}
-	return ret;
-};
-tink_pure_List.iterator = function(this1) {
-	return new tink_pure_NodeIterator(this1);
-};
-tink_pure_List.toIterable = function(this1) {
-	var _e = this1;
-	return { iterator : function() {
-		return new tink_pure_NodeIterator(_e);
-	}};
-};
-tink_pure_List.filter = function(this1,f) {
-	if(this1 == null) {
-		return null;
-	} else {
-		return this1.filter(f);
-	}
-};
-tink_pure_List.map = function(this1,f) {
-	var _g = [];
-	var _g1 = new tink_pure_NodeIterator(this1);
-	while(_g1.list.length > 0) {
-		var i = _g1.next();
-		_g.push(f(i));
-	}
-	return tink_pure_List.fromArray(_g);
-};
-tink_pure_List.select = function(this1,f) {
-	var arr = [];
-	var _g = new tink_pure_NodeIterator(this1);
-	while(_g.list.length > 0) {
-		var i = _g.next();
-		var _g1 = f(i);
-		switch(_g1._hx_index) {
-		case 0:
-			arr.push(_g1.v);
-			break;
-		case 1:
-			break;
-		}
-	}
-	return tink_pure_List.fromArray(arr);
-};
-tink_pure_List.fold = function(this1,f,first) {
-	var _g = new tink_pure_NodeIterator(this1);
-	while(_g.list.length > 0) {
-		var x = _g.next();
-		first = f(x,first);
-	}
-	return first;
-};
-tink_pure_List.single = function(v) {
-	return new tink_pure__$List_Node(1,v);
-};
-tink_pure_List.toArray = function(this1) {
-	var _g = [];
-	var _g1 = new tink_pure_NodeIterator(this1);
-	while(_g1.list.length > 0) {
-		var v = _g1.next();
-		_g.push(v);
-	}
-	return _g;
-};
-tink_pure_List.fromArray = function(i) {
-	var ret = null;
-	var len = 0;
-	var pos = i.length;
-	while(pos-- > 0) ret = new tink_pure__$List_Node(++len,i[pos],ret == null ? tink_pure__$List_Node.EMPTY : [ret]);
-	return ret;
-};
-var tink_pure__$List_Node = function(length,value,tails) {
-	this.value = value;
-	this.length = length;
-	this.tails = tails == null ? tink_pure__$List_Node.EMPTY : tails;
-};
-tink_pure__$List_Node.__name__ = true;
-tink_pure__$List_Node.prototype = {
-	filter: function(f) {
-		var iter = new tink_pure_NodeIterator(this);
-		var ret = [];
-		while(iter.list.length > 0) {
-			var value = iter.next();
-			var res = f(value);
-			if(res > 0) {
-				ret.push(value);
-			}
-			if((res & 3) == 3) {
-				break;
-			}
-		}
-		return tink_pure_List.fromArray(ret);
-	}
-	,__class__: tink_pure__$List_Node
-};
 var tink_pure_NodeIterator = function(node) {
 	this.list = [];
 	if(node != null) {
@@ -7250,12 +7600,6 @@ tink_state_ObservableTools.flatten = function(o) {
 		return tink_state_Observable.get_value(tink_state_Observable.get_value(o));
 	}),null,null);
 };
-var tink_state_PromisedWith = $hxEnums["tink.state.PromisedWith"] = { __ename__:true,__constructs__:null
-	,Loading: {_hx_name:"Loading",_hx_index:0,__enum__:"tink.state.PromisedWith",toString:$estr}
-	,Done: ($_=function(result) { return {_hx_index:1,result:result,__enum__:"tink.state.PromisedWith",toString:$estr}; },$_._hx_name="Done",$_.__params__ = ["result"],$_)
-	,Failed: ($_=function(error) { return {_hx_index:2,error:error,__enum__:"tink.state.PromisedWith",toString:$estr}; },$_._hx_name="Failed",$_.__params__ = ["error"],$_)
-};
-tink_state_PromisedWith.__constructs__ = [tink_state_PromisedWith.Loading,tink_state_PromisedWith.Done,tink_state_PromisedWith.Failed];
 var tink_state_PromisedTools = function() { };
 tink_state_PromisedTools.__name__ = true;
 tink_state_PromisedTools.next = function(a,f) {
@@ -8906,8 +9250,8 @@ var Float = Number;
 var Bool = Boolean;
 var Class = { };
 var Enum = { };
-haxe_ds_ObjectMap.count = 0;
 coconut_diffing_TypeId.idCounter = 0;
+haxe_ds_ObjectMap.count = 0;
 js_Boot.__toStr = ({ }).toString;
 var typeofJQuery = typeof($);
 if(typeofJQuery != "undefined" && $.fn != null) {
@@ -8930,6 +9274,9 @@ DateTools.DAY_SHORT_NAMES = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 DateTools.DAY_NAMES = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 DateTools.MONTH_SHORT_NAMES = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 DateTools.MONTH_NAMES = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+tink_pure__$List_Node.EMPTY = [];
+Simple.entries = tink_state_PromisedWith.Done(tink_pure_List.fromArray([new tink_core_NamedWith("one","un"),new tink_core_NamedWith("two","deux"),new tink_core_NamedWith("troix","three")]));
+coconut_vdom_View.idCounter = 0;
 coconut_diffing_Root.byParent = new haxe_ds_ObjectMap();
 coconut_diffing_internal_VEmpty.TYPE = (function($this) {
 	var $r;
@@ -9073,7 +9420,6 @@ coconut_vdom_Html.A = coconut_vdom_Html.nodeType("a");
 coconut_vdom__$Html_HtmlFragment.tags = new haxe_ds_StringMap();
 coconut_vdom__$Html_Text.inst = new coconut_vdom__$Html_Text();
 coconut_vdom_Renderer.BACKEND = new coconut_vdom__$Renderer_DomBackend();
-coconut_vdom_View.idCounter = 0;
 tink_core_Callback.depth = 0;
 tink_core_Callback.MAX_DEPTH = 500;
 tink_core_AlreadyDisposed.INST = new tink_core_AlreadyDisposed();
@@ -9100,7 +9446,6 @@ tink_pure_FilterResult.ExcludeAndStop = -3;
 tink_pure_FilterResult.Exclude = 0;
 tink_pure_FilterResult.Include = 1;
 tink_pure_FilterResult.IncludeAndStop = 3;
-tink_pure__$List_Node.EMPTY = [];
 tink_state_Scheduler.direct = new tink_state__$Scheduler_DirectScheduler();
 tink_state_Observable.MAX_ITERATIONS = 100;
 tink_state_Observable.scheduler = tink_state_Scheduler.batched(tink_state_Scheduler.batcher());

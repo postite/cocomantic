@@ -31,6 +31,9 @@ using tink.state.Promised;
 
 // TODO: support non-string values. (entries should contain a string ID to be used as data-value attr)
 class Dropdown<T> extends coconut.ui.View {
+
+
+	
 	@:attr var className:ClassName = null;
 	@:attr var name:String = null;
 	@:attr var value:T = @byDefault null;
@@ -191,7 +194,7 @@ class Dropdown<T> extends coconut.ui.View {
 
 		
 
-		if (value == null)
+		if (value == null )
 			untyped (J(e)).dropdown('clear');
 	}
 }
