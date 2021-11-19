@@ -29,6 +29,21 @@ using tink.state.Promised;
 	var hide;
 }
 
+
+@:structInit
+class NamedSel<T>{
+
+public final name:String;
+public final value:T;
+public final selected:Bool;
+
+  public inline function new(name, value, ?selected=false) {
+    this.name = name;
+	this.value = value;
+	this.selected=selected;
+  }
+}
+
 // TODO: support non-string values. (entries should contain a string ID to be used as data-value attr)
 class Dropdown<T> extends coconut.ui.View {
 
@@ -36,9 +51,11 @@ class Dropdown<T> extends coconut.ui.View {
 	
 	@:attr var className:ClassName = null;
 	@:attr var name:String = null;
-	@:attr var value:T = @byDefault null;
+	//@:attr var value:T = @byDefault null;
+	@:skipCheck
+	@:attr var values:Array<NamedSel<T>> = @byDefault null;
 	@:attr var defaultText:String = null;
-	@:attr var entries:Promised<List<Named<T>>> = @byDefault Done([new Named("default", null)].fromArray());
+	@:attr var entries:Promised<List<NamedSel<T>>> = @byDefault Loading;
 
 	@:attr var onChange:T->Void = @byDefault (a)->{};
 	//
@@ -135,11 +152,12 @@ class Dropdown<T> extends coconut.ui.View {
 				<switch ${entries}>
 					<case ${Done(data)}>
 						<for ${entry in data}>
-							<div class="item" data-value=${Std.string(entry.value)}>${entry.name}</div>
+							<div class="item" data-value=${Std.string(entry.value)}>${entry.name.Log('name')}</div>
 						</for>
-					<case ${_}>
-					<div class="item" data-value="def">defVal</div>
-
+					<case ${Loading}>
+					
+					<case ${Failed(f)}>
+					
 				</switch>
 			</div>
 		</div>
@@ -156,9 +174,26 @@ class Dropdown<T> extends coconut.ui.View {
 		});
 	}
 
+
+	 function shouldViewUpdate(){
+		if (values == null )
+			untyped element.dropdown('clear');
+		return true;
+	 }
+	 var element:js.jquery.JQuery;
 	function setup(e) {
-		var t= (J(e));
-		untyped t.dropdown({
+		trace( "setup" + values);
+		
+		var vv= 
+		try
+			values.map(n->{name:n.name,value:n.value,selected:n.selected}) 
+		catch(msg:Dynamic)
+			null;
+			
+		
+		element= (J(e));
+		untyped element.dropdown({
+			values:vv,
 			onChange: function(value, text) if (onChange != null)
 				onChange(value),
 			clearable: clearable,
@@ -192,9 +227,8 @@ class Dropdown<T> extends coconut.ui.View {
 			
 		});
 
-		
 
-		if (value == null )
-			untyped (J(e)).dropdown('clear');
+		if (values == null )
+			untyped element.dropdown('clear');
 	}
 }

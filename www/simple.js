@@ -399,26 +399,37 @@ tink_pure__$List_Node.prototype = {
 	}
 	,__class__: tink_pure__$List_Node
 };
-var tink_core_NamedWith = function(name,value) {
+var fomantic_NamedSel = function(name,value,selected) {
+	if(selected == null) {
+		selected = false;
+	}
 	this.name = name;
 	this.value = value;
+	this.selected = selected;
 };
-tink_core_NamedWith.__name__ = true;
-tink_core_NamedWith.prototype = {
-	__class__: tink_core_NamedWith
+fomantic_NamedSel.__name__ = true;
+fomantic_NamedSel.prototype = {
+	__class__: fomantic_NamedSel
 };
 var Simple = function() { };
 Simple.__name__ = true;
 Simple.onLabelSelect = function(a) {
-	haxe_Log.trace("onSelect" + Std.string(a),{ fileName : "src/Simple.hx", lineNumber : 17, className : "Simple", methodName : "onLabelSelect"});
+	haxe_Log.trace("onSelect" + Std.string(a),{ fileName : "src/Simple.hx", lineNumber : 18, className : "Simple", methodName : "onLabelSelect"});
 };
 Simple.change = function(n) {
-	haxe_Log.trace("value=" + n,{ fileName : "src/Simple.hx", lineNumber : 26, className : "Simple", methodName : "change"});
+	haxe_Log.trace("value=" + n,{ fileName : "src/Simple.hx", lineNumber : 27, className : "Simple", methodName : "change"});
 };
 Simple.main = function() {
-	haxe_Log.trace("Hello, world!",{ fileName : "src/Simple.hx", lineNumber : 29, className : "Simple", methodName : "main"});
+	haxe_Log.trace("Hello, world!",{ fileName : "src/Simple.hx", lineNumber : 30, className : "Simple", methodName : "main"});
 	$(window.document).ready(function(e) {
-		coconut_vdom_Renderer.mountInto(window.document.body.appendChild(window.document.createElement("div")),InputTest.fromHxx({ },{ }));
+		var tmp = window.document.body.appendChild(window.document.createElement("div"));
+		var tmp1 = new tink_state__$Observable_ConstObservable(false,null);
+		var tmp2 = new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
+			return function(b) {
+				haxe_Log.trace("yo" + (b == null ? "null" : "" + b),{ fileName : "src/Simple.hx", lineNumber : 48, className : "Simple", methodName : "main"});
+			};
+		}),null,null);
+		coconut_vdom_Renderer.mountInto(tmp,fomantic_CheckBox.fromHxx({ },{ checked : tmp1, onChange : tmp2}));
 	});
 };
 var coconut_diffing_Widget = function(rendered,mounted,updated,unmounting) {
@@ -708,9 +719,9 @@ ControlledTest.prototype = $extend(coconut_vdom_View.prototype,{
 			};
 		}),null,null);
 		var tmp2 = new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
-			return Std.string(tink_state_Observable.get_value(_gthis.__coco_bim));
+			return new fomantic_NamedSel(Std.string(tink_state_Observable.get_value(_gthis.__coco_bim)),tink_state_Observable.get_value(_gthis.__coco_bim));
 		}),null,null);
-		return fomantic_Dropdown.fromHxx({ },{ entries : tmp, onChange : tmp1, value : tmp2});
+		return fomantic_Dropdown.fromHxx({ },{ entries : tmp, onChange : tmp1, values : tmp2});
 	}
 	,get_bim: function() {
 		return tink_state_Observable.get_value(this.__coco_bim);
@@ -3513,15 +3524,115 @@ fomantic_Calendar.prototype = $extend(coconut_vdom_View.prototype,{
 	}
 	,__class__: fomantic_Calendar
 });
+var fomantic_CheckBox = function(__coco_data_,implicits) {
+	var _gthis = this;
+	this._coco_implicits = implicits;
+	this.__coco_onChange = new coconut_ui_internal_Slot(this,null,new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
+		return function(b) {
+			return;
+		};
+	}),null,null));
+	this.__coco_onChecked = new coconut_ui_internal_Slot(this,null,new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
+		return function() {
+			return;
+		};
+	}),null,null));
+	this.__coco_checked = new coconut_ui_internal_Slot(this,null,new tink_state__$Observable_ConstObservable(false,null));
+	this.__coco_text = new coconut_ui_internal_Slot(this,null,new tink_state__$Observable_ConstObservable("",null));
+	this.__coco_className = new coconut_ui_internal_Slot(this,null,new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
+		return tink_domspec_ClassName.ofArray([]);
+	}),null,null));
+	this.__coco__checked = tink_state_State._new(tink_state_Observable.get_value(this.__coco_checked),null);
+	this.__initAttributes(__coco_data_);
+	coconut_vdom_View.call(this,function() {
+		return _gthis.render();
+	},null,null,null,null);
+};
+fomantic_CheckBox.__name__ = true;
+fomantic_CheckBox.get___factory = function() {
+	var _g = fomantic_CheckBox.__factory;
+	if(_g == null) {
+		return fomantic_CheckBox.__factory = new coconut_diffing_internal_WidgetFactory(function(__coco_data_,implicits) {
+			return new fomantic_CheckBox(__coco_data_,implicits);
+		},function(v,attr) {
+			v.__initAttributes(attr);
+		});
+	} else {
+		return _g;
+	}
+};
+fomantic_CheckBox.fromHxx = function(hxxMeta,attributes) {
+	var _g = fomantic_CheckBox.__factory;
+	return new coconut_diffing_internal_VWidget(_g == null ? fomantic_CheckBox.__factory = new coconut_diffing_internal_WidgetFactory(function(__coco_data_,implicits) {
+		return new fomantic_CheckBox(__coco_data_,implicits);
+	},function(v,attr) {
+		v.__initAttributes(attr);
+	}) : _g,attributes,hxxMeta.key,hxxMeta.ref);
+};
+fomantic_CheckBox.__super__ = coconut_vdom_View;
+fomantic_CheckBox.prototype = $extend(coconut_vdom_View.prototype,{
+	onChange: function(a0) {
+		(tink_state_Observable.get_value(this.__coco_onChange))(a0);
+	}
+	,onChecked: function() {
+		(tink_state_Observable.get_value(this.__coco_onChecked))();
+	}
+	,setup: function(el) {
+		var _gthis = this;
+		haxe_Log.trace(" checksetup",{ fileName : "src/fomantic/CheckBox.hx", lineNumber : 32, className : "fomantic.CheckBox", methodName : "setup"});
+		this.me = el;
+		$(el).checkbox({ onChange : function() {
+			var param = !tink_state_State.get_value(_gthis.__coco__checked);
+			_gthis.__coco__checked.set(param);
+			_gthis.onChange(tink_state_State.get_value(_gthis.__coco__checked));
+		}, onChecked : $bind(this,this.onChecked)});
+	}
+	,render: function() {
+		var hxxMeta = { };
+		var attr = { className : tink_domspec_ClassName.add(tink_state_Observable.get_value(this.__coco_className),tink_domspec_ClassName.ofString("ui input checkbox"))};
+		var __r = [];
+		var hxxMeta1 = { ref : $bind(this,this.setup)};
+		__r.push(coconut_vdom_Html.INPUT.vnode({ type : "checkbox", checked : tink_state_Observable.get_value(this.__coco_checked)},hxxMeta1.key,hxxMeta1.ref));
+		var hxxMeta1 = { };
+		var s = tink_state_Observable.get_value(this.__coco_text);
+		var children = s == null ? null : coconut_vdom__$Html_Text.inst.vnode(s,null,null,null);
+		__r.push(coconut_vdom_Html.LABEL.vnode({ },hxxMeta1.key,hxxMeta1.ref,[children]));
+		return coconut_vdom_Html.DIV.vnode(attr,hxxMeta.key,hxxMeta.ref,__r);
+	}
+	,get_checked: function() {
+		return tink_state_Observable.get_value(this.__coco_checked);
+	}
+	,get_text: function() {
+		return tink_state_Observable.get_value(this.__coco_text);
+	}
+	,get_className: function() {
+		return tink_state_Observable.get_value(this.__coco_className);
+	}
+	,get__checked: function() {
+		return tink_state_State.get_value(this.__coco__checked);
+	}
+	,set__checked: function(param) {
+		this.__coco__checked.set(param);
+		return param;
+	}
+	,__initAttributes: function(attributes) {
+		this.__coco_onChange.setData(attributes.onChange);
+		this.__coco_onChecked.setData(attributes.onChecked);
+		this.__coco_checked.setData(attributes.checked);
+		this.__coco_text.setData(attributes.text);
+		this.__coco_className.setData(attributes.className);
+	}
+	,__class__: fomantic_CheckBox
+});
 var fomantic_Dropdown = function(__coco_data_,implicits) {
 	var _gthis = this;
 	this._coco_implicits = implicits;
 	this.__coco_className = new coconut_ui_internal_Slot(this,null,null);
 	this.__coco_name = new coconut_ui_internal_Slot(this,null,null);
-	this.__coco_value = new coconut_ui_internal_Slot(this,null,null);
+	this.__coco_values = new coconut_ui_internal_Slot(this,null,null);
 	this.__coco_defaultText = new coconut_ui_internal_Slot(this,null,null);
 	this.__coco_entries = new coconut_ui_internal_Slot(this,null,new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
-		return tink_state_PromisedWith.Done(tink_pure_List.fromArray([new tink_core_NamedWith("default",null)]));
+		return tink_state_PromisedWith.Done(tink_pure_List.fromArray([new fomantic_NamedSel("default",null)]));
 	}),null,null));
 	this.__coco_onChange = new coconut_ui_internal_Slot(this,null,new tink_state_internal_AutoObservable(tink_state_internal__$AutoObservable_Computation.sync(function() {
 		return function(a) {
@@ -3606,7 +3717,7 @@ var fomantic_Dropdown = function(__coco_data_,implicits) {
 	this.__initAttributes(__coco_data_);
 	coconut_vdom_View.call(this,function() {
 		return _gthis.render();
-	},null,null,null,null);
+	},$bind(this,this.shouldViewUpdate),null,null,null);
 };
 fomantic_Dropdown.__name__ = true;
 fomantic_Dropdown.get___factory = function() {
@@ -3682,7 +3793,7 @@ fomantic_Dropdown.prototype = $extend(coconut_vdom_View.prototype,{
 		var attr1 = { className : tink_domspec_ClassName.add(t,attr)};
 		var __r = [];
 		var hxxMeta1 = { };
-		__r.push(coconut_vdom_Html.INPUT.vnode({ type : "hidden", name : tink_state_Observable.get_value(this.__coco_name), value : Std.string(tink_state_Observable.get_value(this.__coco_value))},hxxMeta1.key,hxxMeta1.ref));
+		__r.push(coconut_vdom_Html.INPUT.vnode({ type : "hidden", name : tink_state_Observable.get_value(this.__coco_name), value : "value"},hxxMeta1.key,hxxMeta1.ref));
 		var hxxMeta1 = { };
 		var __r1 = [];
 		__r.push(coconut_vdom_Html.I.vnode({ className : tink_domspec_ClassName.ofString("dropdown icon")},hxxMeta1.key,hxxMeta1.ref,__r1));
@@ -3733,16 +3844,38 @@ fomantic_Dropdown.prototype = $extend(coconut_vdom_View.prototype,{
 		}
 		return tink_domspec_ClassName.add(t,tmp);
 	}
+	,shouldViewUpdate: function() {
+		if(tink_state_Observable.get_value(this.__coco_values) == null) {
+			this.element.dropdown("clear");
+		}
+		return true;
+	}
 	,setup: function(e) {
 		var _gthis = this;
-		var t = $(e);
-		t.dropdown({ onChange : function(value,text) {
+		haxe_Log.trace("setup" + Std.string(tink_state_Observable.get_value(this.__coco_values)),{ fileName : "src/fomantic/Dropdown.hx", lineNumber : 184, className : "fomantic.Dropdown", methodName : "setup"});
+		var vv;
+		try {
+			var _this = tink_state_Observable.get_value(this.__coco_values);
+			var result = new Array(_this.length);
+			var _g = 0;
+			var _g1 = _this.length;
+			while(_g < _g1) {
+				var i = _g++;
+				var n = _this[i];
+				result[i] = { name : n.name, value : n.value, selected : n.selected};
+			}
+			vv = result;
+		} catch( _g ) {
+			vv = null;
+		}
+		this.element = $(e);
+		this.element.dropdown({ values : vv, onChange : function(value,text) {
 			if(_gthis.onChange != null) {
 				_gthis.onChange(value);
 			}
 		}, clearable : tink_state_Observable.get_value(this.__coco_clearable), ignoreCase : tink_state_Observable.get_value(this.__coco_ignoreCase), ignoreSearchCase : tink_state_Observable.get_value(this.__coco_ignoreSearchCase), allowReselection : tink_state_Observable.get_value(this.__coco_allowReselection), allowAdditions : tink_state_Observable.get_value(this.__coco_allowAdditions), minCharacters : tink_state_Observable.get_value(this.__coco_minCharacters), match : tink_state_Observable.get_value(this.__coco_match), selectOnKeydown : tink_state_Observable.get_value(this.__coco_selectOnKeydown), forceSelection : tink_state_Observable.get_value(this.__coco_forceSelection), allowCategorySelection : tink_state_Observable.get_value(this.__coco_allowCategorySelection), placeholder : tink_state_Observable.get_value(this.__coco_placeholder), useLabels : tink_state_Observable.get_value(this.__coco_useLabels), maxSelections : tink_state_Observable.get_value(this.__coco_maxSelections), glyphWidth : tink_state_Observable.get_value(this.__coco_glyphWidth), label : tink_state_Observable.get_value(this.__coco_label), className : { label : "ui label"}, onAdd : $bind(this,this.onAdd), onRemove : $bind(this,this.onRemove), onLabelRemove : $bind(this,this.onLabelRemove), onNoResults : $bind(this,this.onNoResults), onLabelSelect : $bind(this,this.onLabelSelect), onShow : $bind(this,this.onShow), onHide : $bind(this,this.onHide), onSearch : $bind(this,this.onSearch)});
-		if(tink_state_Observable.get_value(this.__coco_value) == null) {
-			$(e).dropdown("clear");
+		if(tink_state_Observable.get_value(this.__coco_values) == null) {
+			this.element.dropdown("clear");
 		}
 	}
 	,get_className: function() {
@@ -3751,8 +3884,8 @@ fomantic_Dropdown.prototype = $extend(coconut_vdom_View.prototype,{
 	,get_name: function() {
 		return tink_state_Observable.get_value(this.__coco_name);
 	}
-	,get_value: function() {
-		return tink_state_Observable.get_value(this.__coco_value);
+	,get_values: function() {
+		return tink_state_Observable.get_value(this.__coco_values);
 	}
 	,get_defaultText: function() {
 		return tink_state_Observable.get_value(this.__coco_defaultText);
@@ -3820,7 +3953,7 @@ fomantic_Dropdown.prototype = $extend(coconut_vdom_View.prototype,{
 	,__initAttributes: function(attributes) {
 		this.__coco_className.setData(attributes.className);
 		this.__coco_name.setData(attributes.name);
-		this.__coco_value.setData(attributes.value);
+		this.__coco_values.setData(attributes.values);
 		this.__coco_defaultText.setData(attributes.defaultText);
 		this.__coco_entries.setData(attributes.entries);
 		this.__coco_onChange.setData(attributes.onChange);
@@ -5760,6 +5893,14 @@ tink_core__$Lazy_LazyFunc.prototype = {
 		}
 	}
 	,__class__: tink_core__$Lazy_LazyFunc
+};
+var tink_core_NamedWith = function(name,value) {
+	this.name = name;
+	this.value = value;
+};
+tink_core_NamedWith.__name__ = true;
+tink_core_NamedWith.prototype = {
+	__class__: tink_core_NamedWith
 };
 var tink_core_Noise = {};
 tink_core_Noise.ofAny = function(t) {
@@ -9275,7 +9416,7 @@ DateTools.DAY_NAMES = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Frida
 DateTools.MONTH_SHORT_NAMES = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 DateTools.MONTH_NAMES = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 tink_pure__$List_Node.EMPTY = [];
-Simple.entries = tink_state_PromisedWith.Done(tink_pure_List.fromArray([new tink_core_NamedWith("one","un"),new tink_core_NamedWith("two","deux"),new tink_core_NamedWith("troix","three")]));
+Simple.entries = tink_state_PromisedWith.Done(tink_pure_List.fromArray([new fomantic_NamedSel("one","un"),new fomantic_NamedSel("two","deux"),new fomantic_NamedSel("troix","three")]));
 coconut_vdom_View.idCounter = 0;
 coconut_diffing_Root.byParent = new haxe_ds_ObjectMap();
 coconut_diffing_internal_VEmpty.TYPE = (function($this) {

@@ -10,13 +10,857 @@
 				access: null
 				doc: null
 				kind: FVar(TPath({
-					name: Variable
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: ClassName
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: className
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: String
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: name
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: value
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
 					pack: [coconut, data]
 					params: [TPType(null <- expected enum value)]
 					sub: null
 				}), null)
-				meta: []
-				name: bi
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: values
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: String
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: defaultText
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Promised
+						pack: []
+						params: [TPType(TPath({
+							name: List
+							pack: []
+							params: [TPType(TPath({
+								name: Named
+								pack: []
+								params: [TPType(TPath({
+									name: T
+									pack: []
+									params: []
+									sub: null
+								}))]
+								sub: null
+							}))]
+							sub: null
+						}))]
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: entries
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					})], TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onChange
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: clearable
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: ignoreCase
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: ignoreSearchCase
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: allowReselection
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: allowAdditions
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: hideAdditions
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: DropdownAction
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: action
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Int
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: minCharacters
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: DropdownMatch
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: match
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: selectOnKeydown
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: forceSelection
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: allowCategorySelection
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: DropdownPlaceholder
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: placeholder
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: ignoreDiacritics
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: multiple
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: useLabels
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Int
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: maxSelections
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Float
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: glyphWidth
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TAnonymous([{
+						access: []
+						doc: null
+						kind: FVar(TPath({
+							name: String
+							pack: []
+							params: []
+							sub: null
+						}), null)
+						meta: []
+						name: transition
+						pos: #pos
+					}, {
+						access: []
+						doc: null
+						kind: FVar(TPath({
+							name: Int
+							pack: []
+							params: []
+							sub: null
+						}), null)
+						meta: []
+						name: duration
+						pos: #pos
+					}, {
+						access: []
+						doc: null
+						kind: FVar(TPath({
+							name: Bool
+							pack: []
+							params: []
+							sub: null
+						}), null)
+						meta: []
+						name: variation
+						pos: #pos
+					}]))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: label
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					}), TPath({
+						name: String
+						pack: []
+						params: []
+						sub: null
+					}), TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					})], TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onAdd
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TNamed(removedValue, TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					})), TNamed(removedText, TPath({
+						name: String
+						pack: []
+						params: []
+						sub: null
+					})), TNamed(removedChoice, TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					}))], TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onRemove
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TNamed(value, TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					})), TNamed(text, TPath({
+						name: String
+						pack: []
+						params: []
+						sub: null
+					}))], TPath({
+						name: JQuery
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onLabelCreate
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TNamed(value, TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					}))], TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onLabelRemove
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TNamed(selectedLabels, TPath({
+						name: Array
+						pack: []
+						params: [TPType(TPath({
+							name: JQuery
+							pack: []
+							params: []
+							sub: null
+						}))]
+						sub: null
+					}))], TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onLabelSelect
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TNamed(searchValue, TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					}))], TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onNoResults
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})], TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onShow
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})], TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onHide
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})], TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onSearch
 				pos: #pos
 			}])
 			value: null
@@ -99,7 +943,7 @@
 						})
 						pos: #pos
 					}, {
-						expr: EConst(CIdent(null))
+						expr: EConst(CIdent(shouldViewUpdate))
 						pos: #pos
 					}, {
 						expr: EConst(CIdent(null))
@@ -164,15 +1008,1236 @@
 	name: new
 	pos: #pos
 }, {
-	access: []
+	access: [APublic]
 	doc: null
-	kind: FProp(get, set, null, null)
+	kind: FVar(TPath({
+		name: ClassName
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EConst(CIdent(null))
+		pos: #pos
+	})
 	meta: [{
-		name: :controlled
+		name: :attr
 		params: []
 		pos: #pos
 	}]
-	name: bi
+	name: className
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: String
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EConst(CIdent(null))
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: name
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: T
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EMeta({
+			name: byDefault
+			params: []
+			pos: #pos
+		}, {
+			expr: EConst(CIdent(null))
+			pos: #pos
+		})
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: value
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(null, {
+		expr: EMeta({
+			name: byDefault
+			params: []
+			pos: #pos
+		}, {
+			expr: EConst(CIdent(null))
+			pos: #pos
+		})
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: values
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: String
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EConst(CIdent(null))
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: defaultText
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: Promised
+		pack: []
+		params: [TPType(TPath({
+			name: List
+			pack: []
+			params: [TPType(TPath({
+				name: Named
+				pack: []
+				params: [TPType(TPath({
+					name: T
+					pack: []
+					params: []
+					sub: null
+				}))]
+				sub: null
+			}))]
+			sub: null
+		}))]
+		sub: null
+	}), {
+		expr: EMeta({
+			name: byDefault
+			params: []
+			pos: #pos
+		}, {
+			expr: ECall({
+				expr: EConst(CIdent(Done))
+				pos: #pos
+			}, [{
+				expr: ECall({
+					expr: EField({
+						expr: EArrayDecl([{
+							expr: ENew({
+								name: Named
+								pack: []
+								params: []
+								sub: null
+							}, [{
+								expr: EConst(CString(default, DoubleQuotes))
+								pos: #pos
+							}, {
+								expr: EConst(CIdent(null))
+								pos: #pos
+							}])
+							pos: #pos
+						}])
+						pos: #pos
+					}, fromArray)
+					pos: #pos
+				}, [])
+				pos: #pos
+			}])
+			pos: #pos
+		})
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: entries
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TFunction([TPath({
+		name: T
+		pack: []
+		params: []
+		sub: null
+	})], TPath({
+		name: Void
+		pack: []
+		params: []
+		sub: null
+	})), {
+		expr: EMeta({
+			name: byDefault
+			params: []
+			pos: #pos
+		}, {
+			expr: EFunction(FArrow, {
+				args: [{
+					meta: null
+					name: a
+					opt: false
+					type: null
+					value: null
+				}]
+				expr: {
+					expr: EMeta({
+						name: :implicitReturn
+						params: []
+						pos: #pos
+					}, {
+						expr: EReturn({
+							expr: EBlock([])
+							pos: #pos
+						})
+						pos: #pos
+					})
+					pos: #pos
+				}
+				params: []
+				ret: null
+			})
+			pos: #pos
+		})
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: onChange
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: Bool
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EConst(CIdent(false))
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: clearable
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: Bool
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EConst(CIdent(false))
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: ignoreCase
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: Bool
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EConst(CIdent(true))
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: ignoreSearchCase
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: Bool
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EConst(CIdent(false))
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: allowReselection
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: Bool
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EConst(CIdent(false))
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: allowAdditions
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: Bool
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EConst(CIdent(true))
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: hideAdditions
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: DropdownAction
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EConst(CIdent(activate))
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: action
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: Int
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EConst(CInt(0))
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: minCharacters
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: DropdownMatch
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EConst(CIdent(both))
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: match
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: Bool
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EConst(CIdent(true))
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: selectOnKeydown
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: Bool
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EConst(CIdent(true))
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: forceSelection
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: Bool
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EConst(CIdent(false))
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: allowCategorySelection
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: DropdownPlaceholder
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EConst(CIdent(auto))
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: placeholder
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: Bool
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EConst(CIdent(false))
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: ignoreDiacritics
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: Bool
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EMeta({
+			name: byDefault
+			params: []
+			pos: #pos
+		}, {
+			expr: EConst(CIdent(false))
+			pos: #pos
+		})
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: multiple
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: Bool
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EConst(CIdent(true))
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: useLabels
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: Int
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EConst(CInt(0))
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: maxSelections
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TPath({
+		name: Float
+		pack: []
+		params: []
+		sub: null
+	}), {
+		expr: EConst(CFloat(1.0714))
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: glyphWidth
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TAnonymous([{
+		access: []
+		doc: null
+		kind: FVar(TPath({
+			name: String
+			pack: []
+			params: []
+			sub: null
+		}), null)
+		meta: []
+		name: transition
+		pos: #pos
+	}, {
+		access: []
+		doc: null
+		kind: FVar(TPath({
+			name: Int
+			pack: []
+			params: []
+			sub: null
+		}), null)
+		meta: []
+		name: duration
+		pos: #pos
+	}, {
+		access: []
+		doc: null
+		kind: FVar(TPath({
+			name: Bool
+			pack: []
+			params: []
+			sub: null
+		}), null)
+		meta: []
+		name: variation
+		pos: #pos
+	}]), {
+		expr: EObjectDecl([{
+			expr: {
+				expr: EConst(CString(horizontal flip, SingleQuotes))
+				pos: #pos
+			}
+			field: transition
+			quotes: Unquoted
+		}, {
+			expr: {
+				expr: EConst(CInt(200))
+				pos: #pos
+			}
+			field: duration
+			quotes: Unquoted
+		}, {
+			expr: {
+				expr: EConst(CIdent(false))
+				pos: #pos
+			}
+			field: variation
+			quotes: Unquoted
+		}])
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: label
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TFunction([TPath({
+		name: T
+		pack: []
+		params: []
+		sub: null
+	}), TPath({
+		name: String
+		pack: []
+		params: []
+		sub: null
+	}), TPath({
+		name: T
+		pack: []
+		params: []
+		sub: null
+	})], TPath({
+		name: Void
+		pack: []
+		params: []
+		sub: null
+	})), {
+		expr: EMeta({
+			name: byDefault
+			params: []
+			pos: #pos
+		}, {
+			expr: EFunction(FArrow, {
+				args: [{
+					meta: null
+					name: a
+					opt: false
+					type: null
+					value: null
+				}, {
+					meta: null
+					name: b
+					opt: false
+					type: null
+					value: null
+				}, {
+					meta: null
+					name: c
+					opt: false
+					type: null
+					value: null
+				}]
+				expr: {
+					expr: EMeta({
+						name: :implicitReturn
+						params: []
+						pos: #pos
+					}, {
+						expr: EReturn({
+							expr: EBlock([])
+							pos: #pos
+						})
+						pos: #pos
+					})
+					pos: #pos
+				}
+				params: []
+				ret: null
+			})
+			pos: #pos
+		})
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: onAdd
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TFunction([TNamed(removedValue, TPath({
+		name: T
+		pack: []
+		params: []
+		sub: null
+	})), TNamed(removedText, TPath({
+		name: String
+		pack: []
+		params: []
+		sub: null
+	})), TNamed(removedChoice, TPath({
+		name: T
+		pack: []
+		params: []
+		sub: null
+	}))], TPath({
+		name: Void
+		pack: []
+		params: []
+		sub: null
+	})), {
+		expr: EFunction(FArrow, {
+			args: [{
+				meta: null
+				name: a
+				opt: false
+				type: null
+				value: null
+			}, {
+				meta: null
+				name: b
+				opt: false
+				type: null
+				value: null
+			}, {
+				meta: null
+				name: c
+				opt: false
+				type: null
+				value: null
+			}]
+			expr: {
+				expr: EMeta({
+					name: :implicitReturn
+					params: []
+					pos: #pos
+				}, {
+					expr: EReturn({
+						expr: EBlock([])
+						pos: #pos
+					})
+					pos: #pos
+				})
+				pos: #pos
+			}
+			params: []
+			ret: null
+		})
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: onRemove
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TFunction([TNamed(value, TPath({
+		name: T
+		pack: []
+		params: []
+		sub: null
+	})), TNamed(text, TPath({
+		name: String
+		pack: []
+		params: []
+		sub: null
+	}))], TPath({
+		name: JQuery
+		pack: []
+		params: []
+		sub: null
+	})), {
+		expr: EFunction(FArrow, {
+			args: [{
+				meta: null
+				name: a
+				opt: false
+				type: null
+				value: null
+			}, {
+				meta: null
+				name: b
+				opt: false
+				type: null
+				value: null
+			}]
+			expr: {
+				expr: EMeta({
+					name: :implicitReturn
+					params: []
+					pos: #pos
+				}, {
+					expr: EReturn({
+						expr: EBlock([{
+							expr: EVars([{
+								expr: {
+									expr: ECall({
+										expr: EConst(CIdent(J))
+										pos: #pos
+									}, [{
+										expr: EConst(CString(<label><i class='close'></i></label>, DoubleQuotes))
+										pos: #pos
+									}])
+									pos: #pos
+								}
+								isFinal: false
+								meta: null
+								name: t
+								type: null
+							}])
+							pos: #pos
+						}, {
+							expr: ECall({
+								expr: EField({
+									expr: EConst(CIdent(t))
+									pos: #pos
+								}, addClass)
+								pos: #pos
+							}, [{
+								expr: EConst(CString(ui label, DoubleQuotes))
+								pos: #pos
+							}])
+							pos: #pos
+						}, {
+							expr: ECall({
+								expr: EField({
+									expr: EConst(CIdent(t))
+									pos: #pos
+								}, text)
+								pos: #pos
+							}, [{
+								expr: EConst(CIdent(b))
+								pos: #pos
+							}])
+							pos: #pos
+						}, {
+							expr: EReturn({
+								expr: EConst(CIdent(t))
+								pos: #pos
+							})
+							pos: #pos
+						}])
+						pos: #pos
+					})
+					pos: #pos
+				})
+				pos: #pos
+			}
+			params: []
+			ret: null
+		})
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: onLabelCreate
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TFunction([TNamed(value, TPath({
+		name: T
+		pack: []
+		params: []
+		sub: null
+	}))], TPath({
+		name: Bool
+		pack: []
+		params: []
+		sub: null
+	})), {
+		expr: EFunction(FArrow, {
+			args: [{
+				meta: null
+				name: a
+				opt: false
+				type: null
+				value: null
+			}]
+			expr: {
+				expr: EMeta({
+					name: :implicitReturn
+					params: []
+					pos: #pos
+				}, {
+					expr: EReturn({
+						expr: EConst(CIdent(true))
+						pos: #pos
+					})
+					pos: #pos
+				})
+				pos: #pos
+			}
+			params: []
+			ret: null
+		})
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: onLabelRemove
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TFunction([TNamed(selectedLabels, TPath({
+		name: Array
+		pack: []
+		params: [TPType(TPath({
+			name: JQuery
+			pack: []
+			params: []
+			sub: null
+		}))]
+		sub: null
+	}))], TPath({
+		name: Void
+		pack: []
+		params: []
+		sub: null
+	})), {
+		expr: EMeta({
+			name: byDefault
+			params: []
+			pos: #pos
+		}, {
+			expr: EFunction(FArrow, {
+				args: [{
+					meta: null
+					name: a
+					opt: false
+					type: null
+					value: null
+				}]
+				expr: {
+					expr: EMeta({
+						name: :implicitReturn
+						params: []
+						pos: #pos
+					}, {
+						expr: EReturn({
+							expr: EBlock([])
+							pos: #pos
+						})
+						pos: #pos
+					})
+					pos: #pos
+				}
+				params: []
+				ret: null
+			})
+			pos: #pos
+		})
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: onLabelSelect
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TFunction([TNamed(searchValue, TPath({
+		name: T
+		pack: []
+		params: []
+		sub: null
+	}))], TPath({
+		name: Void
+		pack: []
+		params: []
+		sub: null
+	})), {
+		expr: EFunction(FArrow, {
+			args: [{
+				meta: null
+				name: a
+				opt: false
+				type: null
+				value: null
+			}]
+			expr: {
+				expr: EMeta({
+					name: :implicitReturn
+					params: []
+					pos: #pos
+				}, {
+					expr: EReturn({
+						expr: EBlock([])
+						pos: #pos
+					})
+					pos: #pos
+				})
+				pos: #pos
+			}
+			params: []
+			ret: null
+		})
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: onNoResults
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TFunction([TPath({
+		name: Void
+		pack: []
+		params: []
+		sub: null
+	})], TPath({
+		name: Bool
+		pack: []
+		params: []
+		sub: null
+	})), {
+		expr: EFunction(FArrow, {
+			args: []
+			expr: {
+				expr: EMeta({
+					name: :implicitReturn
+					params: []
+					pos: #pos
+				}, {
+					expr: EReturn({
+						expr: EConst(CIdent(true))
+						pos: #pos
+					})
+					pos: #pos
+				})
+				pos: #pos
+			}
+			params: []
+			ret: null
+		})
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: onShow
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TFunction([TPath({
+		name: Void
+		pack: []
+		params: []
+		sub: null
+	})], TPath({
+		name: Bool
+		pack: []
+		params: []
+		sub: null
+	})), {
+		expr: EFunction(FArrow, {
+			args: []
+			expr: {
+				expr: EMeta({
+					name: :implicitReturn
+					params: []
+					pos: #pos
+				}, {
+					expr: EReturn({
+						expr: EConst(CIdent(true))
+						pos: #pos
+					})
+					pos: #pos
+				})
+				pos: #pos
+			}
+			params: []
+			ret: null
+		})
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: onHide
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FVar(TFunction([TPath({
+		name: Void
+		pack: []
+		params: []
+		sub: null
+	})], TPath({
+		name: Bool
+		pack: []
+		params: []
+		sub: null
+	})), {
+		expr: EFunction(FArrow, {
+			args: []
+			expr: {
+				expr: EMeta({
+					name: :implicitReturn
+					params: []
+					pos: #pos
+				}, {
+					expr: EReturn({
+						expr: EConst(CIdent(true))
+						pos: #pos
+					})
+					pos: #pos
+				})
+				pos: #pos
+			}
+			params: []
+			ret: null
+		})
+		pos: #pos
+	})
+	meta: [{
+		name: :attr
+		params: []
+		pos: #pos
+	}]
+	name: onSearch
+	pos: #pos
+}, {
+	access: []
+	doc: null
+	kind: FFun({
+		args: []
+		expr: {
+			expr: EReturn({
+				expr: ECall({
+					expr: EConst(CIdent(hxx))
+					pos: #pos
+				}, [{
+					expr: EConst(CString(
+		<div ref=${setup} class=${getClassName()} >
+			<input type="hidden" name=${name} value=${Std.string(value)}/>
+			<i class="dropdown icon"></i>
+			<div class="default text">${defaultText}</div>
+			<div class="menu">
+				<switch ${entries}>
+					<case ${Done(data)}>
+						<for ${entry in data}>
+							<div class="item" data-value=${Std.string(entry.value)}>${entry.name}</div>
+						</for>
+					<case ${_}>
+					<div class="item" data-value="def">defVal</div>
+
+				</switch>
+			</div>
+		</div>
+	, SingleQuotes))
+					pos: #pos
+				}])
+				pos: #pos
+			})
+			pos: #pos
+		}
+		params: []
+		ret: TPath({
+			name: RenderResult
+			pack: [coconut, vdom]
+			params: []
+			sub: null
+		})
+	})
+	meta: [{
+		name: :noCompletion
+		params: []
+		pos: #pos
+	}]
+	name: render
 	pos: #pos
 }, {
 	access: [AInline]
@@ -180,87 +2245,117 @@
 	kind: FFun({
 		args: []
 		expr: {
-			expr: EReturn({
-				expr: EField({
-					expr: EField({
-						expr: EConst(CIdent(this))
-						pos: #pos
-					}, __coco_bi)
-					pos: #pos
-				}, value)
-				pos: #pos
-			})
-			pos: #pos
-		}
-		params: []
-		ret: null
-	})
-	meta: []
-	name: get_bi
-	pos: #pos
-}, {
-	access: null
-	doc: null
-	kind: FFun({
-		args: [{
-			meta: null
-			name: param
-			opt: false
-			type: null
-			value: null
-		}]
-		expr: {
 			expr: EBlock([{
-				expr: ESwitch({
-					expr: EMeta({
-						name: :privateAccess
-						params: []
-						pos: #pos
-					}, {
-						expr: EField({
-							expr: EField({
-								expr: EConst(CIdent(this))
-								pos: #pos
-							}, __coco_bi)
-							pos: #pos
-						}, data)
-						pos: #pos
-					})
-					pos: #pos
-				}, [{
-					expr: null
-					guard: null
-					values: [{
-						expr: EConst(CIdent(null))
-						pos: #pos
-					}]
-				}, {
+				expr: EVars([{
 					expr: {
-						expr: EBlock([{
-							expr: ECall({
-								expr: EField({
-									expr: EConst(CIdent(v))
-									pos: #pos
-								}, set)
+						expr: ECall({
+							expr: EField({
+								expr: EConst(CIdent(className))
 								pos: #pos
-							}, [{
-								expr: EConst(CIdent(param))
-								pos: #pos
-							}])
+							}, add)
+							pos: #pos
+						}, [{
+							expr: EConst(CString(ui selection dropdown, SingleQuotes))
 							pos: #pos
 						}])
 						pos: #pos
 					}
-					guard: null
-					values: [{
-						expr: EConst(CIdent(v))
+					isFinal: false
+					meta: null
+					name: t
+					type: null
+				}])
+				pos: #pos
+			}, {
+				expr: EIf({
+					expr: EConst(CIdent(multiple))
+					pos: #pos
+				}, {
+					expr: EBinop(OpAssign, {
+						expr: EConst(CIdent(t))
 						pos: #pos
-					}]
-				}], null)
+					}, {
+						expr: ECall({
+							expr: EField({
+								expr: EConst(CIdent(t))
+								pos: #pos
+							}, add)
+							pos: #pos
+						}, [{
+							expr: EConst(CString(multiple normal, DoubleQuotes))
+							pos: #pos
+						}])
+						pos: #pos
+					})
+					pos: #pos
+				}, null)
 				pos: #pos
 			}, {
 				expr: EReturn({
-					expr: EConst(CIdent(param))
+					expr: ECall({
+						expr: EField({
+							expr: EConst(CIdent(t))
+							pos: #pos
+						}, add)
+						pos: #pos
+					}, [{
+						expr: ESwitch({
+							expr: EConst(CIdent(entries))
+							pos: #pos
+						}, [{
+							expr: {
+								expr: EBlock([{
+									expr: EConst(CString(loading, SingleQuotes))
+									pos: #pos
+								}])
+								pos: #pos
+							}
+							guard: null
+							values: [{
+								expr: EConst(CIdent(Loading))
+								pos: #pos
+							}]
+						}, {
+							expr: {
+								expr: EBlock([{
+									expr: EConst(CString(error, SingleQuotes))
+									pos: #pos
+								}])
+								pos: #pos
+							}
+							guard: null
+							values: [{
+								expr: ECall({
+									expr: EConst(CIdent(Failed))
+									pos: #pos
+								}, [{
+									expr: EConst(CIdent(_))
+									pos: #pos
+								}])
+								pos: #pos
+							}]
+						}, {
+							expr: {
+								expr: EBlock([{
+									expr: EConst(CIdent(null))
+									pos: #pos
+								}])
+								pos: #pos
+							}
+							guard: null
+							values: [{
+								expr: ECall({
+									expr: EConst(CIdent(Done))
+									pos: #pos
+								}, [{
+									expr: EConst(CIdent(_))
+									pos: #pos
+								}])
+								pos: #pos
+							}]
+						}], null)
+						pos: #pos
+					}])
 					pos: #pos
 				})
 				pos: #pos
@@ -271,7 +2366,377 @@
 		ret: null
 	})
 	meta: []
-	name: set_bi
+	name: getClassName
+	pos: #pos
+}, {
+	access: []
+	doc: null
+	kind: FFun({
+		args: []
+		expr: {
+			expr: EBlock([{
+				expr: EIf({
+					expr: EBinop(OpEq, {
+						expr: EConst(CIdent(value))
+						pos: #pos
+					}, {
+						expr: EConst(CIdent(null))
+						pos: #pos
+					})
+					pos: #pos
+				}, {
+					expr: EUntyped({
+						expr: ECall({
+							expr: EField({
+								expr: EConst(CIdent(element))
+								pos: #pos
+							}, dropdown)
+							pos: #pos
+						}, [{
+							expr: EConst(CString(clear, SingleQuotes))
+							pos: #pos
+						}])
+						pos: #pos
+					})
+					pos: #pos
+				}, null)
+				pos: #pos
+			}, {
+				expr: EReturn({
+					expr: EConst(CIdent(true))
+					pos: #pos
+				})
+				pos: #pos
+			}])
+			pos: #pos
+		}
+		params: []
+		ret: TPath({
+			name: Bool
+			pack: []
+			params: []
+			sub: null
+		})
+	})
+	meta: [{
+		name: :noCompletion
+		params: []
+		pos: #pos
+	}]
+	name: shouldViewUpdate
+	pos: #pos
+}, {
+	access: []
+	doc: null
+	kind: FVar(TPath({
+		name: JQuery
+		pack: [js, jquery]
+		params: []
+		sub: null
+	}), null)
+	meta: []
+	name: element
+	pos: #pos
+}, {
+	access: []
+	doc: null
+	kind: FFun({
+		args: [{
+			meta: []
+			name: e
+			opt: false
+			type: null
+			value: null
+		}]
+		expr: {
+			expr: EBlock([{
+				expr: EBinop(OpAssign, {
+					expr: EConst(CIdent(element))
+					pos: #pos
+				}, {
+					expr: EParenthesis({
+						expr: ECall({
+							expr: EConst(CIdent(J))
+							pos: #pos
+						}, [{
+							expr: EConst(CIdent(e))
+							pos: #pos
+						}])
+						pos: #pos
+					})
+					pos: #pos
+				})
+				pos: #pos
+			}, {
+				expr: EUntyped({
+					expr: ECall({
+						expr: EField({
+							expr: EConst(CIdent(element))
+							pos: #pos
+						}, dropdown)
+						pos: #pos
+					}, [{
+						expr: EObjectDecl([{
+							expr: {
+								expr: EFunction(FAnonymous, {
+									args: [{
+										meta: null
+										name: value
+										opt: false
+										type: null
+										value: null
+									}, {
+										meta: null
+										name: text
+										opt: false
+										type: null
+										value: null
+									}]
+									expr: {
+										expr: EIf({
+											expr: EBinop(OpNotEq, {
+												expr: EConst(CIdent(onChange))
+												pos: #pos
+											}, {
+												expr: EConst(CIdent(null))
+												pos: #pos
+											})
+											pos: #pos
+										}, {
+											expr: ECall({
+												expr: EConst(CIdent(onChange))
+												pos: #pos
+											}, [{
+												expr: EConst(CIdent(value))
+												pos: #pos
+											}])
+											pos: #pos
+										}, null)
+										pos: #pos
+									}
+									params: []
+									ret: null
+								})
+								pos: #pos
+							}
+							field: onChange
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(clearable))
+								pos: #pos
+							}
+							field: clearable
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(ignoreCase))
+								pos: #pos
+							}
+							field: ignoreCase
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(ignoreSearchCase))
+								pos: #pos
+							}
+							field: ignoreSearchCase
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(allowReselection))
+								pos: #pos
+							}
+							field: allowReselection
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(allowAdditions))
+								pos: #pos
+							}
+							field: allowAdditions
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(minCharacters))
+								pos: #pos
+							}
+							field: minCharacters
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(match))
+								pos: #pos
+							}
+							field: match
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(selectOnKeydown))
+								pos: #pos
+							}
+							field: selectOnKeydown
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(forceSelection))
+								pos: #pos
+							}
+							field: forceSelection
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(allowCategorySelection))
+								pos: #pos
+							}
+							field: allowCategorySelection
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(placeholder))
+								pos: #pos
+							}
+							field: placeholder
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(useLabels))
+								pos: #pos
+							}
+							field: useLabels
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(maxSelections))
+								pos: #pos
+							}
+							field: maxSelections
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(glyphWidth))
+								pos: #pos
+							}
+							field: glyphWidth
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(label))
+								pos: #pos
+							}
+							field: label
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EObjectDecl([{
+									expr: {
+										expr: EConst(CString(ui label, SingleQuotes))
+										pos: #pos
+									}
+									field: label
+									quotes: Unquoted
+								}])
+								pos: #pos
+							}
+							field: className
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(onAdd))
+								pos: #pos
+							}
+							field: onAdd
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(onRemove))
+								pos: #pos
+							}
+							field: onRemove
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(onLabelRemove))
+								pos: #pos
+							}
+							field: onLabelRemove
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(onNoResults))
+								pos: #pos
+							}
+							field: onNoResults
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(onLabelSelect))
+								pos: #pos
+							}
+							field: onLabelSelect
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(onShow))
+								pos: #pos
+							}
+							field: onShow
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(onHide))
+								pos: #pos
+							}
+							field: onHide
+							quotes: Unquoted
+						}, {
+							expr: {
+								expr: EConst(CIdent(onSearch))
+								pos: #pos
+							}
+							field: onSearch
+							quotes: Unquoted
+						}])
+						pos: #pos
+					}])
+					pos: #pos
+				})
+				pos: #pos
+			}, {
+				expr: EIf({
+					expr: EBinop(OpEq, {
+						expr: EConst(CIdent(value))
+						pos: #pos
+					}, {
+						expr: EConst(CIdent(null))
+						pos: #pos
+					})
+					pos: #pos
+				}, {
+					expr: EUntyped({
+						expr: ECall({
+							expr: EField({
+								expr: EConst(CIdent(element))
+								pos: #pos
+							}, dropdown)
+							pos: #pos
+						}, [{
+							expr: EConst(CString(clear, SingleQuotes))
+							pos: #pos
+						}])
+						pos: #pos
+					})
+					pos: #pos
+				}, null)
+				pos: #pos
+			}])
+			pos: #pos
+		}
+		params: []
+		ret: null
+	})
+	meta: []
+	name: setup
 	pos: #pos
 }, {
 	access: null
@@ -285,13 +2750,857 @@
 				access: null
 				doc: null
 				kind: FVar(TPath({
-					name: Variable
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: ClassName
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: className
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: String
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: name
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: value
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
 					pack: [coconut, data]
 					params: [TPType(null <- expected enum value)]
 					sub: null
 				}), null)
-				meta: []
-				name: bi
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: values
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: String
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: defaultText
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Promised
+						pack: []
+						params: [TPType(TPath({
+							name: List
+							pack: []
+							params: [TPType(TPath({
+								name: Named
+								pack: []
+								params: [TPType(TPath({
+									name: T
+									pack: []
+									params: []
+									sub: null
+								}))]
+								sub: null
+							}))]
+							sub: null
+						}))]
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: entries
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					})], TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onChange
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: clearable
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: ignoreCase
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: ignoreSearchCase
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: allowReselection
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: allowAdditions
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: hideAdditions
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: DropdownAction
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: action
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Int
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: minCharacters
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: DropdownMatch
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: match
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: selectOnKeydown
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: forceSelection
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: allowCategorySelection
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: DropdownPlaceholder
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: placeholder
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: ignoreDiacritics
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: multiple
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: useLabels
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Int
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: maxSelections
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Float
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: glyphWidth
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TAnonymous([{
+						access: []
+						doc: null
+						kind: FVar(TPath({
+							name: String
+							pack: []
+							params: []
+							sub: null
+						}), null)
+						meta: []
+						name: transition
+						pos: #pos
+					}, {
+						access: []
+						doc: null
+						kind: FVar(TPath({
+							name: Int
+							pack: []
+							params: []
+							sub: null
+						}), null)
+						meta: []
+						name: duration
+						pos: #pos
+					}, {
+						access: []
+						doc: null
+						kind: FVar(TPath({
+							name: Bool
+							pack: []
+							params: []
+							sub: null
+						}), null)
+						meta: []
+						name: variation
+						pos: #pos
+					}]))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: label
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					}), TPath({
+						name: String
+						pack: []
+						params: []
+						sub: null
+					}), TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					})], TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onAdd
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TNamed(removedValue, TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					})), TNamed(removedText, TPath({
+						name: String
+						pack: []
+						params: []
+						sub: null
+					})), TNamed(removedChoice, TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					}))], TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onRemove
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TNamed(value, TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					})), TNamed(text, TPath({
+						name: String
+						pack: []
+						params: []
+						sub: null
+					}))], TPath({
+						name: JQuery
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onLabelCreate
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TNamed(value, TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					}))], TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onLabelRemove
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TNamed(selectedLabels, TPath({
+						name: Array
+						pack: []
+						params: [TPType(TPath({
+							name: JQuery
+							pack: []
+							params: []
+							sub: null
+						}))]
+						sub: null
+					}))], TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onLabelSelect
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TNamed(searchValue, TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					}))], TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onNoResults
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})], TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onShow
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})], TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onHide
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})], TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onSearch
 				pos: #pos
 			}])
 			value: null
@@ -348,7 +3657,7 @@
 									sub: null
 								}, [{
 									expr: EField({
-										expr: EConst(CIdent(ControlledTest))
+										expr: EConst(CIdent(Dropdown))
 										pos: #pos
 									}, new)
 									pos: #pos
@@ -455,9 +3764,14 @@
 					name: Ref
 					pack: [coconut, ui]
 					params: [TPType(TPath({
-						name: ControlledTest
+						name: Dropdown
 						pack: []
-						params: []
+						params: [TPType(TPath({
+							name: T
+							pack: []
+							params: []
+							sub: null
+						}))]
 						sub: null
 					}))]
 					sub: null
@@ -479,13 +3793,857 @@
 				access: null
 				doc: null
 				kind: FVar(TPath({
-					name: Variable
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: ClassName
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: className
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: String
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: name
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: value
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
 					pack: [coconut, data]
 					params: [TPType(null <- expected enum value)]
 					sub: null
 				}), null)
-				meta: []
-				name: bi
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: values
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: String
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: defaultText
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Promised
+						pack: []
+						params: [TPType(TPath({
+							name: List
+							pack: []
+							params: [TPType(TPath({
+								name: Named
+								pack: []
+								params: [TPType(TPath({
+									name: T
+									pack: []
+									params: []
+									sub: null
+								}))]
+								sub: null
+							}))]
+							sub: null
+						}))]
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: entries
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					})], TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onChange
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: clearable
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: ignoreCase
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: ignoreSearchCase
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: allowReselection
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: allowAdditions
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: hideAdditions
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: DropdownAction
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: action
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Int
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: minCharacters
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: DropdownMatch
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: match
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: selectOnKeydown
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: forceSelection
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: allowCategorySelection
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: DropdownPlaceholder
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: placeholder
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: ignoreDiacritics
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: multiple
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: useLabels
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Int
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: maxSelections
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TPath({
+						name: Float
+						pack: []
+						params: []
+						sub: null
+					}))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: glyphWidth
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TAnonymous([{
+						access: []
+						doc: null
+						kind: FVar(TPath({
+							name: String
+							pack: []
+							params: []
+							sub: null
+						}), null)
+						meta: []
+						name: transition
+						pos: #pos
+					}, {
+						access: []
+						doc: null
+						kind: FVar(TPath({
+							name: Int
+							pack: []
+							params: []
+							sub: null
+						}), null)
+						meta: []
+						name: duration
+						pos: #pos
+					}, {
+						access: []
+						doc: null
+						kind: FVar(TPath({
+							name: Bool
+							pack: []
+							params: []
+							sub: null
+						}), null)
+						meta: []
+						name: variation
+						pos: #pos
+					}]))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: label
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					}), TPath({
+						name: String
+						pack: []
+						params: []
+						sub: null
+					}), TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					})], TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onAdd
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TNamed(removedValue, TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					})), TNamed(removedText, TPath({
+						name: String
+						pack: []
+						params: []
+						sub: null
+					})), TNamed(removedChoice, TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					}))], TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onRemove
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TNamed(value, TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					})), TNamed(text, TPath({
+						name: String
+						pack: []
+						params: []
+						sub: null
+					}))], TPath({
+						name: JQuery
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onLabelCreate
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TNamed(value, TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					}))], TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onLabelRemove
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TNamed(selectedLabels, TPath({
+						name: Array
+						pack: []
+						params: [TPType(TPath({
+							name: JQuery
+							pack: []
+							params: []
+							sub: null
+						}))]
+						sub: null
+					}))], TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onLabelSelect
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TNamed(searchValue, TPath({
+						name: T
+						pack: []
+						params: []
+						sub: null
+					}))], TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onNoResults
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})], TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onShow
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})], TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onHide
+				pos: #pos
+			}, {
+				access: null
+				doc: null
+				kind: FVar(TPath({
+					name: Value
+					pack: [coconut, data]
+					params: [TPType(TFunction([TPath({
+						name: Void
+						pack: []
+						params: []
+						sub: null
+					})], TPath({
+						name: Bool
+						pack: []
+						params: []
+						sub: null
+					})))]
+					sub: null
+				}), null)
+				meta: [{
+					name: :optional
+					params: []
+					pos: #pos
+				}]
+				name: onSearch
 				pos: #pos
 			}])
 			value: null
@@ -520,7 +4678,12 @@
 			})
 			pos: #pos
 		}
-		params: []
+		params: [{
+			constraints: []
+			meta: null
+			name: T
+			params: null
+		}]
 		ret: TPath({
 			name: RenderResult
 			pack: [coconut, vdom]
@@ -532,6 +4695,6 @@
 	name: fromHxx
 	pos: #pos
 }]
-line 15: expected enum value
-line 290: expected enum value
-line 484: expected enum value
+line 78: expected enum value
+line 2801: expected enum value
+line 3844: expected enum value
