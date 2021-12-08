@@ -26,6 +26,9 @@ class CheckBox extends View{
 
     var me:js.html.InputElement;
 
+    @:attr
+    var type:CheckBoxType = @byDefault checkbox;
+
     @:attribute var className:tink.domspec.ClassName = [];
 
     function setup(el:js.html.Element){
@@ -43,9 +46,17 @@ class CheckBox extends View{
 
 
     function render()
-        <div class={className.add('ui input checkbox')}>
+        <div class={className.add('ui input checkbox $type')}>
         <input ref={setup} type="checkbox" checked={checked} ></input>
         <label>{text}</label>
         </div>;
+}
+
+
+enum abstract CheckBoxType(String){
+    var checkbox;
+    var radio;
+    var toggle;
+    var slider;
 }
 
